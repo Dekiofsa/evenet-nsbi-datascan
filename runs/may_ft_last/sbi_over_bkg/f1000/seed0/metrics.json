@@ -1,0 +1,21 @@
+{
+ "task": "sbi_over_bkg",
+ "frac": 1.0,
+ "frac_tag": "f1000",
+ "seed": 0,
+ "checkpoint": "/home/ubuntu/datascan/may_ckpt/pretrain_sbi/final.pt",
+ "checkpoint_epoch": null,
+ "checkpoint_step": 180100,
+ "C_ref": 0.9991029431372801,
+ "C_sub": 0.9991002816328536,
+ "C_val": 0.9991854099868024,
+ "fast_predict_max_rel_dev": 7.081842015435583e-07,
+ "val_bce_full": 0.6925872221767826,
+ "val_auc_full": 0.5080077457823523,
+ "best_epoch": 20,
+ "epochs_run": 20,
+ "best_step": 180100,
+ "closure_chi2_ndf": NaN,
+ "total_seconds": 1059.9912202358246,
+ "variant": "may_ft_last"
+}

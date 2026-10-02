@@ -1,0 +1,83 @@
+root /home/ubuntu/datascan/fullsched | 2 runs for variants ['pretrained'] at fractions [0.03, 1.0] | 20 full-pass epochs, early stopping off, every epoch saved, exports best + ['e01', 'e02', 'e03', 'e04']
+[run] pretrained/sig_over_bkg/f0030: epoch_size 104313 = 204 steps/epoch, 4080 steps total
+/opt/pytorch/lib/python3.13/site-packages/torch/cuda/__init__.py:64: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+[skip] /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0 already done
+[full] pretrained/sig_over_bkg/f0030: 20/20 epochs, 20/20 epoch files, steps/epoch 204 (n_train_rows 104313 == epoch_size 104313: True), total steps 4080, best epoch 20, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-19 01:20:10,653 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 01:20:13,780 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 01:20:13,781 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch01.pt
+2026-09-19 01:20:14,769 | INFO | Restored normalizer state from checkpoint
+2026-09-19 01:20:15,321 | INFO | Starting _collect_predictions
+2026-09-19 01:20:15,321 | INFO | Dataset size = 4096
+2026-09-19 01:20:15,322 | INFO | Batch size = 1024
+2026-09-19 01:20:15,537 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e01/sig_over_bkg/f0030/seed0: val_auc=0.8629 bce=0.4571 C_ref=0.9168 chi2/ndf=35.72 (7.7 min)
+2026-09-19 01:27:49,905 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 01:27:49,996 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 01:27:49,996 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch02.pt
+2026-09-19 01:27:51,098 | INFO | Restored normalizer state from checkpoint
+2026-09-19 01:27:51,402 | INFO | Starting _collect_predictions
+2026-09-19 01:27:51,402 | INFO | Dataset size = 4096
+2026-09-19 01:27:51,402 | INFO | Batch size = 1024
+2026-09-19 01:27:51,623 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e02/sig_over_bkg/f0030/seed0: val_auc=0.8666 bce=0.4515 C_ref=0.8787 chi2/ndf=35.77 (7.7 min)
+2026-09-19 01:35:30,096 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 01:35:30,187 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 01:35:30,187 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch03.pt
+2026-09-19 01:35:31,187 | INFO | Restored normalizer state from checkpoint
+2026-09-19 01:35:31,485 | INFO | Starting _collect_predictions
+2026-09-19 01:35:31,485 | INFO | Dataset size = 4096
+2026-09-19 01:35:31,485 | INFO | Batch size = 1024
+2026-09-19 01:35:31,709 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e03/sig_over_bkg/f0030/seed0: val_auc=0.8666 bce=0.4499 C_ref=0.9395 chi2/ndf=2.76 (7.8 min)
+2026-09-19 01:43:16,667 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 01:43:16,758 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 01:43:16,758 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch04.pt
+2026-09-19 01:43:17,877 | INFO | Restored normalizer state from checkpoint
+2026-09-19 01:43:18,176 | INFO | Starting _collect_predictions
+2026-09-19 01:43:18,176 | INFO | Dataset size = 4096
+2026-09-19 01:43:18,176 | INFO | Batch size = 1024
+2026-09-19 01:43:18,396 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e04/sig_over_bkg/f0030/seed0: val_auc=0.8671 bce=0.4504 C_ref=0.8780 chi2/ndf=11.87 (7.8 min)
+[run] pretrained/sig_over_bkg/f1000: epoch_size 3477101 = 6792 steps/epoch, 135840 steps total
+[skip] /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0 already done
+[full] pretrained/sig_over_bkg/f1000: 20/20 epochs, 20/20 epoch files, steps/epoch 6792 (n_train_rows 3477101 == epoch_size 3477101: True), total steps 135840, best epoch 10, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-19 01:51:03,446 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 01:51:03,537 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 01:51:03,537 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch01.pt
+2026-09-19 01:51:03,891 | INFO | Restored normalizer state from checkpoint
+2026-09-19 01:51:04,129 | INFO | Starting _collect_predictions
+2026-09-19 01:51:04,129 | INFO | Dataset size = 4096
+2026-09-19 01:51:04,129 | INFO | Batch size = 1024
+2026-09-19 01:51:04,351 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e01/sig_over_bkg/f1000/seed0: val_auc=0.8753 bce=0.4360 C_ref=0.9709 chi2/ndf=4.70 (9.9 min)
+2026-09-19 02:00:58,558 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 02:00:58,808 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 02:00:58,808 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch02.pt
+2026-09-19 02:00:59,161 | INFO | Restored normalizer state from checkpoint
+2026-09-19 02:00:59,401 | INFO | Starting _collect_predictions
+2026-09-19 02:00:59,401 | INFO | Dataset size = 4096
+2026-09-19 02:00:59,401 | INFO | Batch size = 1024
+2026-09-19 02:00:59,625 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e02/sig_over_bkg/f1000/seed0: val_auc=0.8797 bce=0.4302 C_ref=1.0312 chi2/ndf=18.52 (10.0 min)
+2026-09-19 02:10:57,189 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 02:10:57,280 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 02:10:57,281 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch03.pt
+2026-09-19 02:10:57,639 | INFO | Restored normalizer state from checkpoint
+2026-09-19 02:10:57,877 | INFO | Starting _collect_predictions
+2026-09-19 02:10:57,877 | INFO | Dataset size = 4096
+2026-09-19 02:10:57,877 | INFO | Batch size = 1024
+2026-09-19 02:10:58,099 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e03/sig_over_bkg/f1000/seed0: val_auc=0.8812 bce=0.4279 C_ref=0.9620 chi2/ndf=8.36 (9.9 min)
+2026-09-19 02:20:48,857 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 02:20:48,949 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 02:20:48,949 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch04.pt
+2026-09-19 02:20:49,302 | INFO | Restored normalizer state from checkpoint
+2026-09-19 02:20:49,542 | INFO | Starting _collect_predictions
+2026-09-19 02:20:49,542 | INFO | Dataset size = 4096
+2026-09-19 02:20:49,542 | INFO | Batch size = 1024
+2026-09-19 02:20:49,765 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e04/sig_over_bkg/f1000/seed0: val_auc=0.8822 bce=0.4267 C_ref=0.8992 chi2/ndf=8.57 (10.0 min)
+summary: started=2 failed=0
+EXPORT_EXIT=0

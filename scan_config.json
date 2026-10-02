@@ -1,0 +1,50 @@
+{
+  "root": "/content/drive/MyDrive/Research/NSBI/Training Statistics Scan",
+  "raw_data_dir": "/content/drive/MyDrive/Research/NSBI/spliced_21_columns",
+  "toys_root": "/content/drive/MyDrive/Research/NSBI",
+  "train_frac": 0.8,
+  "split_seed": 42,
+  "fractions": [
+    0.01,
+    0.03,
+    0.1,
+    0.3,
+    1.0
+  ],
+  "variants": [
+    "scratch",
+    "pretrained",
+    "frozen"
+  ],
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "tasks": [
+    "sig_over_bkg",
+    "sbi_over_bkg"
+  ],
+  "batch_size": 512,
+  "epoch_size": 1024000,
+  "max_epochs": 50,
+  "early_stop_patience": 5,
+  "val_monitor_rows": 262144,
+  "num_workers": 0,
+  "scratch_lr": 0.0003,
+  "scratch_weight_decay": 0.01,
+  "lumi": 300.0,
+  "mu_true_values": [
+    0.4,
+    2.5
+  ],
+  "mu_min": 0.0,
+  "mu_max": 4.0,
+  "mu_steps": 401,
+  "calib_ref_events": 1000000,
+  "keep_checkpoint": false,
+  "wandb_project": null,
+  "wandb_entity": null,
+  "tf32": false,
+  "autocast_bf16": false
+}

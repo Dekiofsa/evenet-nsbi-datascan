@@ -1,0 +1,83 @@
+[
+ {
+  "epoch": 1,
+  "global_step": 2000,
+  "elapsed_s": 460.99055647850037,
+  "train_loss": 0.43284771728515625,
+  "train_accuracy": 0.816696286201477,
+  "val_loss": 0.4120464026927948,
+  "val_accuracy": 0.7765312194824219
+ },
+ {
+  "epoch": 2,
+  "global_step": 4000,
+  "elapsed_s": 916.2953636646271,
+  "train_loss": 0.42372650146484375,
+  "train_accuracy": 0.8206982612609863,
+  "val_loss": 0.4136558175086975,
+  "val_accuracy": 0.7827911376953125
+ },
+ {
+  "epoch": 3,
+  "global_step": 6000,
+  "elapsed_s": 1372.3567235469818,
+  "train_loss": 0.423342529296875,
+  "train_accuracy": 0.8206484317779541,
+  "val_loss": 0.41498348116874695,
+  "val_accuracy": 0.7709465026855469
+ },
+ {
+  "epoch": 4,
+  "global_step": 8000,
+  "elapsed_s": 1830.4220039844513,
+  "train_loss": 0.42255322265625,
+  "train_accuracy": 0.8212929964065552,
+  "val_loss": 0.4045203626155853,
+  "val_accuracy": 0.7753219604492188
+ },
+ {
+  "epoch": 5,
+  "global_step": 10000,
+  "elapsed_s": 2292.090652704239,
+  "train_loss": 0.4209747314453125,
+  "train_accuracy": 0.8219589591026306,
+  "val_loss": 0.4301162362098694,
+  "val_accuracy": 0.7720756530761719
+ },
+ {
+  "epoch": 6,
+  "global_step": 12000,
+  "elapsed_s": 2752.6224207878113,
+  "train_loss": 0.42100942993164064,
+  "train_accuracy": 0.8216289281845093,
+  "val_loss": 0.4218403398990631,
+  "val_accuracy": 0.7803878784179688
+ },
+ {
+  "epoch": 7,
+  "global_step": 14000,
+  "elapsed_s": 3214.0365118980408,
+  "train_loss": 0.4199672241210938,
+  "train_accuracy": 0.8225331902503967,
+  "val_loss": 0.4060323238372803,
+  "val_accuracy": 0.7808685302734375
+ },
+ {
+  "epoch": 8,
+  "global_step": 16000,
+  "elapsed_s": 3677.4017617702484,
+  "train_loss": 0.4195144348144531,
+  "train_accuracy": 0.8222822546958923,
+  "val_loss": 0.40802857279777527,
+  "val_accuracy": 0.7742042541503906
+ },
+ {
+  "epoch": 9,
+  "global_step": 18000,
+  "elapsed_s": 4265.441189050674,
+  "train_loss": 0.4189131774902344,
+  "train_accuracy": 0.8229120969772339,
+  "val_loss": 0.43231526017189026,
+  "val_accuracy": 0.7613868713378906
+ }
+]

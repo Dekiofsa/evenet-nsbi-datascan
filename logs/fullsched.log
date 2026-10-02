@@ -1,0 +1,1465 @@
+root /home/ubuntu/datascan/fullsched | 10 runs for variants ['pretrained'] at fractions [0.01, 0.03, 0.1, 0.3, 1.0] | 20 full-pass epochs, early stopping off, every epoch saved, exports best + ['e05', 'e10', 'e15', 'e20']
+[run] pretrained/sig_over_bkg/f0010: epoch_size 34771 = 68 steps/epoch, 1360 steps total
+/opt/pytorch/lib/python3.13/site-packages/torch/cuda/__init__.py:64: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+2026-09-18 03:35:35,883 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 03:35:36,007 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-18 03:35:36,289 | INFO | ======== Soft Load Summary ========
+2026-09-18 03:35:36,289 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-18 03:35:36,289 | INFO | All components loaded: NO
+2026-09-18 03:35:36,290 | INFO | --- Breakdown ---
+2026-09-18 03:35:36,290 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-18 03:35:36,290 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-18 03:35:36,290 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-18 03:35:36,290 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-18 03:35:36,290 | WARNING | Shape mismatches for 8 layers
+2026-09-18 03:35:36,290 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-18 03:35:36,290 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-18 03:35:36,290 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-18 03:35:36,290 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-18 03:35:36,290 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-18 03:35:36,290 | WARNING |   - ... and 3 more
+2026-09-18 03:35:36,290 | WARNING | Missing layers (randomly initialized): 23
+2026-09-18 03:35:36,290 | WARNING | • models         : 23 layers missing
+2026-09-18 03:35:36,290 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-18 03:35:36,290 | INFO | ===================================
+2026-09-18 03:35:38,098 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 03:35:38,139 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-18 03:35:38,139 | INFO | Normalization plan:
++---------------+--------------+-------------------+-------------+----------+
+| Feature Group | Feature Name | Rule              | Mean        | Std      |
++===============+==============+===================+=============+==========+
+| x             | pt           | log_normalize     | 3.9907      | 0.682227 |
+|               | energy       | log_normalize     | 4.42875     | 0.738802 |
+|               | eta          | normalize         | 0.00825904  | 1.09472  |
+|               | phi          | normalize_uniform | 0.000825798 | 1.813    |
+| globals       | m4l          | log_normalize     | 5.72653     | 0.401061 |
+|               | sum_pt       | log_normalize     | 5.49585     | 0.446093 |
+|               | sum_energy   | log_normalize     | 5.97629     | 0.455497 |
++---------------+--------------+-------------------+-------------+----------+
+2026-09-18 03:35:38,139 | INFO | Training setup: epochs=20, batch_size=512, world_size=1, device=cuda
+2026-09-18 03:35:38,140 | INFO | Train loader: size=34771, steps_per_epoch=68, sampler=DistributedWeightedSampler, epoch_size=34771, replacement=True
+2026-09-18 03:35:38,140 | INFO | Class distribution for train -> bkg: count=22632 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=12139 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-18 03:35:38,140 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-18 03:35:38,142 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-18 03:36:01,609 | INFO | Epoch 1/20 | train_loss=0.5572 | train_accuracy=0.7146 | val_loss=0.4571 | val_accuracy=0.7901
+2026-09-18 03:36:01,610 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch01.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 1/20 step 68 lr=['0.0001', '5e-05', '1e-05'] val_loss=0.4571 -> epoch01.pt
+2026-09-18 03:36:24,634 | INFO | Epoch 2/20 | train_loss=0.4503 | train_accuracy=0.8103 | val_loss=0.4417 | val_accuracy=0.7974
+2026-09-18 03:36:24,636 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch02.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 2/20 step 136 lr=['9.93e-05', '4.97e-05', '9.93e-06'] val_loss=0.4417 -> epoch02.pt
+2026-09-18 03:36:47,498 | INFO | Epoch 3/20 | train_loss=0.4434 | train_accuracy=0.8129 | val_loss=0.4439 | val_accuracy=0.7986
+2026-09-18 03:36:47,499 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch03.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 3/20 step 204 lr=['9.73e-05', '4.86e-05', '9.73e-06'] val_loss=0.4439 -> epoch03.pt
+2026-09-18 03:37:10,208 | INFO | Epoch 4/20 | train_loss=0.4405 | train_accuracy=0.8135 | val_loss=0.4568 | val_accuracy=0.7941
+2026-09-18 03:37:10,210 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch04.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 4/20 step 272 lr=['9.4e-05', '4.7e-05', '9.4e-06'] val_loss=0.4568 -> epoch04.pt
+2026-09-18 03:37:32,971 | INFO | Epoch 5/20 | train_loss=0.4360 | train_accuracy=0.8155 | val_loss=0.4416 | val_accuracy=0.7979
+2026-09-18 03:37:32,972 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch05.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 5/20 step 340 lr=['8.95e-05', '4.47e-05', '8.95e-06'] val_loss=0.4416 -> epoch05.pt
+2026-09-18 03:37:55,717 | INFO | Epoch 6/20 | train_loss=0.4356 | train_accuracy=0.8138 | val_loss=0.4487 | val_accuracy=0.7917
+2026-09-18 03:37:55,719 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch06.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 6/20 step 408 lr=['8.39e-05', '4.19e-05', '8.39e-06'] val_loss=0.4487 -> epoch06.pt
+2026-09-18 03:38:18,506 | INFO | Epoch 7/20 | train_loss=0.4306 | train_accuracy=0.8191 | val_loss=0.4502 | val_accuracy=0.7968
+2026-09-18 03:38:18,508 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch07.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 7/20 step 476 lr=['7.73e-05', '3.87e-05', '7.73e-06'] val_loss=0.4502 -> epoch07.pt
+2026-09-18 03:38:41,288 | INFO | Epoch 8/20 | train_loss=0.4293 | train_accuracy=0.8169 | val_loss=0.4489 | val_accuracy=0.7941
+2026-09-18 03:38:41,290 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch08.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 8/20 step 544 lr=['7.01e-05', '3.5e-05', '7.01e-06'] val_loss=0.4489 -> epoch08.pt
+2026-09-18 03:39:04,661 | INFO | Epoch 9/20 | train_loss=0.4327 | train_accuracy=0.8136 | val_loss=0.4448 | val_accuracy=0.7936
+2026-09-18 03:39:04,662 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch09.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 9/20 step 612 lr=['6.23e-05', '3.11e-05', '6.23e-06'] val_loss=0.4448 -> epoch09.pt
+2026-09-18 03:39:27,767 | INFO | Epoch 10/20 | train_loss=0.4281 | train_accuracy=0.8177 | val_loss=0.4477 | val_accuracy=0.7934
+2026-09-18 03:39:27,769 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch10.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 10/20 step 680 lr=['5.41e-05', '2.71e-05', '5.41e-06'] val_loss=0.4477 -> epoch10.pt
+2026-09-18 03:39:50,973 | INFO | Epoch 11/20 | train_loss=0.4225 | train_accuracy=0.8207 | val_loss=0.4474 | val_accuracy=0.7915
+2026-09-18 03:39:50,975 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch11.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 11/20 step 748 lr=['4.59e-05', '2.29e-05', '4.59e-06'] val_loss=0.4474 -> epoch11.pt
+2026-09-18 03:40:14,065 | INFO | Epoch 12/20 | train_loss=0.4237 | train_accuracy=0.8199 | val_loss=0.4463 | val_accuracy=0.7945
+2026-09-18 03:40:14,067 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch12.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 12/20 step 816 lr=['3.77e-05', '1.89e-05', '3.77e-06'] val_loss=0.4463 -> epoch12.pt
+2026-09-18 03:40:37,044 | INFO | Epoch 13/20 | train_loss=0.4188 | train_accuracy=0.8241 | val_loss=0.4541 | val_accuracy=0.7889
+2026-09-18 03:40:37,046 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch13.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 13/20 step 884 lr=['2.99e-05', '1.5e-05', '2.99e-06'] val_loss=0.4541 -> epoch13.pt
+2026-09-18 03:40:59,888 | INFO | Epoch 14/20 | train_loss=0.4264 | train_accuracy=0.8182 | val_loss=0.4480 | val_accuracy=0.7914
+2026-09-18 03:40:59,890 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch14.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 14/20 step 952 lr=['2.27e-05', '1.13e-05', '2.27e-06'] val_loss=0.4480 -> epoch14.pt
+2026-09-18 03:41:22,866 | INFO | Epoch 15/20 | train_loss=0.4140 | train_accuracy=0.8242 | val_loss=0.4477 | val_accuracy=0.7915
+2026-09-18 03:41:22,868 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch15.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 15/20 step 1020 lr=['1.61e-05', '8.07e-06', '1.61e-06'] val_loss=0.4477 -> epoch15.pt
+2026-09-18 03:41:46,061 | INFO | Epoch 16/20 | train_loss=0.4202 | train_accuracy=0.8214 | val_loss=0.4465 | val_accuracy=0.7911
+2026-09-18 03:41:46,064 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch16.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 16/20 step 1088 lr=['1.05e-05', '5.27e-06', '1.05e-06'] val_loss=0.4465 -> epoch16.pt
+2026-09-18 03:42:09,353 | INFO | Epoch 17/20 | train_loss=0.4255 | train_accuracy=0.8171 | val_loss=0.4509 | val_accuracy=0.7892
+2026-09-18 03:42:09,355 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch17.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 17/20 step 1156 lr=['6.03e-06', '3.01e-06', '6.03e-07'] val_loss=0.4509 -> epoch17.pt
+2026-09-18 03:42:32,506 | INFO | Epoch 18/20 | train_loss=0.4231 | train_accuracy=0.8197 | val_loss=0.4502 | val_accuracy=0.7901
+2026-09-18 03:42:32,509 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch18.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 18/20 step 1224 lr=['2.71e-06', '1.35e-06', '2.71e-07'] val_loss=0.4502 -> epoch18.pt
+2026-09-18 03:42:55,406 | INFO | Epoch 19/20 | train_loss=0.4100 | train_accuracy=0.8261 | val_loss=0.4499 | val_accuracy=0.7902
+2026-09-18 03:42:55,408 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch19.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 19/20 step 1292 lr=['6.82e-07', '3.41e-07', '6.82e-08'] val_loss=0.4499 -> epoch19.pt
+2026-09-18 03:43:18,481 | INFO | Epoch 20/20 | train_loss=0.4160 | train_accuracy=0.8229 | val_loss=0.4484 | val_accuracy=0.7906
+2026-09-18 03:43:18,483 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch20.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 20/20 step 1360 lr=['0', '0', '0'] val_loss=0.4484 -> epoch20.pt
+2026-09-18 03:43:18,748 | INFO | Restored best model from epoch 5 based on val_loss=0.4416
+2026-09-18 03:43:18,748 | INFO | Training finished
+2026-09-18 03:43:18,748 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-18 03:43:19,219 | INFO | Starting _collect_predictions
+2026-09-18 03:43:19,219 | INFO | Dataset size = 4096
+2026-09-18 03:43:19,219 | INFO | Batch size = 1024
+2026-09-18 03:43:19,603 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f0010/seed0: best_epoch=5 val_auc=0.8646 C_ref=0.9185 chi2/ndf=32.57 (15.3 min)
+[full] pretrained/sig_over_bkg/f0010: 20/20 epochs, 20/20 epoch files, steps/epoch 68 (n_train_rows 34771 == epoch_size 34771: True), total steps 1360, best epoch 5, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-18 03:50:55,325 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 03:50:55,417 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 03:50:55,417 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch05.pt
+2026-09-18 03:50:55,773 | INFO | Restored normalizer state from checkpoint
+2026-09-18 03:50:56,061 | INFO | Starting _collect_predictions
+2026-09-18 03:50:56,061 | INFO | Dataset size = 4096
+2026-09-18 03:50:56,061 | INFO | Batch size = 1024
+2026-09-18 03:50:56,283 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e05/sig_over_bkg/f0010/seed0: val_auc=0.8646 bce=0.4537 C_ref=0.9185 chi2/ndf=32.57 (7.6 min)
+2026-09-18 03:58:32,657 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 03:58:32,748 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 03:58:32,749 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch10.pt
+2026-09-18 03:58:33,099 | INFO | Restored normalizer state from checkpoint
+2026-09-18 03:58:33,384 | INFO | Starting _collect_predictions
+2026-09-18 03:58:33,384 | INFO | Dataset size = 4096
+2026-09-18 03:58:33,384 | INFO | Batch size = 1024
+2026-09-18 03:58:33,608 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e10/sig_over_bkg/f0010/seed0: val_auc=0.8641 bce=0.4542 C_ref=0.8591 chi2/ndf=17.17 (7.6 min)
+2026-09-18 04:06:09,085 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 04:06:09,176 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 04:06:09,176 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch15.pt
+2026-09-18 04:06:09,524 | INFO | Restored normalizer state from checkpoint
+2026-09-18 04:06:09,816 | INFO | Starting _collect_predictions
+2026-09-18 04:06:09,816 | INFO | Dataset size = 4096
+2026-09-18 04:06:09,816 | INFO | Batch size = 1024
+2026-09-18 04:06:10,038 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e15/sig_over_bkg/f0010/seed0: val_auc=0.8650 bce=0.4564 C_ref=0.8207 chi2/ndf=41.18 (7.6 min)
+2026-09-18 04:13:43,231 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 04:13:43,322 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 04:13:43,322 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0010/seed0/epoch20.pt
+2026-09-18 04:13:43,675 | INFO | Restored normalizer state from checkpoint
+2026-09-18 04:13:43,963 | INFO | Starting _collect_predictions
+2026-09-18 04:13:43,963 | INFO | Dataset size = 4096
+2026-09-18 04:13:43,963 | INFO | Batch size = 1024
+2026-09-18 04:13:44,183 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e20/sig_over_bkg/f0010/seed0: val_auc=0.8649 bce=0.4553 C_ref=0.8344 chi2/ndf=22.55 (7.6 min)
+[run] pretrained/sbi_over_bkg/f0010: epoch_size 46102 = 91 steps/epoch, 1820 steps total
+2026-09-18 04:21:20,868 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 04:21:20,958 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-18 04:21:21,400 | INFO | ======== Soft Load Summary ========
+2026-09-18 04:21:21,400 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-18 04:21:21,400 | INFO | All components loaded: NO
+2026-09-18 04:21:21,401 | INFO | --- Breakdown ---
+2026-09-18 04:21:21,401 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-18 04:21:21,401 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-18 04:21:21,401 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-18 04:21:21,401 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-18 04:21:21,401 | WARNING | Shape mismatches for 8 layers
+2026-09-18 04:21:21,401 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-18 04:21:21,401 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-18 04:21:21,401 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-18 04:21:21,401 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-18 04:21:21,401 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-18 04:21:21,401 | WARNING |   - ... and 3 more
+2026-09-18 04:21:21,401 | WARNING | Missing layers (randomly initialized): 23
+2026-09-18 04:21:21,401 | WARNING | • models         : 23 layers missing
+2026-09-18 04:21:21,401 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-18 04:21:21,401 | INFO | ===================================
+2026-09-18 04:21:21,586 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 04:21:21,634 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-18 04:21:21,634 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.80884      | 0.529981 |
+|               | energy       | log_normalize     | 4.26055      | 0.626558 |
+|               | eta          | normalize         | 0.00557408   | 1.11464  |
+|               | phi          | normalize_uniform | -0.000519471 | 1.81274  |
+| globals       | m4l          | log_normalize     | 5.525        | 0.2586   |
+|               | sum_pt       | log_normalize     | 5.27436      | 0.294911 |
+|               | sum_energy   | log_normalize     | 5.77549      | 0.354933 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-18 04:21:21,634 | INFO | Training setup: epochs=20, batch_size=512, world_size=1, device=cuda
+2026-09-18 04:21:21,634 | INFO | Train loader: size=46102, steps_per_epoch=91, sampler=DistributedWeightedSampler, epoch_size=46102, replacement=True
+2026-09-18 04:21:21,635 | INFO | Class distribution for train -> bkg: count=23051 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=23051 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-18 04:21:21,635 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-18 04:21:21,637 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-18 04:21:47,033 | INFO | Epoch 1/20 | train_loss=0.7170 | train_accuracy=0.4962 | val_loss=0.6989 | val_accuracy=0.4999
+2026-09-18 04:21:47,033 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch01.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 1/20 step 91 lr=['0.0001', '5e-05', '1e-05'] val_loss=0.6989 -> epoch01.pt
+2026-09-18 04:22:12,522 | INFO | Epoch 2/20 | train_loss=0.7013 | train_accuracy=0.5031 | val_loss=0.6966 | val_accuracy=0.5010
+2026-09-18 04:22:12,525 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch02.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 2/20 step 182 lr=['9.93e-05', '4.97e-05', '9.93e-06'] val_loss=0.6966 -> epoch02.pt
+2026-09-18 04:22:38,265 | INFO | Epoch 3/20 | train_loss=0.6983 | train_accuracy=0.5008 | val_loss=0.6953 | val_accuracy=0.4990
+2026-09-18 04:22:38,267 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch03.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 3/20 step 273 lr=['9.73e-05', '4.86e-05', '9.73e-06'] val_loss=0.6953 -> epoch03.pt
+2026-09-18 04:23:03,759 | INFO | Epoch 4/20 | train_loss=0.6974 | train_accuracy=0.5009 | val_loss=0.6953 | val_accuracy=0.4995
+2026-09-18 04:23:03,760 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch04.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 4/20 step 364 lr=['9.4e-05', '4.7e-05', '9.4e-06'] val_loss=0.6953 -> epoch04.pt
+2026-09-18 04:23:29,623 | INFO | Epoch 5/20 | train_loss=0.6966 | train_accuracy=0.4990 | val_loss=0.6949 | val_accuracy=0.5000
+2026-09-18 04:23:29,626 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch05.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 5/20 step 455 lr=['8.95e-05', '4.47e-05', '8.95e-06'] val_loss=0.6949 -> epoch05.pt
+2026-09-18 04:23:55,071 | INFO | Epoch 6/20 | train_loss=0.6962 | train_accuracy=0.5003 | val_loss=0.6958 | val_accuracy=0.4996
+2026-09-18 04:23:55,072 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch06.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 6/20 step 546 lr=['8.39e-05', '4.19e-05', '8.39e-06'] val_loss=0.6958 -> epoch06.pt
+2026-09-18 04:24:20,782 | INFO | Epoch 7/20 | train_loss=0.6953 | train_accuracy=0.5024 | val_loss=0.6946 | val_accuracy=0.4986
+2026-09-18 04:24:20,784 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch07.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 7/20 step 637 lr=['7.73e-05', '3.87e-05', '7.73e-06'] val_loss=0.6946 -> epoch07.pt
+2026-09-18 04:24:46,260 | INFO | Epoch 8/20 | train_loss=0.6951 | train_accuracy=0.5018 | val_loss=0.6948 | val_accuracy=0.4997
+2026-09-18 04:24:46,262 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch08.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 8/20 step 728 lr=['7.01e-05', '3.5e-05', '7.01e-06'] val_loss=0.6948 -> epoch08.pt
+2026-09-18 04:25:11,892 | INFO | Epoch 9/20 | train_loss=0.6954 | train_accuracy=0.4965 | val_loss=0.6961 | val_accuracy=0.4993
+2026-09-18 04:25:11,895 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch09.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 9/20 step 819 lr=['6.23e-05', '3.11e-05', '6.23e-06'] val_loss=0.6961 -> epoch09.pt
+2026-09-18 04:25:37,509 | INFO | Epoch 10/20 | train_loss=0.6953 | train_accuracy=0.5003 | val_loss=0.6939 | val_accuracy=0.4998
+2026-09-18 04:25:37,512 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch10.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 10/20 step 910 lr=['5.41e-05', '2.71e-05', '5.41e-06'] val_loss=0.6939 -> epoch10.pt
+2026-09-18 04:26:03,265 | INFO | Epoch 11/20 | train_loss=0.6948 | train_accuracy=0.5014 | val_loss=0.6937 | val_accuracy=0.4982
+2026-09-18 04:26:03,267 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch11.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 11/20 step 1001 lr=['4.59e-05', '2.29e-05', '4.59e-06'] val_loss=0.6937 -> epoch11.pt
+2026-09-18 04:26:28,716 | INFO | Epoch 12/20 | train_loss=0.6946 | train_accuracy=0.5025 | val_loss=0.6942 | val_accuracy=0.4990
+2026-09-18 04:26:28,717 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch12.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 12/20 step 1092 lr=['3.77e-05', '1.89e-05', '3.77e-06'] val_loss=0.6942 -> epoch12.pt
+2026-09-18 04:26:54,377 | INFO | Epoch 13/20 | train_loss=0.6939 | train_accuracy=0.5056 | val_loss=0.6937 | val_accuracy=0.4988
+2026-09-18 04:26:54,379 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch13.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 13/20 step 1183 lr=['2.99e-05', '1.5e-05', '2.99e-06'] val_loss=0.6937 -> epoch13.pt
+2026-09-18 04:27:20,033 | INFO | Epoch 14/20 | train_loss=0.6937 | train_accuracy=0.5043 | val_loss=0.6935 | val_accuracy=0.4992
+2026-09-18 04:27:20,035 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch14.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 14/20 step 1274 lr=['2.27e-05', '1.13e-05', '2.27e-06'] val_loss=0.6935 -> epoch14.pt
+2026-09-18 04:27:45,640 | INFO | Epoch 15/20 | train_loss=0.6941 | train_accuracy=0.5016 | val_loss=0.6935 | val_accuracy=0.4994
+2026-09-18 04:27:45,643 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch15.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 15/20 step 1365 lr=['1.61e-05', '8.07e-06', '1.61e-06'] val_loss=0.6935 -> epoch15.pt
+2026-09-18 04:28:11,265 | INFO | Epoch 16/20 | train_loss=0.6936 | train_accuracy=0.5033 | val_loss=0.6935 | val_accuracy=0.4989
+2026-09-18 04:28:11,267 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch16.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 16/20 step 1456 lr=['1.05e-05', '5.27e-06', '1.05e-06'] val_loss=0.6935 -> epoch16.pt
+2026-09-18 04:28:36,628 | INFO | Epoch 17/20 | train_loss=0.6937 | train_accuracy=0.5034 | val_loss=0.6934 | val_accuracy=0.4984
+2026-09-18 04:28:36,630 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch17.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 17/20 step 1547 lr=['6.03e-06', '3.01e-06', '6.03e-07'] val_loss=0.6934 -> epoch17.pt
+2026-09-18 04:29:02,188 | INFO | Epoch 18/20 | train_loss=0.6934 | train_accuracy=0.5059 | val_loss=0.6933 | val_accuracy=0.4991
+2026-09-18 04:29:02,190 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch18.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 18/20 step 1638 lr=['2.71e-06', '1.35e-06', '2.71e-07'] val_loss=0.6933 -> epoch18.pt
+2026-09-18 04:29:27,586 | INFO | Epoch 19/20 | train_loss=0.6931 | train_accuracy=0.5072 | val_loss=0.6933 | val_accuracy=0.4991
+2026-09-18 04:29:27,588 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch19.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 19/20 step 1729 lr=['6.82e-07', '3.41e-07', '6.82e-08'] val_loss=0.6933 -> epoch19.pt
+2026-09-18 04:29:53,217 | INFO | Epoch 20/20 | train_loss=0.6937 | train_accuracy=0.5039 | val_loss=0.6933 | val_accuracy=0.4986
+2026-09-18 04:29:53,219 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch20.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 20/20 step 1820 lr=['0', '0', '0'] val_loss=0.6933 -> epoch20.pt
+2026-09-18 04:29:53,514 | INFO | Restored best model from epoch 20 based on val_loss=0.6933
+2026-09-18 04:29:53,515 | INFO | Training finished
+2026-09-18 04:29:53,515 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-18 04:29:53,985 | INFO | Starting _collect_predictions
+2026-09-18 04:29:53,985 | INFO | Dataset size = 4096
+2026-09-18 04:29:53,985 | INFO | Batch size = 1024
+2026-09-18 04:29:54,212 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f0010/seed0: best_epoch=20 val_auc=0.5053 C_ref=0.9912 chi2/ndf=1.55 (15.9 min)
+[full] pretrained/sbi_over_bkg/f0010: 20/20 epochs, 20/20 epoch files, steps/epoch 91 (n_train_rows 46102 == epoch_size 46102: True), total steps 1820, best epoch 20, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-18 04:37:12,002 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 04:37:12,093 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 04:37:12,093 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch05.pt
+2026-09-18 04:37:12,449 | INFO | Restored normalizer state from checkpoint
+2026-09-18 04:37:12,727 | INFO | Starting _collect_predictions
+2026-09-18 04:37:12,727 | INFO | Dataset size = 4096
+2026-09-18 04:37:12,727 | INFO | Batch size = 1024
+2026-09-18 04:37:12,952 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e05/sbi_over_bkg/f0010/seed0: val_auc=0.5031 bce=0.6948 C_ref=1.0203 chi2/ndf=7.55 (7.3 min)
+2026-09-18 04:44:28,588 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 04:44:28,680 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 04:44:28,680 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch10.pt
+2026-09-18 04:44:29,030 | INFO | Restored normalizer state from checkpoint
+2026-09-18 04:44:29,308 | INFO | Starting _collect_predictions
+2026-09-18 04:44:29,308 | INFO | Dataset size = 4096
+2026-09-18 04:44:29,308 | INFO | Batch size = 1024
+2026-09-18 04:44:29,533 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e10/sbi_over_bkg/f0010/seed0: val_auc=0.5031 bce=0.6938 C_ref=1.0038 chi2/ndf=2.93 (7.3 min)
+2026-09-18 04:51:47,435 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 04:51:47,526 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 04:51:47,526 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch15.pt
+2026-09-18 04:51:47,877 | INFO | Restored normalizer state from checkpoint
+2026-09-18 04:51:48,152 | INFO | Starting _collect_predictions
+2026-09-18 04:51:48,152 | INFO | Dataset size = 4096
+2026-09-18 04:51:48,152 | INFO | Batch size = 1024
+2026-09-18 04:51:48,376 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e15/sbi_over_bkg/f0010/seed0: val_auc=0.5050 bce=0.6934 C_ref=0.9829 chi2/ndf=1.32 (7.3 min)
+2026-09-18 04:59:04,469 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 04:59:04,560 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 04:59:04,561 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0010/seed0/epoch20.pt
+2026-09-18 04:59:04,908 | INFO | Restored normalizer state from checkpoint
+2026-09-18 04:59:05,180 | INFO | Starting _collect_predictions
+2026-09-18 04:59:05,180 | INFO | Dataset size = 4096
+2026-09-18 04:59:05,180 | INFO | Batch size = 1024
+2026-09-18 04:59:05,402 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e20/sbi_over_bkg/f0010/seed0: val_auc=0.5053 bce=0.6931 C_ref=0.9912 chi2/ndf=1.55 (7.3 min)
+[run] pretrained/sig_over_bkg/f0030: epoch_size 104313 = 204 steps/epoch, 4080 steps total
+2026-09-18 05:06:23,347 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 05:06:23,437 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-18 05:06:23,663 | INFO | ======== Soft Load Summary ========
+2026-09-18 05:06:23,663 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-18 05:06:23,663 | INFO | All components loaded: NO
+2026-09-18 05:06:23,664 | INFO | --- Breakdown ---
+2026-09-18 05:06:23,664 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-18 05:06:23,664 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-18 05:06:23,664 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-18 05:06:23,664 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-18 05:06:23,664 | WARNING | Shape mismatches for 8 layers
+2026-09-18 05:06:23,664 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-18 05:06:23,664 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-18 05:06:23,664 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-18 05:06:23,664 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-18 05:06:23,664 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-18 05:06:23,664 | WARNING |   - ... and 3 more
+2026-09-18 05:06:23,664 | WARNING | Missing layers (randomly initialized): 23
+2026-09-18 05:06:23,664 | WARNING | • models         : 23 layers missing
+2026-09-18 05:06:23,665 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-18 05:06:23,665 | INFO | ===================================
+2026-09-18 05:06:23,807 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 05:06:23,850 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-18 05:06:23,850 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.98783    | 0.679691 |
+|               | energy       | log_normalize     | 4.42913    | 0.738827 |
+|               | eta          | normalize         | 0.00361719 | 1.09929  |
+|               | phi          | normalize_uniform | 0.0028908  | 1.81309  |
+| globals       | m4l          | log_normalize     | 5.7241     | 0.399983 |
+|               | sum_pt       | log_normalize     | 5.492      | 0.444526 |
+|               | sum_energy   | log_normalize     | 5.97656    | 0.455542 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-18 05:06:23,851 | INFO | Training setup: epochs=20, batch_size=512, world_size=1, device=cuda
+2026-09-18 05:06:23,851 | INFO | Train loader: size=104313, steps_per_epoch=204, sampler=DistributedWeightedSampler, epoch_size=104313, replacement=True
+2026-09-18 05:06:23,851 | INFO | Class distribution for train -> bkg: count=67896 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=36417 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-18 05:06:23,851 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-18 05:06:23,853 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-18 05:07:01,489 | INFO | Epoch 1/20 | train_loss=0.5060 | train_accuracy=0.7640 | val_loss=0.4455 | val_accuracy=0.7938
+2026-09-18 05:07:01,490 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch01.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 1/20 step 204 lr=['0.0001', '5e-05', '1e-05'] val_loss=0.4455 -> epoch01.pt
+2026-09-18 05:07:39,235 | INFO | Epoch 2/20 | train_loss=0.4503 | train_accuracy=0.8086 | val_loss=0.4416 | val_accuracy=0.7939
+2026-09-18 05:07:39,238 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch02.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 2/20 step 408 lr=['9.93e-05', '4.97e-05', '9.93e-06'] val_loss=0.4416 -> epoch02.pt
+2026-09-18 05:08:16,797 | INFO | Epoch 3/20 | train_loss=0.4438 | train_accuracy=0.8106 | val_loss=0.4455 | val_accuracy=0.7946
+2026-09-18 05:08:16,798 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch03.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 3/20 step 612 lr=['9.73e-05', '4.86e-05', '9.73e-06'] val_loss=0.4455 -> epoch03.pt
+2026-09-18 05:08:54,181 | INFO | Epoch 4/20 | train_loss=0.4400 | train_accuracy=0.8116 | val_loss=0.4515 | val_accuracy=0.7922
+2026-09-18 05:08:54,182 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch04.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 4/20 step 816 lr=['9.4e-05', '4.7e-05', '9.4e-06'] val_loss=0.4515 -> epoch04.pt
+2026-09-18 05:09:31,522 | INFO | Epoch 5/20 | train_loss=0.4401 | train_accuracy=0.8115 | val_loss=0.4427 | val_accuracy=0.7923
+2026-09-18 05:09:31,524 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch05.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 5/20 step 1020 lr=['8.95e-05', '4.47e-05', '8.95e-06'] val_loss=0.4427 -> epoch05.pt
+2026-09-18 05:10:08,851 | INFO | Epoch 6/20 | train_loss=0.4308 | train_accuracy=0.8173 | val_loss=0.4420 | val_accuracy=0.7845
+2026-09-18 05:10:08,852 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch06.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 6/20 step 1224 lr=['8.39e-05', '4.19e-05', '8.39e-06'] val_loss=0.4420 -> epoch06.pt
+2026-09-18 05:10:46,398 | INFO | Epoch 7/20 | train_loss=0.4330 | train_accuracy=0.8158 | val_loss=0.4420 | val_accuracy=0.7858
+2026-09-18 05:10:46,400 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch07.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 7/20 step 1428 lr=['7.73e-05', '3.87e-05', '7.73e-06'] val_loss=0.4420 -> epoch07.pt
+2026-09-18 05:11:24,061 | INFO | Epoch 8/20 | train_loss=0.4320 | train_accuracy=0.8158 | val_loss=0.4410 | val_accuracy=0.7899
+2026-09-18 05:11:24,063 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch08.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 8/20 step 1632 lr=['7.01e-05', '3.5e-05', '7.01e-06'] val_loss=0.4410 -> epoch08.pt
+2026-09-18 05:12:01,604 | INFO | Epoch 9/20 | train_loss=0.4271 | train_accuracy=0.8192 | val_loss=0.4479 | val_accuracy=0.7842
+2026-09-18 05:12:01,606 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch09.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 9/20 step 1836 lr=['6.23e-05', '3.11e-05', '6.23e-06'] val_loss=0.4479 -> epoch09.pt
+2026-09-18 05:12:39,083 | INFO | Epoch 10/20 | train_loss=0.4256 | train_accuracy=0.8189 | val_loss=0.4421 | val_accuracy=0.7858
+2026-09-18 05:12:39,085 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch10.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 10/20 step 2040 lr=['5.41e-05', '2.71e-05', '5.41e-06'] val_loss=0.4421 -> epoch10.pt
+2026-09-18 05:13:16,827 | INFO | Epoch 11/20 | train_loss=0.4251 | train_accuracy=0.8187 | val_loss=0.4448 | val_accuracy=0.7856
+2026-09-18 05:13:16,828 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch11.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 11/20 step 2244 lr=['4.59e-05', '2.29e-05', '4.59e-06'] val_loss=0.4448 -> epoch11.pt
+2026-09-18 05:13:54,775 | INFO | Epoch 12/20 | train_loss=0.4217 | train_accuracy=0.8196 | val_loss=0.4434 | val_accuracy=0.7853
+2026-09-18 05:13:54,777 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch12.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 12/20 step 2448 lr=['3.77e-05', '1.89e-05', '3.77e-06'] val_loss=0.4434 -> epoch12.pt
+2026-09-18 05:14:32,513 | INFO | Epoch 13/20 | train_loss=0.4196 | train_accuracy=0.8224 | val_loss=0.4417 | val_accuracy=0.7851
+2026-09-18 05:14:32,515 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch13.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 13/20 step 2652 lr=['2.99e-05', '1.5e-05', '2.99e-06'] val_loss=0.4417 -> epoch13.pt
+2026-09-18 05:15:10,403 | INFO | Epoch 14/20 | train_loss=0.4223 | train_accuracy=0.8192 | val_loss=0.4442 | val_accuracy=0.7804
+2026-09-18 05:15:10,405 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch14.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 14/20 step 2856 lr=['2.27e-05', '1.13e-05', '2.27e-06'] val_loss=0.4442 -> epoch14.pt
+2026-09-18 05:15:48,181 | INFO | Epoch 15/20 | train_loss=0.4194 | train_accuracy=0.8213 | val_loss=0.4434 | val_accuracy=0.7825
+2026-09-18 05:15:48,183 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch15.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 15/20 step 3060 lr=['1.61e-05', '8.07e-06', '1.61e-06'] val_loss=0.4434 -> epoch15.pt
+2026-09-18 05:16:25,804 | INFO | Epoch 16/20 | train_loss=0.4191 | train_accuracy=0.8211 | val_loss=0.4409 | val_accuracy=0.7830
+2026-09-18 05:16:25,805 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch16.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 16/20 step 3264 lr=['1.05e-05', '5.27e-06', '1.05e-06'] val_loss=0.4409 -> epoch16.pt
+2026-09-18 05:17:03,601 | INFO | Epoch 17/20 | train_loss=0.4203 | train_accuracy=0.8201 | val_loss=0.4419 | val_accuracy=0.7813
+2026-09-18 05:17:03,603 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch17.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 17/20 step 3468 lr=['6.03e-06', '3.01e-06', '6.03e-07'] val_loss=0.4419 -> epoch17.pt
+2026-09-18 05:17:41,430 | INFO | Epoch 18/20 | train_loss=0.4214 | train_accuracy=0.8195 | val_loss=0.4382 | val_accuracy=0.7835
+2026-09-18 05:17:41,432 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch18.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 18/20 step 3672 lr=['2.71e-06', '1.35e-06', '2.71e-07'] val_loss=0.4382 -> epoch18.pt
+2026-09-18 05:18:18,920 | INFO | Epoch 19/20 | train_loss=0.4194 | train_accuracy=0.8210 | val_loss=0.4422 | val_accuracy=0.7812
+2026-09-18 05:18:18,922 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch19.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 19/20 step 3876 lr=['6.82e-07', '3.41e-07', '6.82e-08'] val_loss=0.4422 -> epoch19.pt
+2026-09-18 05:18:56,439 | INFO | Epoch 20/20 | train_loss=0.4208 | train_accuracy=0.8199 | val_loss=0.4374 | val_accuracy=0.7828
+2026-09-18 05:18:56,441 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch20.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 20/20 step 4080 lr=['0', '0', '0'] val_loss=0.4374 -> epoch20.pt
+2026-09-18 05:18:56,738 | INFO | Restored best model from epoch 20 based on val_loss=0.4374
+2026-09-18 05:18:56,738 | INFO | Training finished
+2026-09-18 05:18:56,739 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-18 05:18:57,200 | INFO | Starting _collect_predictions
+2026-09-18 05:18:57,200 | INFO | Dataset size = 4096
+2026-09-18 05:18:57,200 | INFO | Batch size = 1024
+2026-09-18 05:18:57,426 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f0030/seed0: best_epoch=20 val_auc=0.8714 C_ref=0.6990 chi2/ndf=108.96 (20.2 min)
+[full] pretrained/sig_over_bkg/f0030: 20/20 epochs, 20/20 epoch files, steps/epoch 204 (n_train_rows 104313 == epoch_size 104313: True), total steps 4080, best epoch 20, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-18 05:26:33,779 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 05:26:33,871 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 05:26:33,871 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch05.pt
+2026-09-18 05:26:34,225 | INFO | Restored normalizer state from checkpoint
+2026-09-18 05:26:34,526 | INFO | Starting _collect_predictions
+2026-09-18 05:26:34,526 | INFO | Dataset size = 4096
+2026-09-18 05:26:34,526 | INFO | Batch size = 1024
+2026-09-18 05:26:34,749 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e05/sig_over_bkg/f0030/seed0: val_auc=0.8696 bce=0.4468 C_ref=0.8534 chi2/ndf=15.34 (7.6 min)
+2026-09-18 05:34:09,827 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 05:34:09,918 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 05:34:09,918 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch10.pt
+2026-09-18 05:34:10,272 | INFO | Restored normalizer state from checkpoint
+2026-09-18 05:34:10,573 | INFO | Starting _collect_predictions
+2026-09-18 05:34:10,573 | INFO | Dataset size = 4096
+2026-09-18 05:34:10,573 | INFO | Batch size = 1024
+2026-09-18 05:34:10,796 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e10/sig_over_bkg/f0030/seed0: val_auc=0.8712 bce=0.4450 C_ref=0.7121 chi2/ndf=66.10 (7.6 min)
+2026-09-18 05:41:47,296 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 05:41:47,388 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 05:41:47,388 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch15.pt
+2026-09-18 05:41:47,741 | INFO | Restored normalizer state from checkpoint
+2026-09-18 05:41:48,043 | INFO | Starting _collect_predictions
+2026-09-18 05:41:48,043 | INFO | Dataset size = 4096
+2026-09-18 05:41:48,043 | INFO | Batch size = 1024
+2026-09-18 05:41:48,268 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e15/sig_over_bkg/f0030/seed0: val_auc=0.8715 bce=0.4458 C_ref=0.6322 chi2/ndf=129.84 (7.6 min)
+2026-09-18 05:49:23,632 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 05:49:23,725 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 05:49:23,725 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0030/seed0/epoch20.pt
+2026-09-18 05:49:24,078 | INFO | Restored normalizer state from checkpoint
+2026-09-18 05:49:24,383 | INFO | Starting _collect_predictions
+2026-09-18 05:49:24,383 | INFO | Dataset size = 4096
+2026-09-18 05:49:24,383 | INFO | Batch size = 1024
+2026-09-18 05:49:24,604 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e20/sig_over_bkg/f0030/seed0: val_auc=0.8714 bce=0.4453 C_ref=0.6990 chi2/ndf=108.96 (7.6 min)
+[run] pretrained/sbi_over_bkg/f0030: epoch_size 138304 = 271 steps/epoch, 5420 steps total
+2026-09-18 05:57:00,417 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 05:57:00,508 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-18 05:57:00,735 | INFO | ======== Soft Load Summary ========
+2026-09-18 05:57:00,735 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-18 05:57:00,735 | INFO | All components loaded: NO
+2026-09-18 05:57:00,736 | INFO | --- Breakdown ---
+2026-09-18 05:57:00,736 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-18 05:57:00,736 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-18 05:57:00,736 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-18 05:57:00,736 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-18 05:57:00,736 | WARNING | Shape mismatches for 8 layers
+2026-09-18 05:57:00,736 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-18 05:57:00,736 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-18 05:57:00,736 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-18 05:57:00,737 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-18 05:57:00,737 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-18 05:57:00,737 | WARNING |   - ... and 3 more
+2026-09-18 05:57:00,737 | WARNING | Missing layers (randomly initialized): 23
+2026-09-18 05:57:00,737 | WARNING | • models         : 23 layers missing
+2026-09-18 05:57:00,737 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-18 05:57:00,737 | INFO | ===================================
+2026-09-18 05:57:00,916 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 05:57:00,961 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-18 05:57:00,961 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.80984    | 0.531669 |
+|               | energy       | log_normalize     | 4.26035    | 0.627613 |
+|               | eta          | normalize         | 0.00520081 | 1.11337  |
+|               | phi          | normalize_uniform | 0.00395417 | 1.81339  |
+| globals       | m4l          | log_normalize     | 5.5261     | 0.259915 |
+|               | sum_pt       | log_normalize     | 5.27562    | 0.295925 |
+|               | sum_energy   | log_normalize     | 5.77553    | 0.356403 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-18 05:57:00,961 | INFO | Training setup: epochs=20, batch_size=512, world_size=1, device=cuda
+2026-09-18 05:57:00,961 | INFO | Train loader: size=138304, steps_per_epoch=271, sampler=DistributedWeightedSampler, epoch_size=138304, replacement=True
+2026-09-18 05:57:00,962 | INFO | Class distribution for train -> bkg: count=69152 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=69152 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-18 05:57:00,963 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-18 05:57:00,964 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-18 05:57:45,569 | INFO | Epoch 1/20 | train_loss=0.7070 | train_accuracy=0.4995 | val_loss=0.6971 | val_accuracy=0.5005
+2026-09-18 05:57:45,569 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch01.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 1/20 step 271 lr=['0.0001', '5e-05', '1e-05'] val_loss=0.6971 -> epoch01.pt
+2026-09-18 05:58:30,479 | INFO | Epoch 2/20 | train_loss=0.6976 | train_accuracy=0.5000 | val_loss=0.6963 | val_accuracy=0.4994
+2026-09-18 05:58:30,481 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch02.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 2/20 step 542 lr=['9.93e-05', '4.97e-05', '9.93e-06'] val_loss=0.6963 -> epoch02.pt
+2026-09-18 05:59:15,372 | INFO | Epoch 3/20 | train_loss=0.6957 | train_accuracy=0.5025 | val_loss=0.6951 | val_accuracy=0.5000
+2026-09-18 05:59:15,373 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch03.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 3/20 step 813 lr=['9.73e-05', '4.86e-05', '9.73e-06'] val_loss=0.6951 -> epoch03.pt
+2026-09-18 06:00:00,407 | INFO | Epoch 4/20 | train_loss=0.6949 | train_accuracy=0.5016 | val_loss=0.6945 | val_accuracy=0.5000
+2026-09-18 06:00:00,409 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch04.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 4/20 step 1084 lr=['9.4e-05', '4.7e-05', '9.4e-06'] val_loss=0.6945 -> epoch04.pt
+2026-09-18 06:00:45,200 | INFO | Epoch 5/20 | train_loss=0.6944 | train_accuracy=0.5031 | val_loss=0.6942 | val_accuracy=0.4999
+2026-09-18 06:00:45,202 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch05.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 5/20 step 1355 lr=['8.95e-05', '4.47e-05', '8.95e-06'] val_loss=0.6942 -> epoch05.pt
+2026-09-18 06:01:30,315 | INFO | Epoch 6/20 | train_loss=0.6940 | train_accuracy=0.5022 | val_loss=0.6936 | val_accuracy=0.4988
+2026-09-18 06:01:30,317 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch06.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 6/20 step 1626 lr=['8.39e-05', '4.19e-05', '8.39e-06'] val_loss=0.6936 -> epoch06.pt
+2026-09-18 06:02:15,276 | INFO | Epoch 7/20 | train_loss=0.6940 | train_accuracy=0.5042 | val_loss=0.6940 | val_accuracy=0.4990
+2026-09-18 06:02:15,278 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch07.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 7/20 step 1897 lr=['7.73e-05', '3.87e-05', '7.73e-06'] val_loss=0.6940 -> epoch07.pt
+2026-09-18 06:03:00,415 | INFO | Epoch 8/20 | train_loss=0.6939 | train_accuracy=0.5014 | val_loss=0.6935 | val_accuracy=0.4998
+2026-09-18 06:03:00,417 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch08.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 8/20 step 2168 lr=['7.01e-05', '3.5e-05', '7.01e-06'] val_loss=0.6935 -> epoch08.pt
+2026-09-18 06:03:45,498 | INFO | Epoch 9/20 | train_loss=0.6935 | train_accuracy=0.5038 | val_loss=0.6933 | val_accuracy=0.5001
+2026-09-18 06:03:45,500 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch09.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 9/20 step 2439 lr=['6.23e-05', '3.11e-05', '6.23e-06'] val_loss=0.6933 -> epoch09.pt
+2026-09-18 06:04:30,315 | INFO | Epoch 10/20 | train_loss=0.6937 | train_accuracy=0.5008 | val_loss=0.6937 | val_accuracy=0.5003
+2026-09-18 06:04:30,317 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch10.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 10/20 step 2710 lr=['5.41e-05', '2.71e-05', '5.41e-06'] val_loss=0.6937 -> epoch10.pt
+2026-09-18 06:05:15,123 | INFO | Epoch 11/20 | train_loss=0.6936 | train_accuracy=0.5029 | val_loss=0.6929 | val_accuracy=0.4991
+2026-09-18 06:05:15,124 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch11.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 11/20 step 2981 lr=['4.59e-05', '2.29e-05', '4.59e-06'] val_loss=0.6929 -> epoch11.pt
+2026-09-18 06:06:00,139 | INFO | Epoch 12/20 | train_loss=0.6932 | train_accuracy=0.5039 | val_loss=0.6931 | val_accuracy=0.4993
+2026-09-18 06:06:00,141 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch12.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 12/20 step 3252 lr=['3.77e-05', '1.89e-05', '3.77e-06'] val_loss=0.6931 -> epoch12.pt
+2026-09-18 06:06:45,256 | INFO | Epoch 13/20 | train_loss=0.6929 | train_accuracy=0.5077 | val_loss=0.6936 | val_accuracy=0.4989
+2026-09-18 06:06:45,257 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch13.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 13/20 step 3523 lr=['2.99e-05', '1.5e-05', '2.99e-06'] val_loss=0.6936 -> epoch13.pt
+2026-09-18 06:07:30,071 | INFO | Epoch 14/20 | train_loss=0.6930 | train_accuracy=0.5042 | val_loss=0.6932 | val_accuracy=0.4989
+2026-09-18 06:07:30,073 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch14.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 14/20 step 3794 lr=['2.27e-05', '1.13e-05', '2.27e-06'] val_loss=0.6932 -> epoch14.pt
+2026-09-18 06:08:15,081 | INFO | Epoch 15/20 | train_loss=0.6932 | train_accuracy=0.5030 | val_loss=0.6929 | val_accuracy=0.4989
+2026-09-18 06:08:15,083 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch15.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 15/20 step 4065 lr=['1.61e-05', '8.07e-06', '1.61e-06'] val_loss=0.6929 -> epoch15.pt
+2026-09-18 06:08:59,837 | INFO | Epoch 16/20 | train_loss=0.6931 | train_accuracy=0.5011 | val_loss=0.6928 | val_accuracy=0.4994
+2026-09-18 06:08:59,839 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch16.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 16/20 step 4336 lr=['1.05e-05', '5.27e-06', '1.05e-06'] val_loss=0.6928 -> epoch16.pt
+2026-09-18 06:09:44,653 | INFO | Epoch 17/20 | train_loss=0.6930 | train_accuracy=0.5043 | val_loss=0.6928 | val_accuracy=0.4994
+2026-09-18 06:09:44,655 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch17.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 17/20 step 4607 lr=['6.03e-06', '3.01e-06', '6.03e-07'] val_loss=0.6928 -> epoch17.pt
+2026-09-18 06:10:29,608 | INFO | Epoch 18/20 | train_loss=0.6929 | train_accuracy=0.5049 | val_loss=0.6928 | val_accuracy=0.5002
+2026-09-18 06:10:29,610 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch18.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 18/20 step 4878 lr=['2.71e-06', '1.35e-06', '2.71e-07'] val_loss=0.6928 -> epoch18.pt
+2026-09-18 06:11:14,672 | INFO | Epoch 19/20 | train_loss=0.6929 | train_accuracy=0.5031 | val_loss=0.6928 | val_accuracy=0.4993
+2026-09-18 06:11:14,674 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch19.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 19/20 step 5149 lr=['6.82e-07', '3.41e-07', '6.82e-08'] val_loss=0.6928 -> epoch19.pt
+2026-09-18 06:11:59,733 | INFO | Epoch 20/20 | train_loss=0.6927 | train_accuracy=0.5044 | val_loss=0.6928 | val_accuracy=0.4995
+2026-09-18 06:11:59,735 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch20.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 20/20 step 5420 lr=['0', '0', '0'] val_loss=0.6928 -> epoch20.pt
+2026-09-18 06:12:00,028 | INFO | Restored best model from epoch 20 based on val_loss=0.6928
+2026-09-18 06:12:00,028 | INFO | Training finished
+2026-09-18 06:12:00,028 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-18 06:12:00,487 | INFO | Starting _collect_predictions
+2026-09-18 06:12:00,487 | INFO | Dataset size = 4096
+2026-09-18 06:12:00,487 | INFO | Batch size = 1024
+2026-09-18 06:12:00,712 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f0030/seed0: best_epoch=20 val_auc=0.5061 C_ref=0.9979 chi2/ndf=0.34 (22.4 min)
+[full] pretrained/sbi_over_bkg/f0030: 20/20 epochs, 20/20 epoch files, steps/epoch 271 (n_train_rows 138304 == epoch_size 138304: True), total steps 5420, best epoch 20, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-18 06:19:27,072 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 06:19:27,163 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 06:19:27,163 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch05.pt
+2026-09-18 06:19:27,514 | INFO | Restored normalizer state from checkpoint
+2026-09-18 06:19:27,798 | INFO | Starting _collect_predictions
+2026-09-18 06:19:27,798 | INFO | Dataset size = 4096
+2026-09-18 06:19:27,798 | INFO | Batch size = 1024
+2026-09-18 06:19:28,022 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e05/sbi_over_bkg/f0030/seed0: val_auc=0.5025 bce=0.6942 C_ref=0.9884 chi2/ndf=3.55 (7.4 min)
+2026-09-18 06:26:50,424 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 06:26:50,516 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 06:26:50,516 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch10.pt
+2026-09-18 06:26:50,863 | INFO | Restored normalizer state from checkpoint
+2026-09-18 06:26:51,144 | INFO | Starting _collect_predictions
+2026-09-18 06:26:51,144 | INFO | Dataset size = 4096
+2026-09-18 06:26:51,144 | INFO | Batch size = 1024
+2026-09-18 06:26:51,367 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e10/sbi_over_bkg/f0030/seed0: val_auc=0.5036 bce=0.6937 C_ref=0.9996 chi2/ndf=2.64 (7.3 min)
+2026-09-18 06:34:10,545 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 06:34:10,637 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 06:34:10,637 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch15.pt
+2026-09-18 06:34:10,987 | INFO | Restored normalizer state from checkpoint
+2026-09-18 06:34:11,269 | INFO | Starting _collect_predictions
+2026-09-18 06:34:11,269 | INFO | Dataset size = 4096
+2026-09-18 06:34:11,269 | INFO | Batch size = 1024
+2026-09-18 06:34:11,491 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e15/sbi_over_bkg/f0030/seed0: val_auc=0.5042 bce=0.6929 C_ref=0.9958 chi2/ndf=1.07 (7.4 min)
+2026-09-18 06:41:33,797 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 06:41:33,888 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 06:41:33,888 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0030/seed0/epoch20.pt
+2026-09-18 06:41:34,237 | INFO | Restored normalizer state from checkpoint
+2026-09-18 06:41:34,521 | INFO | Starting _collect_predictions
+2026-09-18 06:41:34,521 | INFO | Dataset size = 4096
+2026-09-18 06:41:34,521 | INFO | Batch size = 1024
+2026-09-18 06:41:34,743 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e20/sbi_over_bkg/f0030/seed0: val_auc=0.5061 bce=0.6927 C_ref=0.9979 chi2/ndf=0.34 (7.4 min)
+[run] pretrained/sig_over_bkg/f0100: epoch_size 347710 = 680 steps/epoch, 13600 steps total
+2026-09-18 06:48:58,222 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 06:48:58,312 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-18 06:48:58,556 | INFO | ======== Soft Load Summary ========
+2026-09-18 06:48:58,556 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-18 06:48:58,556 | INFO | All components loaded: NO
+2026-09-18 06:48:58,557 | INFO | --- Breakdown ---
+2026-09-18 06:48:58,557 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-18 06:48:58,557 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-18 06:48:58,557 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-18 06:48:58,557 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-18 06:48:58,557 | WARNING | Shape mismatches for 8 layers
+2026-09-18 06:48:58,557 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-18 06:48:58,557 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-18 06:48:58,557 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-18 06:48:58,557 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-18 06:48:58,557 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-18 06:48:58,557 | WARNING |   - ... and 3 more
+2026-09-18 06:48:58,557 | WARNING | Missing layers (randomly initialized): 23
+2026-09-18 06:48:58,557 | WARNING | • models         : 23 layers missing
+2026-09-18 06:48:58,557 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-18 06:48:58,557 | INFO | ===================================
+2026-09-18 06:48:58,726 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 06:48:58,787 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-18 06:48:58,787 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.98686    | 0.679313 |
+|               | energy       | log_normalize     | 4.42744    | 0.738507 |
+|               | eta          | normalize         | 0.0021108  | 1.09821  |
+|               | phi          | normalize_uniform | 0.00100433 | 1.81335  |
+| globals       | m4l          | log_normalize     | 5.7232     | 0.399941 |
+|               | sum_pt       | log_normalize     | 5.49097    | 0.444    |
+|               | sum_energy   | log_normalize     | 5.97462    | 0.455477 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-18 06:48:58,787 | INFO | Training setup: epochs=20, batch_size=512, world_size=1, device=cuda
+2026-09-18 06:48:58,788 | INFO | Train loader: size=347710, steps_per_epoch=680, sampler=DistributedWeightedSampler, epoch_size=347710, replacement=True
+2026-09-18 06:48:58,789 | INFO | Class distribution for train -> bkg: count=226320 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=121390 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-18 06:48:58,790 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-18 06:48:58,791 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-18 06:50:27,467 | INFO | Epoch 1/20 | train_loss=0.4739 | train_accuracy=0.7896 | val_loss=0.4466 | val_accuracy=0.7930
+2026-09-18 06:50:27,468 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch01.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 1/20 step 680 lr=['0.0001', '5e-05', '1e-05'] val_loss=0.4466 -> epoch01.pt
+2026-09-18 06:51:56,475 | INFO | Epoch 2/20 | train_loss=0.4433 | train_accuracy=0.8117 | val_loss=0.4433 | val_accuracy=0.7881
+2026-09-18 06:51:56,477 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch02.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 2/20 step 1360 lr=['9.93e-05', '4.97e-05', '9.93e-06'] val_loss=0.4433 -> epoch02.pt
+2026-09-18 06:53:25,595 | INFO | Epoch 3/20 | train_loss=0.4374 | train_accuracy=0.8143 | val_loss=0.4331 | val_accuracy=0.7884
+2026-09-18 06:53:25,597 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch03.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 3/20 step 2040 lr=['9.73e-05', '4.86e-05', '9.73e-06'] val_loss=0.4331 -> epoch03.pt
+2026-09-18 06:54:54,334 | INFO | Epoch 4/20 | train_loss=0.4331 | train_accuracy=0.8161 | val_loss=0.4306 | val_accuracy=0.7801
+2026-09-18 06:54:54,336 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch04.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 4/20 step 2720 lr=['9.4e-05', '4.7e-05', '9.4e-06'] val_loss=0.4306 -> epoch04.pt
+2026-09-18 06:56:23,526 | INFO | Epoch 5/20 | train_loss=0.4292 | train_accuracy=0.8184 | val_loss=0.4292 | val_accuracy=0.7809
+2026-09-18 06:56:23,527 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch05.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 5/20 step 3400 lr=['8.95e-05', '4.47e-05', '8.95e-06'] val_loss=0.4292 -> epoch05.pt
+2026-09-18 06:57:52,581 | INFO | Epoch 6/20 | train_loss=0.4266 | train_accuracy=0.8197 | val_loss=0.4236 | val_accuracy=0.7840
+2026-09-18 06:57:52,584 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch06.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 6/20 step 4080 lr=['8.39e-05', '4.19e-05', '8.39e-06'] val_loss=0.4236 -> epoch06.pt
+2026-09-18 06:59:21,357 | INFO | Epoch 7/20 | train_loss=0.4266 | train_accuracy=0.8191 | val_loss=0.4258 | val_accuracy=0.7837
+2026-09-18 06:59:21,359 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch07.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 7/20 step 4760 lr=['7.73e-05', '3.87e-05', '7.73e-06'] val_loss=0.4258 -> epoch07.pt
+2026-09-18 07:00:50,664 | INFO | Epoch 8/20 | train_loss=0.4230 | train_accuracy=0.8208 | val_loss=0.4241 | val_accuracy=0.7762
+2026-09-18 07:00:50,666 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch08.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 8/20 step 5440 lr=['7.01e-05', '3.5e-05', '7.01e-06'] val_loss=0.4241 -> epoch08.pt
+2026-09-18 07:02:19,611 | INFO | Epoch 9/20 | train_loss=0.4213 | train_accuracy=0.8224 | val_loss=0.4213 | val_accuracy=0.7774
+2026-09-18 07:02:19,613 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch09.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 9/20 step 6120 lr=['6.23e-05', '3.11e-05', '6.23e-06'] val_loss=0.4213 -> epoch09.pt
+2026-09-18 07:03:48,873 | INFO | Epoch 10/20 | train_loss=0.4204 | train_accuracy=0.8225 | val_loss=0.4286 | val_accuracy=0.7849
+2026-09-18 07:03:48,875 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch10.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 10/20 step 6800 lr=['5.41e-05', '2.71e-05', '5.41e-06'] val_loss=0.4286 -> epoch10.pt
+2026-09-18 07:05:17,915 | INFO | Epoch 11/20 | train_loss=0.4190 | train_accuracy=0.8230 | val_loss=0.4228 | val_accuracy=0.7857
+2026-09-18 07:05:17,917 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch11.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 11/20 step 7480 lr=['4.59e-05', '2.29e-05', '4.59e-06'] val_loss=0.4228 -> epoch11.pt
+2026-09-18 07:06:46,953 | INFO | Epoch 12/20 | train_loss=0.4214 | train_accuracy=0.8209 | val_loss=0.4320 | val_accuracy=0.7747
+2026-09-18 07:06:46,954 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch12.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 12/20 step 8160 lr=['3.77e-05', '1.89e-05', '3.77e-06'] val_loss=0.4320 -> epoch12.pt
+2026-09-18 07:08:15,902 | INFO | Epoch 13/20 | train_loss=0.4167 | train_accuracy=0.8236 | val_loss=0.4238 | val_accuracy=0.7844
+2026-09-18 07:08:15,904 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch13.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 13/20 step 8840 lr=['2.99e-05', '1.5e-05', '2.99e-06'] val_loss=0.4238 -> epoch13.pt
+2026-09-18 07:09:44,937 | INFO | Epoch 14/20 | train_loss=0.4162 | train_accuracy=0.8232 | val_loss=0.4297 | val_accuracy=0.7799
+2026-09-18 07:09:44,940 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch14.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 14/20 step 9520 lr=['2.27e-05', '1.13e-05', '2.27e-06'] val_loss=0.4297 -> epoch14.pt
+2026-09-18 07:11:14,128 | INFO | Epoch 15/20 | train_loss=0.4166 | train_accuracy=0.8229 | val_loss=0.4298 | val_accuracy=0.7753
+2026-09-18 07:11:14,130 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch15.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 15/20 step 10200 lr=['1.61e-05', '8.07e-06', '1.61e-06'] val_loss=0.4298 -> epoch15.pt
+2026-09-18 07:12:43,152 | INFO | Epoch 16/20 | train_loss=0.4153 | train_accuracy=0.8238 | val_loss=0.4279 | val_accuracy=0.7764
+2026-09-18 07:12:43,154 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch16.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 16/20 step 10880 lr=['1.05e-05', '5.27e-06', '1.05e-06'] val_loss=0.4279 -> epoch16.pt
+2026-09-18 07:14:12,258 | INFO | Epoch 17/20 | train_loss=0.4144 | train_accuracy=0.8240 | val_loss=0.4261 | val_accuracy=0.7792
+2026-09-18 07:14:12,260 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch17.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 17/20 step 11560 lr=['6.03e-06', '3.01e-06', '6.03e-07'] val_loss=0.4261 -> epoch17.pt
+2026-09-18 07:15:41,218 | INFO | Epoch 18/20 | train_loss=0.4147 | train_accuracy=0.8236 | val_loss=0.4257 | val_accuracy=0.7778
+2026-09-18 07:15:41,220 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch18.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 18/20 step 12240 lr=['2.71e-06', '1.35e-06', '2.71e-07'] val_loss=0.4257 -> epoch18.pt
+2026-09-18 07:17:10,347 | INFO | Epoch 19/20 | train_loss=0.4142 | train_accuracy=0.8235 | val_loss=0.4282 | val_accuracy=0.7776
+2026-09-18 07:17:10,350 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch19.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 19/20 step 12920 lr=['6.82e-07', '3.41e-07', '6.82e-08'] val_loss=0.4282 -> epoch19.pt
+2026-09-18 07:18:39,436 | INFO | Epoch 20/20 | train_loss=0.4170 | train_accuracy=0.8225 | val_loss=0.4263 | val_accuracy=0.7780
+2026-09-18 07:18:39,439 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch20.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 20/20 step 13600 lr=['0', '0', '0'] val_loss=0.4263 -> epoch20.pt
+2026-09-18 07:18:39,699 | INFO | Restored best model from epoch 9 based on val_loss=0.4213
+2026-09-18 07:18:39,699 | INFO | Training finished
+2026-09-18 07:18:39,700 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-18 07:18:40,153 | INFO | Starting _collect_predictions
+2026-09-18 07:18:40,153 | INFO | Dataset size = 4096
+2026-09-18 07:18:40,153 | INFO | Batch size = 1024
+2026-09-18 07:18:40,380 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f0100/seed0: best_epoch=9 val_auc=0.8763 C_ref=1.0373 chi2/ndf=5.30 (37.5 min)
+[full] pretrained/sig_over_bkg/f0100: 20/20 epochs, 20/20 epoch files, steps/epoch 680 (n_train_rows 347710 == epoch_size 347710: True), total steps 13600, best epoch 9, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-18 07:26:27,981 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 07:26:28,072 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 07:26:28,072 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch05.pt
+2026-09-18 07:26:28,422 | INFO | Restored normalizer state from checkpoint
+2026-09-18 07:26:28,732 | INFO | Starting _collect_predictions
+2026-09-18 07:26:28,732 | INFO | Dataset size = 4096
+2026-09-18 07:26:28,732 | INFO | Batch size = 1024
+2026-09-18 07:26:28,953 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e05/sig_over_bkg/f0100/seed0: val_auc=0.8750 bce=0.4371 C_ref=1.0470 chi2/ndf=13.97 (7.8 min)
+2026-09-18 07:34:14,502 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 07:34:14,593 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 07:34:14,594 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch10.pt
+2026-09-18 07:34:14,945 | INFO | Restored normalizer state from checkpoint
+2026-09-18 07:34:15,248 | INFO | Starting _collect_predictions
+2026-09-18 07:34:15,248 | INFO | Dataset size = 4096
+2026-09-18 07:34:15,248 | INFO | Batch size = 1024
+2026-09-18 07:34:15,471 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e10/sig_over_bkg/f0100/seed0: val_auc=0.8762 bce=0.4366 C_ref=0.8994 chi2/ndf=20.25 (7.8 min)
+2026-09-18 07:42:02,386 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 07:42:02,478 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 07:42:02,478 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch15.pt
+2026-09-18 07:42:02,829 | INFO | Restored normalizer state from checkpoint
+2026-09-18 07:42:03,139 | INFO | Starting _collect_predictions
+2026-09-18 07:42:03,139 | INFO | Dataset size = 4096
+2026-09-18 07:42:03,139 | INFO | Batch size = 1024
+2026-09-18 07:42:03,359 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e15/sig_over_bkg/f0100/seed0: val_auc=0.8767 bce=0.4364 C_ref=0.7447 chi2/ndf=62.26 (7.8 min)
+2026-09-18 07:49:50,057 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 07:49:50,148 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 07:49:50,148 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0100/seed0/epoch20.pt
+2026-09-18 07:49:50,497 | INFO | Restored normalizer state from checkpoint
+2026-09-18 07:49:50,806 | INFO | Starting _collect_predictions
+2026-09-18 07:49:50,807 | INFO | Dataset size = 4096
+2026-09-18 07:49:50,807 | INFO | Batch size = 1024
+2026-09-18 07:49:51,031 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e20/sig_over_bkg/f0100/seed0: val_auc=0.8767 bce=0.4360 C_ref=0.8078 chi2/ndf=34.49 (7.8 min)
+[run] pretrained/sbi_over_bkg/f0100: epoch_size 461012 = 901 steps/epoch, 18020 steps total
+2026-09-18 07:57:38,534 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 07:57:38,624 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-18 07:57:39,891 | INFO | ======== Soft Load Summary ========
+2026-09-18 07:57:39,891 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-18 07:57:39,891 | INFO | All components loaded: NO
+2026-09-18 07:57:39,892 | INFO | --- Breakdown ---
+2026-09-18 07:57:39,892 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-18 07:57:39,892 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-18 07:57:39,892 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-18 07:57:39,892 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-18 07:57:39,892 | WARNING | Shape mismatches for 8 layers
+2026-09-18 07:57:39,892 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-18 07:57:39,892 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-18 07:57:39,892 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-18 07:57:39,892 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-18 07:57:39,893 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-18 07:57:39,893 | WARNING |   - ... and 3 more
+2026-09-18 07:57:39,893 | WARNING | Missing layers (randomly initialized): 23
+2026-09-18 07:57:39,893 | WARNING | • models         : 23 layers missing
+2026-09-18 07:57:39,893 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-18 07:57:39,893 | INFO | ===================================
+2026-09-18 07:57:40,117 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 07:57:40,188 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-18 07:57:40,189 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.81118    | 0.531703 |
+|               | energy       | log_normalize     | 4.26226    | 0.628747 |
+|               | eta          | normalize         | 0.00374292 | 1.1142   |
+|               | phi          | normalize_uniform | 0.00147381 | 1.81312  |
+| globals       | m4l          | log_normalize     | 5.52675    | 0.259837 |
+|               | sum_pt       | log_normalize     | 5.27715    | 0.295785 |
+|               | sum_energy   | log_normalize     | 5.77779    | 0.35728  |
++---------------+--------------+-------------------+------------+----------+
+2026-09-18 07:57:40,189 | INFO | Training setup: epochs=20, batch_size=512, world_size=1, device=cuda
+2026-09-18 07:57:40,189 | INFO | Train loader: size=461012, steps_per_epoch=901, sampler=DistributedWeightedSampler, epoch_size=461012, replacement=True
+2026-09-18 07:57:40,191 | INFO | Class distribution for train -> bkg: count=230506 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=230506 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-18 07:57:40,191 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-18 07:57:40,193 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-18 07:59:32,128 | INFO | Epoch 1/20 | train_loss=0.7011 | train_accuracy=0.5016 | val_loss=0.6950 | val_accuracy=0.5005
+2026-09-18 07:59:32,129 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch01.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 1/20 step 901 lr=['0.0001', '5e-05', '1e-05'] val_loss=0.6950 -> epoch01.pt
+2026-09-18 08:01:25,134 | INFO | Epoch 2/20 | train_loss=0.6951 | train_accuracy=0.5025 | val_loss=0.6944 | val_accuracy=0.4996
+2026-09-18 08:01:25,137 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch02.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 2/20 step 1802 lr=['9.93e-05', '4.97e-05', '9.93e-06'] val_loss=0.6944 -> epoch02.pt
+2026-09-18 08:03:18,071 | INFO | Epoch 3/20 | train_loss=0.6944 | train_accuracy=0.5017 | val_loss=0.6938 | val_accuracy=0.4999
+2026-09-18 08:03:18,073 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch03.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 3/20 step 2703 lr=['9.73e-05', '4.86e-05', '9.73e-06'] val_loss=0.6938 -> epoch03.pt
+2026-09-18 08:05:10,909 | INFO | Epoch 4/20 | train_loss=0.6937 | train_accuracy=0.5022 | val_loss=0.6933 | val_accuracy=0.4996
+2026-09-18 08:05:10,911 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch04.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 4/20 step 3604 lr=['9.4e-05', '4.7e-05', '9.4e-06'] val_loss=0.6933 -> epoch04.pt
+2026-09-18 08:07:03,107 | INFO | Epoch 5/20 | train_loss=0.6936 | train_accuracy=0.5029 | val_loss=0.6939 | val_accuracy=0.4987
+2026-09-18 08:07:03,109 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch05.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 5/20 step 4505 lr=['8.95e-05', '4.47e-05', '8.95e-06'] val_loss=0.6939 -> epoch05.pt
+2026-09-18 08:08:55,313 | INFO | Epoch 6/20 | train_loss=0.6936 | train_accuracy=0.5031 | val_loss=0.6931 | val_accuracy=0.4999
+2026-09-18 08:08:55,314 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch06.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 6/20 step 5406 lr=['8.39e-05', '4.19e-05', '8.39e-06'] val_loss=0.6931 -> epoch06.pt
+2026-09-18 08:10:48,395 | INFO | Epoch 7/20 | train_loss=0.6933 | train_accuracy=0.5015 | val_loss=0.6929 | val_accuracy=0.5000
+2026-09-18 08:10:48,397 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch07.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 7/20 step 6307 lr=['7.73e-05', '3.87e-05', '7.73e-06'] val_loss=0.6929 -> epoch07.pt
+2026-09-18 08:12:41,376 | INFO | Epoch 8/20 | train_loss=0.6932 | train_accuracy=0.5024 | val_loss=0.6929 | val_accuracy=0.4993
+2026-09-18 08:12:41,378 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch08.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 8/20 step 7208 lr=['7.01e-05', '3.5e-05', '7.01e-06'] val_loss=0.6929 -> epoch08.pt
+2026-09-18 08:14:34,239 | INFO | Epoch 9/20 | train_loss=0.6931 | train_accuracy=0.5033 | val_loss=0.6930 | val_accuracy=0.5000
+2026-09-18 08:14:34,241 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch09.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 9/20 step 8109 lr=['6.23e-05', '3.11e-05', '6.23e-06'] val_loss=0.6930 -> epoch09.pt
+2026-09-18 08:16:26,666 | INFO | Epoch 10/20 | train_loss=0.6929 | train_accuracy=0.5028 | val_loss=0.6929 | val_accuracy=0.5005
+2026-09-18 08:16:26,668 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch10.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 10/20 step 9010 lr=['5.41e-05', '2.71e-05', '5.41e-06'] val_loss=0.6929 -> epoch10.pt
+2026-09-18 08:18:19,336 | INFO | Epoch 11/20 | train_loss=0.6930 | train_accuracy=0.5032 | val_loss=0.6928 | val_accuracy=0.4999
+2026-09-18 08:18:19,338 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch11.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 11/20 step 9911 lr=['4.59e-05', '2.29e-05', '4.59e-06'] val_loss=0.6928 -> epoch11.pt
+2026-09-18 08:20:11,579 | INFO | Epoch 12/20 | train_loss=0.6929 | train_accuracy=0.5020 | val_loss=0.6929 | val_accuracy=0.5008
+2026-09-18 08:20:11,582 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch12.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 12/20 step 10812 lr=['3.77e-05', '1.89e-05', '3.77e-06'] val_loss=0.6929 -> epoch12.pt
+2026-09-18 08:22:04,430 | INFO | Epoch 13/20 | train_loss=0.6928 | train_accuracy=0.5041 | val_loss=0.6929 | val_accuracy=0.4992
+2026-09-18 08:22:04,432 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch13.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 13/20 step 11713 lr=['2.99e-05', '1.5e-05', '2.99e-06'] val_loss=0.6929 -> epoch13.pt
+2026-09-18 08:23:57,160 | INFO | Epoch 14/20 | train_loss=0.6928 | train_accuracy=0.5036 | val_loss=0.6928 | val_accuracy=0.5006
+2026-09-18 08:23:57,163 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch14.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 14/20 step 12614 lr=['2.27e-05', '1.13e-05', '2.27e-06'] val_loss=0.6928 -> epoch14.pt
+2026-09-18 08:25:49,997 | INFO | Epoch 15/20 | train_loss=0.6927 | train_accuracy=0.5042 | val_loss=0.6929 | val_accuracy=0.5003
+2026-09-18 08:25:49,999 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch15.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 15/20 step 13515 lr=['1.61e-05', '8.07e-06', '1.61e-06'] val_loss=0.6929 -> epoch15.pt
+2026-09-18 08:27:42,673 | INFO | Epoch 16/20 | train_loss=0.6927 | train_accuracy=0.5040 | val_loss=0.6927 | val_accuracy=0.4994
+2026-09-18 08:27:42,676 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch16.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 16/20 step 14416 lr=['1.05e-05', '5.27e-06', '1.05e-06'] val_loss=0.6927 -> epoch16.pt
+2026-09-18 08:29:35,549 | INFO | Epoch 17/20 | train_loss=0.6927 | train_accuracy=0.5040 | val_loss=0.6928 | val_accuracy=0.4990
+2026-09-18 08:29:35,552 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch17.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 17/20 step 15317 lr=['6.03e-06', '3.01e-06', '6.03e-07'] val_loss=0.6928 -> epoch17.pt
+2026-09-18 08:31:28,148 | INFO | Epoch 18/20 | train_loss=0.6927 | train_accuracy=0.5033 | val_loss=0.6927 | val_accuracy=0.4995
+2026-09-18 08:31:28,151 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch18.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 18/20 step 16218 lr=['2.71e-06', '1.35e-06', '2.71e-07'] val_loss=0.6927 -> epoch18.pt
+2026-09-18 08:33:20,520 | INFO | Epoch 19/20 | train_loss=0.6927 | train_accuracy=0.5047 | val_loss=0.6927 | val_accuracy=0.4991
+2026-09-18 08:33:20,522 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch19.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 19/20 step 17119 lr=['6.82e-07', '3.41e-07', '6.82e-08'] val_loss=0.6927 -> epoch19.pt
+2026-09-18 08:35:13,387 | INFO | Epoch 20/20 | train_loss=0.6928 | train_accuracy=0.5027 | val_loss=0.6927 | val_accuracy=0.4992
+2026-09-18 08:35:13,390 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch20.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 20/20 step 18020 lr=['0', '0', '0'] val_loss=0.6927 -> epoch20.pt
+2026-09-18 08:35:13,680 | INFO | Restored best model from epoch 20 based on val_loss=0.6927
+2026-09-18 08:35:13,680 | INFO | Training finished
+2026-09-18 08:35:13,680 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-18 08:35:14,132 | INFO | Starting _collect_predictions
+2026-09-18 08:35:14,132 | INFO | Dataset size = 4096
+2026-09-18 08:35:14,132 | INFO | Batch size = 1024
+2026-09-18 08:35:14,360 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f0100/seed0: best_epoch=20 val_auc=0.5068 C_ref=0.9998 chi2/ndf=0.05 (45.1 min)
+[full] pretrained/sbi_over_bkg/f0100: 20/20 epochs, 20/20 epoch files, steps/epoch 901 (n_train_rows 461012 == epoch_size 461012: True), total steps 18020, best epoch 20, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-18 08:42:44,467 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 08:42:44,558 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 08:42:44,558 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch05.pt
+2026-09-18 08:42:44,908 | INFO | Restored normalizer state from checkpoint
+2026-09-18 08:42:45,195 | INFO | Starting _collect_predictions
+2026-09-18 08:42:45,195 | INFO | Dataset size = 4096
+2026-09-18 08:42:45,195 | INFO | Batch size = 1024
+2026-09-18 08:42:45,418 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e05/sbi_over_bkg/f0100/seed0: val_auc=0.5060 bce=0.6937 C_ref=0.9630 chi2/ndf=7.18 (7.5 min)
+2026-09-18 08:50:14,574 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 08:50:14,665 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 08:50:14,665 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch10.pt
+2026-09-18 08:50:15,014 | INFO | Restored normalizer state from checkpoint
+2026-09-18 08:50:15,302 | INFO | Starting _collect_predictions
+2026-09-18 08:50:15,302 | INFO | Dataset size = 4096
+2026-09-18 08:50:15,302 | INFO | Batch size = 1024
+2026-09-18 08:50:15,524 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e10/sbi_over_bkg/f0100/seed0: val_auc=0.5053 bce=0.6929 C_ref=0.9938 chi2/ndf=0.63 (7.6 min)
+2026-09-18 08:57:48,733 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 08:57:48,824 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 08:57:48,824 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch15.pt
+2026-09-18 08:57:49,175 | INFO | Restored normalizer state from checkpoint
+2026-09-18 08:57:49,463 | INFO | Starting _collect_predictions
+2026-09-18 08:57:49,463 | INFO | Dataset size = 4096
+2026-09-18 08:57:49,463 | INFO | Batch size = 1024
+2026-09-18 08:57:49,688 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e15/sbi_over_bkg/f0100/seed0: val_auc=0.5047 bce=0.6928 C_ref=0.9959 chi2/ndf=0.69 (7.5 min)
+2026-09-18 09:05:20,683 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 09:05:20,774 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 09:05:20,774 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0100/seed0/epoch20.pt
+2026-09-18 09:05:21,126 | INFO | Restored normalizer state from checkpoint
+2026-09-18 09:05:21,415 | INFO | Starting _collect_predictions
+2026-09-18 09:05:21,415 | INFO | Dataset size = 4096
+2026-09-18 09:05:21,415 | INFO | Batch size = 1024
+2026-09-18 09:05:21,641 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e20/sbi_over_bkg/f0100/seed0: val_auc=0.5068 bce=0.6926 C_ref=0.9998 chi2/ndf=0.05 (7.5 min)
+[run] pretrained/sig_over_bkg/f0300: epoch_size 1043131 = 2038 steps/epoch, 40760 steps total
+2026-09-18 09:12:50,996 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 09:12:51,086 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-18 09:12:51,321 | INFO | ======== Soft Load Summary ========
+2026-09-18 09:12:51,322 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-18 09:12:51,322 | INFO | All components loaded: NO
+2026-09-18 09:12:51,322 | INFO | --- Breakdown ---
+2026-09-18 09:12:51,322 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-18 09:12:51,322 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-18 09:12:51,322 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-18 09:12:51,322 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-18 09:12:51,323 | WARNING | Shape mismatches for 8 layers
+2026-09-18 09:12:51,323 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-18 09:12:51,323 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-18 09:12:51,323 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-18 09:12:51,323 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-18 09:12:51,323 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-18 09:12:51,323 | WARNING |   - ... and 3 more
+2026-09-18 09:12:51,323 | WARNING | Missing layers (randomly initialized): 23
+2026-09-18 09:12:51,323 | WARNING | • models         : 23 layers missing
+2026-09-18 09:12:51,323 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-18 09:12:51,323 | INFO | ===================================
+2026-09-18 09:12:51,568 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 09:12:51,740 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-18 09:12:51,740 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.9867       | 0.678774 |
+|               | energy       | log_normalize     | 4.42699      | 0.738253 |
+|               | eta          | normalize         | 0.00214376   | 1.09782  |
+|               | phi          | normalize_uniform | -9.31048e-05 | 1.81363  |
+| globals       | m4l          | log_normalize     | 5.72289      | 0.399467 |
+|               | sum_pt       | log_normalize     | 5.49073      | 0.443431 |
+|               | sum_energy   | log_normalize     | 5.97422      | 0.454944 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-18 09:12:51,740 | INFO | Training setup: epochs=20, batch_size=512, world_size=1, device=cuda
+2026-09-18 09:12:51,740 | INFO | Train loader: size=1043131, steps_per_epoch=2038, sampler=DistributedWeightedSampler, epoch_size=1043131, replacement=True
+2026-09-18 09:12:51,745 | INFO | Class distribution for train -> bkg: count=678959 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=364172 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-18 09:12:51,745 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-18 09:12:51,747 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-18 09:17:52,357 | INFO | Epoch 1/20 | train_loss=0.4596 | train_accuracy=0.8004 | val_loss=0.4409 | val_accuracy=0.7903
+2026-09-18 09:17:52,358 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch01.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 1/20 step 2038 lr=['0.0001', '5e-05', '1e-05'] val_loss=0.4409 -> epoch01.pt
+2026-09-18 09:22:06,101 | INFO | Epoch 2/20 | train_loss=0.4368 | train_accuracy=0.8150 | val_loss=0.4339 | val_accuracy=0.7807
+2026-09-18 09:22:06,103 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch02.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 2/20 step 4076 lr=['9.93e-05', '4.97e-05', '9.93e-06'] val_loss=0.4339 -> epoch02.pt
+2026-09-18 09:26:00,060 | INFO | Epoch 3/20 | train_loss=0.4327 | train_accuracy=0.8169 | val_loss=0.4294 | val_accuracy=0.7782
+2026-09-18 09:26:00,062 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch03.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 3/20 step 6114 lr=['9.73e-05', '4.86e-05', '9.73e-06'] val_loss=0.4294 -> epoch03.pt
+2026-09-18 09:29:54,787 | INFO | Epoch 4/20 | train_loss=0.4289 | train_accuracy=0.8185 | val_loss=0.4270 | val_accuracy=0.7716
+2026-09-18 09:29:54,790 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch04.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 4/20 step 8152 lr=['9.4e-05', '4.7e-05', '9.4e-06'] val_loss=0.4270 -> epoch04.pt
+2026-09-18 09:33:48,874 | INFO | Epoch 5/20 | train_loss=0.4262 | train_accuracy=0.8195 | val_loss=0.4247 | val_accuracy=0.7770
+2026-09-18 09:33:48,876 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch05.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 5/20 step 10190 lr=['8.95e-05', '4.47e-05', '8.95e-06'] val_loss=0.4247 -> epoch05.pt
+2026-09-18 09:37:43,582 | INFO | Epoch 6/20 | train_loss=0.4247 | train_accuracy=0.8201 | val_loss=0.4318 | val_accuracy=0.7737
+2026-09-18 09:37:43,584 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch06.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 6/20 step 12228 lr=['8.39e-05', '4.19e-05', '8.39e-06'] val_loss=0.4318 -> epoch06.pt
+2026-09-18 09:41:37,985 | INFO | Epoch 7/20 | train_loss=0.4237 | train_accuracy=0.8204 | val_loss=0.4232 | val_accuracy=0.7779
+2026-09-18 09:41:37,987 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch07.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 7/20 step 14266 lr=['7.73e-05', '3.87e-05', '7.73e-06'] val_loss=0.4232 -> epoch07.pt
+2026-09-18 09:45:32,305 | INFO | Epoch 8/20 | train_loss=0.4208 | train_accuracy=0.8216 | val_loss=0.4202 | val_accuracy=0.7773
+2026-09-18 09:45:32,306 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch08.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 8/20 step 16304 lr=['7.01e-05', '3.5e-05', '7.01e-06'] val_loss=0.4202 -> epoch08.pt
+2026-09-18 09:49:25,427 | INFO | Epoch 9/20 | train_loss=0.4197 | train_accuracy=0.8220 | val_loss=0.4208 | val_accuracy=0.7835
+2026-09-18 09:49:25,429 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch09.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 9/20 step 18342 lr=['6.23e-05', '3.11e-05', '6.23e-06'] val_loss=0.4208 -> epoch09.pt
+2026-09-18 09:53:19,947 | INFO | Epoch 10/20 | train_loss=0.4196 | train_accuracy=0.8224 | val_loss=0.4216 | val_accuracy=0.7713
+2026-09-18 09:53:19,949 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch10.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 10/20 step 20380 lr=['5.41e-05', '2.71e-05', '5.41e-06'] val_loss=0.4216 -> epoch10.pt
+2026-09-18 09:57:13,843 | INFO | Epoch 11/20 | train_loss=0.4183 | train_accuracy=0.8228 | val_loss=0.4218 | val_accuracy=0.7747
+2026-09-18 09:57:13,845 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch11.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 11/20 step 22418 lr=['4.59e-05', '2.29e-05', '4.59e-06'] val_loss=0.4218 -> epoch11.pt
+2026-09-18 10:01:08,667 | INFO | Epoch 12/20 | train_loss=0.4167 | train_accuracy=0.8230 | val_loss=0.4224 | val_accuracy=0.7758
+2026-09-18 10:01:08,669 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch12.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 12/20 step 24456 lr=['3.77e-05', '1.89e-05', '3.77e-06'] val_loss=0.4224 -> epoch12.pt
+2026-09-18 10:05:02,854 | INFO | Epoch 13/20 | train_loss=0.4147 | train_accuracy=0.8242 | val_loss=0.4185 | val_accuracy=0.7791
+2026-09-18 10:05:02,856 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch13.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 13/20 step 26494 lr=['2.99e-05', '1.5e-05', '2.99e-06'] val_loss=0.4185 -> epoch13.pt
+2026-09-18 10:08:56,808 | INFO | Epoch 14/20 | train_loss=0.4156 | train_accuracy=0.8233 | val_loss=0.4236 | val_accuracy=0.7753
+2026-09-18 10:08:56,811 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch14.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 14/20 step 28532 lr=['2.27e-05', '1.13e-05', '2.27e-06'] val_loss=0.4236 -> epoch14.pt
+2026-09-18 10:12:50,983 | INFO | Epoch 15/20 | train_loss=0.4141 | train_accuracy=0.8241 | val_loss=0.4213 | val_accuracy=0.7758
+2026-09-18 10:12:50,985 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch15.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 15/20 step 30570 lr=['1.61e-05', '8.07e-06', '1.61e-06'] val_loss=0.4213 -> epoch15.pt
+2026-09-18 10:16:44,343 | INFO | Epoch 16/20 | train_loss=0.4145 | train_accuracy=0.8235 | val_loss=0.4219 | val_accuracy=0.7750
+2026-09-18 10:16:44,345 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch16.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 16/20 step 32608 lr=['1.05e-05', '5.27e-06', '1.05e-06'] val_loss=0.4219 -> epoch16.pt
+2026-09-18 10:20:38,758 | INFO | Epoch 17/20 | train_loss=0.4139 | train_accuracy=0.8240 | val_loss=0.4218 | val_accuracy=0.7748
+2026-09-18 10:20:38,761 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch17.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 17/20 step 34646 lr=['6.03e-06', '3.01e-06', '6.03e-07'] val_loss=0.4218 -> epoch17.pt
+2026-09-18 10:24:32,924 | INFO | Epoch 18/20 | train_loss=0.4133 | train_accuracy=0.8241 | val_loss=0.4227 | val_accuracy=0.7750
+2026-09-18 10:24:32,927 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch18.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 18/20 step 36684 lr=['2.71e-06', '1.35e-06', '2.71e-07'] val_loss=0.4227 -> epoch18.pt
+2026-09-18 10:28:25,948 | INFO | Epoch 19/20 | train_loss=0.4147 | train_accuracy=0.8235 | val_loss=0.4212 | val_accuracy=0.7758
+2026-09-18 10:28:25,950 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch19.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 19/20 step 38722 lr=['6.82e-07', '3.41e-07', '6.82e-08'] val_loss=0.4212 -> epoch19.pt
+2026-09-18 10:32:19,050 | INFO | Epoch 20/20 | train_loss=0.4132 | train_accuracy=0.8240 | val_loss=0.4241 | val_accuracy=0.7743
+2026-09-18 10:32:19,052 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch20.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 20/20 step 40760 lr=['0', '0', '0'] val_loss=0.4241 -> epoch20.pt
+2026-09-18 10:32:19,314 | INFO | Restored best model from epoch 13 based on val_loss=0.4185
+2026-09-18 10:32:19,314 | INFO | Training finished
+2026-09-18 10:32:19,315 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-18 10:32:19,764 | INFO | Starting _collect_predictions
+2026-09-18 10:32:19,764 | INFO | Dataset size = 4096
+2026-09-18 10:32:19,764 | INFO | Batch size = 1024
+2026-09-18 10:32:19,990 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f0300/seed0: best_epoch=13 val_auc=0.8810 C_ref=0.9792 chi2/ndf=6.81 (87.7 min)
+[full] pretrained/sig_over_bkg/f0300: 20/20 epochs, 20/20 epoch files, steps/epoch 2038 (n_train_rows 1043131 == epoch_size 1043131: True), total steps 40760, best epoch 13, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-18 10:40:35,372 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 10:40:35,463 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 10:40:35,463 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch05.pt
+2026-09-18 10:40:35,991 | INFO | Restored normalizer state from checkpoint
+2026-09-18 10:40:36,321 | INFO | Starting _collect_predictions
+2026-09-18 10:40:36,321 | INFO | Dataset size = 4096
+2026-09-18 10:40:36,321 | INFO | Batch size = 1024
+2026-09-18 10:40:36,545 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e05/sig_over_bkg/f0300/seed0: val_auc=0.8798 bce=0.4302 C_ref=0.9437 chi2/ndf=3.35 (8.3 min)
+2026-09-18 10:48:55,771 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 10:48:55,862 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 10:48:55,862 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch10.pt
+2026-09-18 10:48:56,215 | INFO | Restored normalizer state from checkpoint
+2026-09-18 10:48:56,541 | INFO | Starting _collect_predictions
+2026-09-18 10:48:56,541 | INFO | Dataset size = 4096
+2026-09-18 10:48:56,541 | INFO | Batch size = 1024
+2026-09-18 10:48:56,764 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e10/sig_over_bkg/f0300/seed0: val_auc=0.8814 bce=0.4281 C_ref=0.9550 chi2/ndf=2.69 (8.2 min)
+2026-09-18 10:57:08,992 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 10:57:09,083 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 10:57:09,084 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch15.pt
+2026-09-18 10:57:09,434 | INFO | Restored normalizer state from checkpoint
+2026-09-18 10:57:09,759 | INFO | Starting _collect_predictions
+2026-09-18 10:57:09,759 | INFO | Dataset size = 4096
+2026-09-18 10:57:09,759 | INFO | Batch size = 1024
+2026-09-18 10:57:09,982 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e15/sig_over_bkg/f0300/seed0: val_auc=0.8811 bce=0.4294 C_ref=0.9596 chi2/ndf=3.15 (8.3 min)
+2026-09-18 11:05:24,597 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 11:05:24,689 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 11:05:24,689 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch20.pt
+2026-09-18 11:05:25,038 | INFO | Restored normalizer state from checkpoint
+2026-09-18 11:05:25,366 | INFO | Starting _collect_predictions
+2026-09-18 11:05:25,366 | INFO | Dataset size = 4096
+2026-09-18 11:05:25,366 | INFO | Batch size = 1024
+2026-09-18 11:05:25,588 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e20/sig_over_bkg/f0300/seed0: val_auc=0.8810 bce=0.4294 C_ref=0.9192 chi2/ndf=5.34 (8.2 min)
+[run] pretrained/sbi_over_bkg/f0300: epoch_size 1383034 = 2702 steps/epoch, 54040 steps total
+2026-09-18 11:13:38,825 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 11:13:38,915 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-18 11:13:39,134 | INFO | ======== Soft Load Summary ========
+2026-09-18 11:13:39,134 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-18 11:13:39,134 | INFO | All components loaded: NO
+2026-09-18 11:13:39,135 | INFO | --- Breakdown ---
+2026-09-18 11:13:39,135 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-18 11:13:39,135 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-18 11:13:39,135 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-18 11:13:39,135 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-18 11:13:39,135 | WARNING | Shape mismatches for 8 layers
+2026-09-18 11:13:39,135 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-18 11:13:39,135 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-18 11:13:39,135 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-18 11:13:39,135 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-18 11:13:39,135 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-18 11:13:39,135 | WARNING |   - ... and 3 more
+2026-09-18 11:13:39,135 | WARNING | Missing layers (randomly initialized): 23
+2026-09-18 11:13:39,135 | WARNING | • models         : 23 layers missing
+2026-09-18 11:13:39,135 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-18 11:13:39,135 | INFO | ===================================
+2026-09-18 11:13:39,448 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 11:13:39,660 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-18 11:13:39,660 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.8112     | 0.531766 |
+|               | energy       | log_normalize     | 4.26234    | 0.628546 |
+|               | eta          | normalize         | 0.00263837 | 1.11425  |
+|               | phi          | normalize_uniform | 0.00233675 | 1.81298  |
+| globals       | m4l          | log_normalize     | 5.52714    | 0.260758 |
+|               | sum_pt       | log_normalize     | 5.27706    | 0.296473 |
+|               | sum_energy   | log_normalize     | 5.77768    | 0.357367 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-18 11:13:39,660 | INFO | Training setup: epochs=20, batch_size=512, world_size=1, device=cuda
+2026-09-18 11:13:39,660 | INFO | Train loader: size=1383034, steps_per_epoch=2702, sampler=DistributedWeightedSampler, epoch_size=1383034, replacement=True
+2026-09-18 11:13:39,667 | INFO | Class distribution for train -> bkg: count=691517 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=691517 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-18 11:13:39,667 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-18 11:13:39,669 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-18 11:18:44,422 | INFO | Epoch 1/20 | train_loss=0.6976 | train_accuracy=0.5016 | val_loss=0.6937 | val_accuracy=0.4986
+2026-09-18 11:18:44,423 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch01.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 1/20 step 2702 lr=['0.0001', '5e-05', '1e-05'] val_loss=0.6937 -> epoch01.pt
+2026-09-18 11:23:50,429 | INFO | Epoch 2/20 | train_loss=0.6938 | train_accuracy=0.5025 | val_loss=0.6930 | val_accuracy=0.4998
+2026-09-18 11:23:50,431 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch02.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 2/20 step 5404 lr=['9.93e-05', '4.97e-05', '9.93e-06'] val_loss=0.6930 -> epoch02.pt
+2026-09-18 11:28:55,526 | INFO | Epoch 3/20 | train_loss=0.6937 | train_accuracy=0.5026 | val_loss=0.6938 | val_accuracy=0.5000
+2026-09-18 11:28:55,527 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch03.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 3/20 step 8106 lr=['9.73e-05', '4.86e-05', '9.73e-06'] val_loss=0.6938 -> epoch03.pt
+2026-09-18 11:34:00,321 | INFO | Epoch 4/20 | train_loss=0.6933 | train_accuracy=0.5028 | val_loss=0.6928 | val_accuracy=0.4991
+2026-09-18 11:34:00,323 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch04.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 4/20 step 10808 lr=['9.4e-05', '4.7e-05', '9.4e-06'] val_loss=0.6928 -> epoch04.pt
+2026-09-18 11:39:05,747 | INFO | Epoch 5/20 | train_loss=0.6931 | train_accuracy=0.5034 | val_loss=0.6929 | val_accuracy=0.4996
+2026-09-18 11:39:05,749 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch05.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 5/20 step 13510 lr=['8.95e-05', '4.47e-05', '8.95e-06'] val_loss=0.6929 -> epoch05.pt
+2026-09-18 11:44:09,309 | INFO | Epoch 6/20 | train_loss=0.6931 | train_accuracy=0.5023 | val_loss=0.6928 | val_accuracy=0.4989
+2026-09-18 11:44:09,311 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch06.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 6/20 step 16212 lr=['8.39e-05', '4.19e-05', '8.39e-06'] val_loss=0.6928 -> epoch06.pt
+2026-09-18 11:49:14,403 | INFO | Epoch 7/20 | train_loss=0.6930 | train_accuracy=0.5034 | val_loss=0.6929 | val_accuracy=0.4997
+2026-09-18 11:49:14,404 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch07.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 7/20 step 18914 lr=['7.73e-05', '3.87e-05', '7.73e-06'] val_loss=0.6929 -> epoch07.pt
+2026-09-18 11:54:19,364 | INFO | Epoch 8/20 | train_loss=0.6929 | train_accuracy=0.5036 | val_loss=0.6929 | val_accuracy=0.4996
+2026-09-18 11:54:19,366 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch08.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 8/20 step 21616 lr=['7.01e-05', '3.5e-05', '7.01e-06'] val_loss=0.6929 -> epoch08.pt
+2026-09-18 11:59:24,179 | INFO | Epoch 9/20 | train_loss=0.6929 | train_accuracy=0.5043 | val_loss=0.6927 | val_accuracy=0.4996
+2026-09-18 11:59:24,181 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch09.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 9/20 step 24318 lr=['6.23e-05', '3.11e-05', '6.23e-06'] val_loss=0.6927 -> epoch09.pt
+2026-09-18 12:04:29,766 | INFO | Epoch 10/20 | train_loss=0.6928 | train_accuracy=0.5028 | val_loss=0.6928 | val_accuracy=0.4997
+2026-09-18 12:04:29,768 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch10.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 10/20 step 27020 lr=['5.41e-05', '2.71e-05', '5.41e-06'] val_loss=0.6928 -> epoch10.pt
+2026-09-18 12:09:34,049 | INFO | Epoch 11/20 | train_loss=0.6928 | train_accuracy=0.5039 | val_loss=0.6928 | val_accuracy=0.4995
+2026-09-18 12:09:34,050 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch11.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 11/20 step 29722 lr=['4.59e-05', '2.29e-05', '4.59e-06'] val_loss=0.6928 -> epoch11.pt
+2026-09-18 12:14:38,935 | INFO | Epoch 12/20 | train_loss=0.6928 | train_accuracy=0.5034 | val_loss=0.6927 | val_accuracy=0.4992
+2026-09-18 12:14:38,937 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch12.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 12/20 step 32424 lr=['3.77e-05', '1.89e-05', '3.77e-06'] val_loss=0.6927 -> epoch12.pt
+2026-09-18 12:19:42,726 | INFO | Epoch 13/20 | train_loss=0.6927 | train_accuracy=0.5040 | val_loss=0.6928 | val_accuracy=0.5003
+2026-09-18 12:19:42,729 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch13.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 13/20 step 35126 lr=['2.99e-05', '1.5e-05', '2.99e-06'] val_loss=0.6928 -> epoch13.pt
+2026-09-18 12:24:48,735 | INFO | Epoch 14/20 | train_loss=0.6927 | train_accuracy=0.5036 | val_loss=0.6927 | val_accuracy=0.5003
+2026-09-18 12:24:48,737 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch14.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 14/20 step 37828 lr=['2.27e-05', '1.13e-05', '2.27e-06'] val_loss=0.6927 -> epoch14.pt
+2026-09-18 12:29:53,195 | INFO | Epoch 15/20 | train_loss=0.6927 | train_accuracy=0.5040 | val_loss=0.6927 | val_accuracy=0.4997
+2026-09-18 12:29:53,197 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch15.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 15/20 step 40530 lr=['1.61e-05', '8.07e-06', '1.61e-06'] val_loss=0.6927 -> epoch15.pt
+2026-09-18 12:34:57,596 | INFO | Epoch 16/20 | train_loss=0.6926 | train_accuracy=0.5041 | val_loss=0.6927 | val_accuracy=0.4993
+2026-09-18 12:34:57,598 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch16.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 16/20 step 43232 lr=['1.05e-05', '5.27e-06', '1.05e-06'] val_loss=0.6927 -> epoch16.pt
+2026-09-18 12:40:02,491 | INFO | Epoch 17/20 | train_loss=0.6926 | train_accuracy=0.5037 | val_loss=0.6927 | val_accuracy=0.4992
+2026-09-18 12:40:02,493 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch17.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 17/20 step 45934 lr=['6.03e-06', '3.01e-06', '6.03e-07'] val_loss=0.6927 -> epoch17.pt
+2026-09-18 12:45:06,444 | INFO | Epoch 18/20 | train_loss=0.6926 | train_accuracy=0.5046 | val_loss=0.6927 | val_accuracy=0.4994
+2026-09-18 12:45:06,447 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch18.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 18/20 step 48636 lr=['2.71e-06', '1.35e-06', '2.71e-07'] val_loss=0.6927 -> epoch18.pt
+2026-09-18 12:50:10,824 | INFO | Epoch 19/20 | train_loss=0.6926 | train_accuracy=0.5044 | val_loss=0.6927 | val_accuracy=0.4991
+2026-09-18 12:50:10,827 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch19.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 19/20 step 51338 lr=['6.82e-07', '3.41e-07', '6.82e-08'] val_loss=0.6927 -> epoch19.pt
+2026-09-18 12:55:14,068 | INFO | Epoch 20/20 | train_loss=0.6926 | train_accuracy=0.5047 | val_loss=0.6927 | val_accuracy=0.4993
+2026-09-18 12:55:14,071 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch20.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 20/20 step 54040 lr=['0', '0', '0'] val_loss=0.6927 -> epoch20.pt
+2026-09-18 12:55:14,334 | INFO | Restored best model from epoch 19 based on val_loss=0.6927
+2026-09-18 12:55:14,334 | INFO | Training finished
+2026-09-18 12:55:14,335 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-18 12:55:14,782 | INFO | Starting _collect_predictions
+2026-09-18 12:55:14,782 | INFO | Dataset size = 4096
+2026-09-18 12:55:14,782 | INFO | Batch size = 1024
+2026-09-18 12:55:15,006 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f0300/seed0: best_epoch=19 val_auc=0.5074 C_ref=1.0019 chi2/ndf=0.08 (109.6 min)
+[full] pretrained/sbi_over_bkg/f0300: 20/20 epochs, 20/20 epoch files, steps/epoch 2702 (n_train_rows 1383034 == epoch_size 1383034: True), total steps 54040, best epoch 19, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-18 13:03:14,053 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 13:03:14,144 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 13:03:14,144 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch05.pt
+2026-09-18 13:03:14,493 | INFO | Restored normalizer state from checkpoint
+2026-09-18 13:03:14,792 | INFO | Starting _collect_predictions
+2026-09-18 13:03:14,792 | INFO | Dataset size = 4096
+2026-09-18 13:03:14,792 | INFO | Batch size = 1024
+2026-09-18 13:03:15,020 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e05/sbi_over_bkg/f0300/seed0: val_auc=0.5061 bce=0.6928 C_ref=0.9998 chi2/ndf=1.46 (8.0 min)
+2026-09-18 13:11:12,550 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 13:11:12,641 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 13:11:12,641 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch10.pt
+2026-09-18 13:11:12,991 | INFO | Restored normalizer state from checkpoint
+2026-09-18 13:11:13,290 | INFO | Starting _collect_predictions
+2026-09-18 13:11:13,290 | INFO | Dataset size = 4096
+2026-09-18 13:11:13,290 | INFO | Batch size = 1024
+2026-09-18 13:11:13,516 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e10/sbi_over_bkg/f0300/seed0: val_auc=0.5053 bce=0.6927 C_ref=1.0049 chi2/ndf=0.23 (7.9 min)
+2026-09-18 13:19:09,523 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 13:19:09,614 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 13:19:09,614 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch15.pt
+2026-09-18 13:19:09,968 | INFO | Restored normalizer state from checkpoint
+2026-09-18 13:19:10,263 | INFO | Starting _collect_predictions
+2026-09-18 13:19:10,264 | INFO | Dataset size = 4096
+2026-09-18 13:19:10,264 | INFO | Batch size = 1024
+2026-09-18 13:19:10,487 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e15/sbi_over_bkg/f0300/seed0: val_auc=0.5056 bce=0.6926 C_ref=1.0031 chi2/ndf=0.49 (8.0 min)
+2026-09-18 13:27:07,177 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 13:27:07,269 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 13:27:07,269 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f0300/seed0/epoch20.pt
+2026-09-18 13:27:07,621 | INFO | Restored normalizer state from checkpoint
+2026-09-18 13:27:07,919 | INFO | Starting _collect_predictions
+2026-09-18 13:27:07,919 | INFO | Dataset size = 4096
+2026-09-18 13:27:07,919 | INFO | Batch size = 1024
+2026-09-18 13:27:08,314 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e20/sbi_over_bkg/f0300/seed0: val_auc=0.5073 bce=0.6926 C_ref=1.0023 chi2/ndf=0.09 (7.9 min)
+[run] pretrained/sig_over_bkg/f1000: epoch_size 3477101 = 6792 steps/epoch, 135840 steps total
+2026-09-18 13:35:02,973 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 13:35:03,062 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-18 13:35:03,265 | INFO | ======== Soft Load Summary ========
+2026-09-18 13:35:03,265 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-18 13:35:03,265 | INFO | All components loaded: NO
+2026-09-18 13:35:03,266 | INFO | --- Breakdown ---
+2026-09-18 13:35:03,266 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-18 13:35:03,266 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-18 13:35:03,266 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-18 13:35:03,266 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-18 13:35:03,266 | WARNING | Shape mismatches for 8 layers
+2026-09-18 13:35:03,266 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-18 13:35:03,266 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-18 13:35:03,266 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-18 13:35:03,266 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-18 13:35:03,267 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-18 13:35:03,267 | WARNING |   - ... and 3 more
+2026-09-18 13:35:03,267 | WARNING | Missing layers (randomly initialized): 23
+2026-09-18 13:35:03,267 | WARNING | • models         : 23 layers missing
+2026-09-18 13:35:03,267 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-18 13:35:03,267 | INFO | ===================================
+2026-09-18 13:35:03,773 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 13:35:04,325 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-18 13:35:04,325 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.98682      | 0.678921 |
+|               | energy       | log_normalize     | 4.42733      | 0.7384   |
+|               | eta          | normalize         | 0.0011922    | 1.09815  |
+|               | phi          | normalize_uniform | -0.000436313 | 1.81355  |
+| globals       | m4l          | log_normalize     | 5.72314      | 0.399443 |
+|               | sum_pt       | log_normalize     | 5.49086      | 0.443598 |
+|               | sum_energy   | log_normalize     | 5.97456      | 0.455184 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-18 13:35:04,325 | INFO | Training setup: epochs=20, batch_size=512, world_size=1, device=cuda
+2026-09-18 13:35:04,325 | INFO | Train loader: size=3477101, steps_per_epoch=6792, sampler=DistributedWeightedSampler, epoch_size=3477101, replacement=True
+2026-09-18 13:35:04,343 | INFO | Class distribution for train -> bkg: count=2263196 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=1213905 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-18 13:35:04,343 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-18 13:35:04,344 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-18 13:47:54,559 | INFO | Epoch 1/20 | train_loss=0.4483 | train_accuracy=0.8079 | val_loss=0.4305 | val_accuracy=0.7770
+2026-09-18 13:47:54,560 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch01.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 1/20 step 6792 lr=['0.0001', '5e-05', '1e-05'] val_loss=0.4305 -> epoch01.pt
+2026-09-18 14:00:17,352 | INFO | Epoch 2/20 | train_loss=0.4317 | train_accuracy=0.8170 | val_loss=0.4267 | val_accuracy=0.7703
+2026-09-18 14:00:17,355 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch02.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 2/20 step 13584 lr=['9.93e-05', '4.97e-05', '9.93e-06'] val_loss=0.4267 -> epoch02.pt
+2026-09-18 14:12:39,183 | INFO | Epoch 3/20 | train_loss=0.4269 | train_accuracy=0.8189 | val_loss=0.4208 | val_accuracy=0.7763
+2026-09-18 14:12:39,184 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch03.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 3/20 step 20376 lr=['9.73e-05', '4.86e-05', '9.73e-06'] val_loss=0.4208 -> epoch03.pt
+2026-09-18 14:25:05,583 | INFO | Epoch 4/20 | train_loss=0.4241 | train_accuracy=0.8202 | val_loss=0.4224 | val_accuracy=0.7736
+2026-09-18 14:25:05,585 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch04.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 4/20 step 27168 lr=['9.4e-05', '4.7e-05', '9.4e-06'] val_loss=0.4224 -> epoch04.pt
+2026-09-18 14:37:32,918 | INFO | Epoch 5/20 | train_loss=0.4218 | train_accuracy=0.8212 | val_loss=0.4200 | val_accuracy=0.7717
+2026-09-18 14:37:32,920 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch05.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 5/20 step 33960 lr=['8.95e-05', '4.47e-05', '8.95e-06'] val_loss=0.4200 -> epoch05.pt
+2026-09-18 14:49:59,088 | INFO | Epoch 6/20 | train_loss=0.4197 | train_accuracy=0.8219 | val_loss=0.4169 | val_accuracy=0.7801
+2026-09-18 14:49:59,089 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch06.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 6/20 step 40752 lr=['8.39e-05', '4.19e-05', '8.39e-06'] val_loss=0.4169 -> epoch06.pt
+2026-09-18 15:02:24,269 | INFO | Epoch 7/20 | train_loss=0.4190 | train_accuracy=0.8222 | val_loss=0.4166 | val_accuracy=0.7771
+2026-09-18 15:02:24,271 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch07.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 7/20 step 47544 lr=['7.73e-05', '3.87e-05', '7.73e-06'] val_loss=0.4166 -> epoch07.pt
+2026-09-18 15:14:48,339 | INFO | Epoch 8/20 | train_loss=0.4175 | train_accuracy=0.8228 | val_loss=0.4243 | val_accuracy=0.7738
+2026-09-18 15:14:48,341 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch08.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 8/20 step 54336 lr=['7.01e-05', '3.5e-05', '7.01e-06'] val_loss=0.4243 -> epoch08.pt
+2026-09-18 15:27:09,969 | INFO | Epoch 9/20 | train_loss=0.4162 | train_accuracy=0.8231 | val_loss=0.4163 | val_accuracy=0.7714
+2026-09-18 15:27:09,971 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch09.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 9/20 step 61128 lr=['6.23e-05', '3.11e-05', '6.23e-06'] val_loss=0.4163 -> epoch09.pt
+2026-09-18 15:39:34,829 | INFO | Epoch 10/20 | train_loss=0.4152 | train_accuracy=0.8237 | val_loss=0.4145 | val_accuracy=0.7721
+2026-09-18 15:39:34,831 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch10.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 10/20 step 67920 lr=['5.41e-05', '2.71e-05', '5.41e-06'] val_loss=0.4145 -> epoch10.pt
+2026-09-18 15:51:59,472 | INFO | Epoch 11/20 | train_loss=0.4140 | train_accuracy=0.8241 | val_loss=0.4163 | val_accuracy=0.7738
+2026-09-18 15:51:59,474 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch11.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 11/20 step 74712 lr=['4.59e-05', '2.29e-05', '4.59e-06'] val_loss=0.4163 -> epoch11.pt
+2026-09-18 16:04:22,958 | INFO | Epoch 12/20 | train_loss=0.4129 | train_accuracy=0.8242 | val_loss=0.4154 | val_accuracy=0.7715
+2026-09-18 16:04:22,960 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch12.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 12/20 step 81504 lr=['3.77e-05', '1.89e-05', '3.77e-06'] val_loss=0.4154 -> epoch12.pt
+2026-09-18 16:16:46,024 | INFO | Epoch 13/20 | train_loss=0.4121 | train_accuracy=0.8246 | val_loss=0.4166 | val_accuracy=0.7751
+2026-09-18 16:16:46,026 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch13.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 13/20 step 88296 lr=['2.99e-05', '1.5e-05', '2.99e-06'] val_loss=0.4166 -> epoch13.pt
+2026-09-18 16:29:10,074 | INFO | Epoch 14/20 | train_loss=0.4112 | train_accuracy=0.8250 | val_loss=0.4177 | val_accuracy=0.7729
+2026-09-18 16:29:10,076 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch14.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 14/20 step 95088 lr=['2.27e-05', '1.13e-05', '2.27e-06'] val_loss=0.4177 -> epoch14.pt
+2026-09-18 16:41:36,370 | INFO | Epoch 15/20 | train_loss=0.4110 | train_accuracy=0.8248 | val_loss=0.4199 | val_accuracy=0.7719
+2026-09-18 16:41:36,372 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch15.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 15/20 step 101880 lr=['1.61e-05', '8.07e-06', '1.61e-06'] val_loss=0.4199 -> epoch15.pt
+2026-09-18 16:53:58,609 | INFO | Epoch 16/20 | train_loss=0.4101 | train_accuracy=0.8253 | val_loss=0.4183 | val_accuracy=0.7737
+2026-09-18 16:53:58,612 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch16.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 16/20 step 108672 lr=['1.05e-05', '5.27e-06', '1.05e-06'] val_loss=0.4183 -> epoch16.pt
+2026-09-18 17:06:24,356 | INFO | Epoch 17/20 | train_loss=0.4100 | train_accuracy=0.8251 | val_loss=0.4187 | val_accuracy=0.7730
+2026-09-18 17:06:24,359 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch17.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 17/20 step 115464 lr=['6.03e-06', '3.01e-06', '6.03e-07'] val_loss=0.4187 -> epoch17.pt
+2026-09-18 17:18:49,778 | INFO | Epoch 18/20 | train_loss=0.4095 | train_accuracy=0.8255 | val_loss=0.4163 | val_accuracy=0.7737
+2026-09-18 17:18:49,780 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch18.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 18/20 step 122256 lr=['2.71e-06', '1.35e-06', '2.71e-07'] val_loss=0.4163 -> epoch18.pt
+2026-09-18 17:31:17,520 | INFO | Epoch 19/20 | train_loss=0.4090 | train_accuracy=0.8258 | val_loss=0.4201 | val_accuracy=0.7718
+2026-09-18 17:31:17,522 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch19.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 19/20 step 129048 lr=['6.82e-07', '3.41e-07', '6.82e-08'] val_loss=0.4201 -> epoch19.pt
+2026-09-18 17:43:40,045 | INFO | Epoch 20/20 | train_loss=0.4094 | train_accuracy=0.8256 | val_loss=0.4225 | val_accuracy=0.7703
+2026-09-18 17:43:40,048 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch20.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 20/20 step 135840 lr=['0', '0', '0'] val_loss=0.4225 -> epoch20.pt
+2026-09-18 17:43:40,308 | INFO | Restored best model from epoch 10 based on val_loss=0.4145
+2026-09-18 17:43:40,308 | INFO | Training finished
+2026-09-18 17:43:40,309 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-18 17:43:40,759 | INFO | Starting _collect_predictions
+2026-09-18 17:43:40,759 | INFO | Dataset size = 4096
+2026-09-18 17:43:40,759 | INFO | Batch size = 1024
+2026-09-18 17:43:40,986 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f1000/seed0: best_epoch=10 val_auc=0.8834 C_ref=1.0023 chi2/ndf=31.09 (258.5 min)
+[full] pretrained/sig_over_bkg/f1000: 20/20 epochs, 20/20 epoch files, steps/epoch 6792 (n_train_rows 3477101 == epoch_size 3477101: True), total steps 135840, best epoch 10, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-18 17:53:32,506 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 17:53:32,598 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 17:53:32,598 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch05.pt
+2026-09-18 17:53:32,947 | INFO | Restored normalizer state from checkpoint
+2026-09-18 17:53:33,187 | INFO | Starting _collect_predictions
+2026-09-18 17:53:33,187 | INFO | Dataset size = 4096
+2026-09-18 17:53:33,187 | INFO | Batch size = 1024
+2026-09-18 17:53:33,411 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e05/sig_over_bkg/f1000/seed0: val_auc=0.8826 bce=0.4261 C_ref=0.9928 chi2/ndf=2.30 (9.9 min)
+2026-09-18 18:03:24,407 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 18:03:24,498 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 18:03:24,498 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch10.pt
+2026-09-18 18:03:24,847 | INFO | Restored normalizer state from checkpoint
+2026-09-18 18:03:25,085 | INFO | Starting _collect_predictions
+2026-09-18 18:03:25,085 | INFO | Dataset size = 4096
+2026-09-18 18:03:25,085 | INFO | Batch size = 1024
+2026-09-18 18:03:25,309 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e10/sig_over_bkg/f1000/seed0: val_auc=0.8834 bce=0.4257 C_ref=1.0023 chi2/ndf=31.09 (9.8 min)
+2026-09-18 18:13:14,559 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 18:13:14,651 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 18:13:14,651 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch15.pt
+2026-09-18 18:13:15,002 | INFO | Restored normalizer state from checkpoint
+2026-09-18 18:13:15,235 | INFO | Starting _collect_predictions
+2026-09-18 18:13:15,235 | INFO | Dataset size = 4096
+2026-09-18 18:13:15,235 | INFO | Batch size = 1024
+2026-09-18 18:13:15,455 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e15/sig_over_bkg/f1000/seed0: val_auc=0.8831 bce=0.4266 C_ref=0.9791 chi2/ndf=92.18 (9.9 min)
+2026-09-18 18:23:06,581 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 18:23:06,672 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 18:23:06,672 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f1000/seed0/epoch20.pt
+2026-09-18 18:23:07,024 | INFO | Restored normalizer state from checkpoint
+2026-09-18 18:23:07,261 | INFO | Starting _collect_predictions
+2026-09-18 18:23:07,261 | INFO | Dataset size = 4096
+2026-09-18 18:23:07,261 | INFO | Batch size = 1024
+2026-09-18 18:23:07,484 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e20/sig_over_bkg/f1000/seed0: val_auc=0.8830 bce=0.4272 C_ref=0.9650 chi2/ndf=171.12 (9.9 min)
+[run] pretrained/sbi_over_bkg/f1000: epoch_size 4610116 = 9005 steps/epoch, 180100 steps total
+2026-09-18 18:32:58,914 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-18 18:32:59,005 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-18 18:32:59,204 | INFO | ======== Soft Load Summary ========
+2026-09-18 18:32:59,204 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-18 18:32:59,204 | INFO | All components loaded: NO
+2026-09-18 18:32:59,205 | INFO | --- Breakdown ---
+2026-09-18 18:32:59,205 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-18 18:32:59,205 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-18 18:32:59,205 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-18 18:32:59,205 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-18 18:32:59,205 | WARNING | Shape mismatches for 8 layers
+2026-09-18 18:32:59,205 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-18 18:32:59,205 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-18 18:32:59,205 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-18 18:32:59,205 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-18 18:32:59,205 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-18 18:32:59,205 | WARNING |   - ... and 3 more
+2026-09-18 18:32:59,205 | WARNING | Missing layers (randomly initialized): 23
+2026-09-18 18:32:59,205 | WARNING | • models         : 23 layers missing
+2026-09-18 18:32:59,205 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-18 18:32:59,205 | INFO | ===================================
+2026-09-18 18:32:59,881 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-18 18:33:00,677 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-18 18:33:00,678 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.81124    | 0.532144 |
+|               | energy       | log_normalize     | 4.26257    | 0.628343 |
+|               | eta          | normalize         | 0.00157893 | 1.11446  |
+|               | phi          | normalize_uniform | 0.00215519 | 1.81293  |
+| globals       | m4l          | log_normalize     | 5.52743    | 0.261194 |
+|               | sum_pt       | log_normalize     | 5.27714    | 0.296965 |
+|               | sum_energy   | log_normalize     | 5.77781    | 0.357287 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-18 18:33:00,678 | INFO | Training setup: epochs=20, batch_size=512, world_size=1, device=cuda
+2026-09-18 18:33:00,678 | INFO | Train loader: size=4610116, steps_per_epoch=9005, sampler=DistributedWeightedSampler, epoch_size=4610116, replacement=True
+2026-09-18 18:33:00,701 | INFO | Class distribution for train -> bkg: count=2305058 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=2305058 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-18 18:33:00,702 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-18 18:33:00,703 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-18 18:49:24,913 | INFO | Epoch 1/20 | train_loss=0.6951 | train_accuracy=0.5023 | val_loss=0.6935 | val_accuracy=0.4994
+2026-09-18 18:49:24,914 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch01.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 1/20 step 9005 lr=['0.0001', '5e-05', '1e-05'] val_loss=0.6935 -> epoch01.pt
+2026-09-18 19:05:49,497 | INFO | Epoch 2/20 | train_loss=0.6932 | train_accuracy=0.5025 | val_loss=0.6931 | val_accuracy=0.4992
+2026-09-18 19:05:49,498 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch02.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 2/20 step 18010 lr=['9.93e-05', '4.97e-05', '9.93e-06'] val_loss=0.6931 -> epoch02.pt
+2026-09-18 19:22:13,123 | INFO | Epoch 3/20 | train_loss=0.6930 | train_accuracy=0.5031 | val_loss=0.6927 | val_accuracy=0.4985
+2026-09-18 19:22:13,124 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch03.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 3/20 step 27015 lr=['9.73e-05', '4.86e-05', '9.73e-06'] val_loss=0.6927 -> epoch03.pt
+2026-09-18 19:38:36,957 | INFO | Epoch 4/20 | train_loss=0.6929 | train_accuracy=0.5030 | val_loss=0.6937 | val_accuracy=0.4995
+2026-09-18 19:38:36,959 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch04.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 4/20 step 36020 lr=['9.4e-05', '4.7e-05', '9.4e-06'] val_loss=0.6937 -> epoch04.pt
+2026-09-18 19:54:59,384 | INFO | Epoch 5/20 | train_loss=0.6929 | train_accuracy=0.5028 | val_loss=0.6927 | val_accuracy=0.5001
+2026-09-18 19:54:59,387 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch05.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 5/20 step 45025 lr=['8.95e-05', '4.47e-05', '8.95e-06'] val_loss=0.6927 -> epoch05.pt
+2026-09-18 20:11:24,171 | INFO | Epoch 6/20 | train_loss=0.6929 | train_accuracy=0.5028 | val_loss=0.6929 | val_accuracy=0.4992
+2026-09-18 20:11:24,173 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch06.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 6/20 step 54030 lr=['8.39e-05', '4.19e-05', '8.39e-06'] val_loss=0.6929 -> epoch06.pt
+2026-09-18 20:27:49,888 | INFO | Epoch 7/20 | train_loss=0.6929 | train_accuracy=0.5033 | val_loss=0.6930 | val_accuracy=0.4991
+2026-09-18 20:27:49,890 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch07.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 7/20 step 63035 lr=['7.73e-05', '3.87e-05', '7.73e-06'] val_loss=0.6930 -> epoch07.pt
+2026-09-18 20:44:12,951 | INFO | Epoch 8/20 | train_loss=0.6928 | train_accuracy=0.5032 | val_loss=0.6927 | val_accuracy=0.4998
+2026-09-18 20:44:12,953 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch08.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 8/20 step 72040 lr=['7.01e-05', '3.5e-05', '7.01e-06'] val_loss=0.6927 -> epoch08.pt
+2026-09-18 21:00:37,006 | INFO | Epoch 9/20 | train_loss=0.6927 | train_accuracy=0.5038 | val_loss=0.6929 | val_accuracy=0.4990
+2026-09-18 21:00:37,008 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch09.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 9/20 step 81045 lr=['6.23e-05', '3.11e-05', '6.23e-06'] val_loss=0.6929 -> epoch09.pt
+2026-09-18 21:16:56,853 | INFO | Epoch 10/20 | train_loss=0.6927 | train_accuracy=0.5038 | val_loss=0.6928 | val_accuracy=0.4988
+2026-09-18 21:16:56,855 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch10.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 10/20 step 90050 lr=['5.41e-05', '2.71e-05', '5.41e-06'] val_loss=0.6928 -> epoch10.pt
+2026-09-18 21:33:16,465 | INFO | Epoch 11/20 | train_loss=0.6927 | train_accuracy=0.5039 | val_loss=0.6928 | val_accuracy=0.4988
+2026-09-18 21:33:16,467 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch11.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 11/20 step 99055 lr=['4.59e-05', '2.29e-05', '4.59e-06'] val_loss=0.6928 -> epoch11.pt
+2026-09-18 21:49:42,001 | INFO | Epoch 12/20 | train_loss=0.6927 | train_accuracy=0.5042 | val_loss=0.6927 | val_accuracy=0.4990
+2026-09-18 21:49:42,004 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch12.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 12/20 step 108060 lr=['3.77e-05', '1.89e-05', '3.77e-06'] val_loss=0.6927 -> epoch12.pt
+2026-09-18 22:06:01,445 | INFO | Epoch 13/20 | train_loss=0.6926 | train_accuracy=0.5044 | val_loss=0.6927 | val_accuracy=0.4991
+2026-09-18 22:06:01,448 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch13.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 13/20 step 117065 lr=['2.99e-05', '1.5e-05', '2.99e-06'] val_loss=0.6927 -> epoch13.pt
+2026-09-18 22:22:20,553 | INFO | Epoch 14/20 | train_loss=0.6926 | train_accuracy=0.5047 | val_loss=0.6927 | val_accuracy=0.5001
+2026-09-18 22:22:20,555 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch14.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 14/20 step 126070 lr=['2.27e-05', '1.13e-05', '2.27e-06'] val_loss=0.6927 -> epoch14.pt
+2026-09-18 22:38:41,598 | INFO | Epoch 15/20 | train_loss=0.6926 | train_accuracy=0.5051 | val_loss=0.6927 | val_accuracy=0.4999
+2026-09-18 22:38:41,601 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch15.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 15/20 step 135075 lr=['1.61e-05', '8.07e-06', '1.61e-06'] val_loss=0.6927 -> epoch15.pt
+2026-09-18 22:55:01,868 | INFO | Epoch 16/20 | train_loss=0.6926 | train_accuracy=0.5048 | val_loss=0.6927 | val_accuracy=0.4997
+2026-09-18 22:55:01,870 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch16.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 16/20 step 144080 lr=['1.05e-05', '5.27e-06', '1.05e-06'] val_loss=0.6927 -> epoch16.pt
+2026-09-18 23:11:21,925 | INFO | Epoch 17/20 | train_loss=0.6926 | train_accuracy=0.5050 | val_loss=0.6927 | val_accuracy=0.4994
+2026-09-18 23:11:21,928 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch17.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 17/20 step 153085 lr=['6.03e-06', '3.01e-06', '6.03e-07'] val_loss=0.6927 -> epoch17.pt
+2026-09-18 23:27:44,567 | INFO | Epoch 18/20 | train_loss=0.6926 | train_accuracy=0.5053 | val_loss=0.6927 | val_accuracy=0.4994
+2026-09-18 23:27:44,569 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch18.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 18/20 step 162090 lr=['2.71e-06', '1.35e-06', '2.71e-07'] val_loss=0.6927 -> epoch18.pt
+2026-09-18 23:44:07,351 | INFO | Epoch 19/20 | train_loss=0.6926 | train_accuracy=0.5055 | val_loss=0.6927 | val_accuracy=0.4995
+2026-09-18 23:44:07,353 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch19.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 19/20 step 171095 lr=['6.82e-07', '3.41e-07', '6.82e-08'] val_loss=0.6927 -> epoch19.pt
+2026-09-19 00:00:24,978 | INFO | Epoch 20/20 | train_loss=0.6926 | train_accuracy=0.5057 | val_loss=0.6927 | val_accuracy=0.4993
+2026-09-19 00:00:24,981 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch20.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[full] epoch 20/20 step 180100 lr=['0', '0', '0'] val_loss=0.6927 -> epoch20.pt
+2026-09-19 00:00:25,243 | INFO | Restored best model from epoch 19 based on val_loss=0.6927
+2026-09-19 00:00:25,243 | INFO | Training finished
+2026-09-19 00:00:25,244 | INFO | Saving checkpoint to /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-19 00:00:25,695 | INFO | Starting _collect_predictions
+2026-09-19 00:00:25,695 | INFO | Dataset size = 4096
+2026-09-19 00:00:25,695 | INFO | Batch size = 1024
+2026-09-19 00:00:25,921 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f1000/seed0: best_epoch=19 val_auc=0.5080 C_ref=0.9975 chi2/ndf=0.02 (337.0 min)
+[full] pretrained/sbi_over_bkg/f1000: 20/20 epochs, 20/20 epoch files, steps/epoch 9005 (n_train_rows 4610116 == epoch_size 4610116: True), total steps 180100, best epoch 19, lr first->last 0.0001 -> 0, schedule finished: True
+2026-09-19 00:10:00,125 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 00:10:00,216 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 00:10:00,216 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch05.pt
+2026-09-19 00:10:00,563 | INFO | Restored normalizer state from checkpoint
+2026-09-19 00:10:00,801 | INFO | Starting _collect_predictions
+2026-09-19 00:10:00,801 | INFO | Dataset size = 4096
+2026-09-19 00:10:00,801 | INFO | Batch size = 1024
+2026-09-19 00:10:01,024 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e05/sbi_over_bkg/f1000/seed0: val_auc=0.5065 bce=0.6926 C_ref=0.9920 chi2/ndf=0.56 (9.5 min)
+2026-09-19 00:19:32,555 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 00:19:32,646 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 00:19:32,646 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch10.pt
+2026-09-19 00:19:32,994 | INFO | Restored normalizer state from checkpoint
+2026-09-19 00:19:33,233 | INFO | Starting _collect_predictions
+2026-09-19 00:19:33,233 | INFO | Dataset size = 4096
+2026-09-19 00:19:33,233 | INFO | Batch size = 1024
+2026-09-19 00:19:33,458 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e10/sbi_over_bkg/f1000/seed0: val_auc=0.5071 bce=0.6927 C_ref=1.0010 chi2/ndf=0.54 (9.6 min)
+2026-09-19 00:29:06,862 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 00:29:06,954 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 00:29:06,954 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch15.pt
+2026-09-19 00:29:07,491 | INFO | Restored normalizer state from checkpoint
+2026-09-19 00:29:07,732 | INFO | Starting _collect_predictions
+2026-09-19 00:29:07,733 | INFO | Dataset size = 4096
+2026-09-19 00:29:07,733 | INFO | Batch size = 1024
+2026-09-19 00:29:07,954 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e15/sbi_over_bkg/f1000/seed0: val_auc=0.5074 bce=0.6926 C_ref=1.0012 chi2/ndf=0.15 (9.6 min)
+2026-09-19 00:38:40,189 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-19 00:38:40,280 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-19 00:38:40,280 | INFO | Restoring checkpoint from /home/ubuntu/datascan/fullsched/runs/pretrained/sbi_over_bkg/f1000/seed0/epoch20.pt
+2026-09-19 00:38:40,630 | INFO | Restored normalizer state from checkpoint
+2026-09-19 00:38:40,872 | INFO | Starting _collect_predictions
+2026-09-19 00:38:40,872 | INFO | Dataset size = 4096
+2026-09-19 00:38:40,872 | INFO | Batch size = 1024
+2026-09-19 00:38:41,094 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained_e20/sbi_over_bkg/f1000/seed0: val_auc=0.5081 bce=0.6926 C_ref=1.0001 chi2/ndf=0.02 (9.6 min)
+summary: started=10 failed=0
+DRIVER_EXIT=0

@@ -1,0 +1,1366 @@
+root /home/ubuntu/datascan
+budget: 2000 steps/epoch x max 50 epochs, patience 5, num_workers 0, wandb None, tf32 False, bf16 False
+/opt/pytorch/lib/python3.13/site-packages/torch/cuda/__init__.py:64: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+tier tier2: 22 runs -> pending=22
+2026-09-12 18:29:18,870 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-12 18:29:18,990 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-12 18:29:19,283 | INFO | ======== Soft Load Summary ========
+2026-09-12 18:29:19,284 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-12 18:29:19,284 | INFO | All components loaded: NO
+2026-09-12 18:29:19,285 | INFO | --- Breakdown ---
+2026-09-12 18:29:19,285 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-12 18:29:19,285 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-12 18:29:19,285 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-12 18:29:19,285 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-12 18:29:19,285 | WARNING | Shape mismatches for 8 layers
+2026-09-12 18:29:19,285 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-12 18:29:19,285 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-12 18:29:19,285 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-12 18:29:19,285 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-12 18:29:19,285 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-12 18:29:19,285 | WARNING |   - ... and 3 more
+2026-09-12 18:29:19,285 | WARNING | Missing layers (randomly initialized): 23
+2026-09-12 18:29:19,285 | WARNING | • models         : 23 layers missing
+2026-09-12 18:29:19,285 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-12 18:29:19,285 | INFO | ===================================
+2026-09-12 18:29:21,189 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-12 18:29:21,237 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-12 18:29:21,237 | INFO | Normalization plan:
++---------------+--------------+-------------------+-------------+----------+
+| Feature Group | Feature Name | Rule              | Mean        | Std      |
++===============+==============+===================+=============+==========+
+| x             | pt           | log_normalize     | 3.9907      | 0.682227 |
+|               | energy       | log_normalize     | 4.42875     | 0.738802 |
+|               | eta          | normalize         | 0.00825904  | 1.09472  |
+|               | phi          | normalize_uniform | 0.000825798 | 1.813    |
+| globals       | m4l          | log_normalize     | 5.72653     | 0.401061 |
+|               | sum_pt       | log_normalize     | 5.49585     | 0.446093 |
+|               | sum_energy   | log_normalize     | 5.97629     | 0.455497 |
++---------------+--------------+-------------------+-------------+----------+
+2026-09-12 18:29:21,237 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-12 18:29:21,237 | INFO | Train loader: size=34771, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-12 18:29:21,240 | INFO | Class distribution for train -> bkg: count=22632 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=12139 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-12 18:29:21,240 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-12 18:29:21,242 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-12 18:32:47,297 | INFO | Epoch 1/50 | train_loss=0.4415 | train_accuracy=0.8113 | val_loss=0.4431 | val_accuracy=0.7973
+2026-09-12 18:36:06,623 | INFO | Epoch 2/50 | train_loss=0.4167 | train_accuracy=0.8227 | val_loss=0.4617 | val_accuracy=0.7918
+2026-09-12 18:39:34,326 | INFO | Epoch 3/50 | train_loss=0.3969 | train_accuracy=0.8310 | val_loss=0.4733 | val_accuracy=0.7886
+2026-09-12 18:42:54,578 | INFO | Epoch 4/50 | train_loss=0.3812 | train_accuracy=0.8382 | val_loss=0.4927 | val_accuracy=0.7767
+2026-09-12 18:46:21,765 | INFO | Epoch 5/50 | train_loss=0.3656 | train_accuracy=0.8452 | val_loss=0.5042 | val_accuracy=0.7737
+2026-09-12 18:49:42,532 | INFO | Epoch 6/50 | train_loss=0.3529 | train_accuracy=0.8512 | val_loss=0.5124 | val_accuracy=0.7804
+2026-09-12 18:49:42,533 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-12 18:49:42,763 | INFO | Restored best model from epoch 1 based on val_loss=0.4431
+2026-09-12 18:49:42,763 | INFO | Training finished
+2026-09-12 18:49:42,767 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/frozen/sig_over_bkg/f0010/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-12 18:49:43,242 | INFO | Starting _collect_predictions
+2026-09-12 18:49:43,243 | INFO | Dataset size = 4096
+2026-09-12 18:49:43,243 | INFO | Batch size = 1024
+2026-09-12 18:49:43,675 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sig_over_bkg/f0010/seed0: best_epoch=1 val_auc=0.8611 C_ref=0.8396 chi2/ndf=70.71 (32.8 min)
+2026-09-12 19:02:06,122 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-12 19:02:06,396 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-12 19:02:06,659 | INFO | ======== Soft Load Summary ========
+2026-09-12 19:02:06,659 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-12 19:02:06,659 | INFO | All components loaded: NO
+2026-09-12 19:02:06,660 | INFO | --- Breakdown ---
+2026-09-12 19:02:06,660 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-12 19:02:06,660 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-12 19:02:06,660 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-12 19:02:06,660 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-12 19:02:06,660 | WARNING | Shape mismatches for 8 layers
+2026-09-12 19:02:06,660 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-12 19:02:06,660 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-12 19:02:06,660 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-12 19:02:06,660 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-12 19:02:06,660 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-12 19:02:06,660 | WARNING |   - ... and 3 more
+2026-09-12 19:02:06,661 | WARNING | Missing layers (randomly initialized): 23
+2026-09-12 19:02:06,661 | WARNING | • models         : 23 layers missing
+2026-09-12 19:02:06,661 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-12 19:02:06,661 | INFO | ===================================
+2026-09-12 19:02:06,824 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-12 19:02:07,048 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-12 19:02:07,048 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.80884      | 0.529981 |
+|               | energy       | log_normalize     | 4.26055      | 0.626558 |
+|               | eta          | normalize         | 0.00557408   | 1.11464  |
+|               | phi          | normalize_uniform | -0.000519471 | 1.81274  |
+| globals       | m4l          | log_normalize     | 5.525        | 0.2586   |
+|               | sum_pt       | log_normalize     | 5.27436      | 0.294911 |
+|               | sum_energy   | log_normalize     | 5.77549      | 0.354933 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-12 19:02:07,048 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-12 19:02:07,049 | INFO | Train loader: size=46102, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-12 19:02:07,049 | INFO | Class distribution for train -> bkg: count=23051 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=23051 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-12 19:02:07,050 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-12 19:02:07,052 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-12 19:05:28,102 | INFO | Epoch 1/50 | train_loss=0.6968 | train_accuracy=0.5024 | val_loss=0.6956 | val_accuracy=0.5000
+2026-09-12 19:08:55,170 | INFO | Epoch 2/50 | train_loss=0.6950 | train_accuracy=0.5020 | val_loss=0.6944 | val_accuracy=0.5000
+2026-09-12 19:12:33,668 | INFO | Epoch 3/50 | train_loss=0.6942 | train_accuracy=0.5020 | val_loss=0.6932 | val_accuracy=0.4994
+2026-09-12 19:17:20,887 | INFO | Epoch 4/50 | train_loss=0.6938 | train_accuracy=0.5021 | val_loss=0.6931 | val_accuracy=0.4981
+2026-09-12 19:22:09,440 | INFO | Epoch 5/50 | train_loss=0.6934 | train_accuracy=0.5027 | val_loss=0.6936 | val_accuracy=0.4999
+2026-09-12 19:25:43,502 | INFO | Epoch 6/50 | train_loss=0.6932 | train_accuracy=0.5025 | val_loss=0.6932 | val_accuracy=0.4989
+2026-09-12 19:29:04,359 | INFO | Epoch 7/50 | train_loss=0.6930 | train_accuracy=0.5042 | val_loss=0.6929 | val_accuracy=0.5001
+2026-09-12 19:32:32,533 | INFO | Epoch 8/50 | train_loss=0.6929 | train_accuracy=0.5033 | val_loss=0.6931 | val_accuracy=0.4985
+2026-09-12 19:35:53,846 | INFO | Epoch 9/50 | train_loss=0.6928 | train_accuracy=0.5048 | val_loss=0.6928 | val_accuracy=0.4990
+2026-09-12 19:39:22,680 | INFO | Epoch 10/50 | train_loss=0.6928 | train_accuracy=0.5043 | val_loss=0.6929 | val_accuracy=0.4990
+2026-09-12 19:42:43,470 | INFO | Epoch 11/50 | train_loss=0.6928 | train_accuracy=0.5041 | val_loss=0.6928 | val_accuracy=0.4994
+2026-09-12 19:46:12,982 | INFO | Epoch 12/50 | train_loss=0.6927 | train_accuracy=0.5038 | val_loss=0.6929 | val_accuracy=0.4989
+2026-09-12 19:49:33,838 | INFO | Epoch 13/50 | train_loss=0.6927 | train_accuracy=0.5049 | val_loss=0.6928 | val_accuracy=0.4999
+2026-09-12 19:53:02,990 | INFO | Epoch 14/50 | train_loss=0.6927 | train_accuracy=0.5044 | val_loss=0.6928 | val_accuracy=0.4988
+2026-09-12 19:56:45,596 | INFO | Epoch 15/50 | train_loss=0.6927 | train_accuracy=0.5040 | val_loss=0.6927 | val_accuracy=0.4996
+2026-09-12 20:03:27,907 | INFO | Epoch 16/50 | train_loss=0.6927 | train_accuracy=0.5041 | val_loss=0.6927 | val_accuracy=0.4993
+2026-09-12 20:10:06,056 | INFO | Epoch 17/50 | train_loss=0.6927 | train_accuracy=0.5034 | val_loss=0.6928 | val_accuracy=0.4991
+2026-09-12 20:16:44,433 | INFO | Epoch 18/50 | train_loss=0.6927 | train_accuracy=0.5036 | val_loss=0.6928 | val_accuracy=0.4979
+2026-09-12 20:24:28,165 | INFO | Epoch 19/50 | train_loss=0.6927 | train_accuracy=0.5045 | val_loss=0.6928 | val_accuracy=0.5002
+2026-09-12 20:32:21,930 | INFO | Epoch 20/50 | train_loss=0.6928 | train_accuracy=0.5041 | val_loss=0.6928 | val_accuracy=0.4989
+2026-09-12 20:39:34,765 | INFO | Epoch 21/50 | train_loss=0.6927 | train_accuracy=0.5034 | val_loss=0.6927 | val_accuracy=0.4998
+2026-09-12 20:39:34,770 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-12 20:39:36,212 | INFO | Restored best model from epoch 16 based on val_loss=0.6927
+2026-09-12 20:39:36,212 | INFO | Training finished
+2026-09-12 20:39:36,213 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/frozen/sbi_over_bkg/f0010/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-12 20:39:36,932 | INFO | Starting _collect_predictions
+2026-09-12 20:39:36,932 | INFO | Dataset size = 4096
+2026-09-12 20:39:36,932 | INFO | Batch size = 1024
+2026-09-12 20:39:37,608 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sbi_over_bkg/f0010/seed0: best_epoch=16 val_auc=0.5060 C_ref=0.9927 chi2/ndf=0.47 (109.7 min)
+2026-09-12 20:51:47,919 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-12 20:51:48,010 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-12 20:51:48,373 | INFO | ======== Soft Load Summary ========
+2026-09-12 20:51:48,373 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-12 20:51:48,373 | INFO | All components loaded: NO
+2026-09-12 20:51:48,374 | INFO | --- Breakdown ---
+2026-09-12 20:51:48,374 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-12 20:51:48,374 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-12 20:51:48,374 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-12 20:51:48,374 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-12 20:51:48,374 | WARNING | Shape mismatches for 8 layers
+2026-09-12 20:51:48,374 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-12 20:51:48,374 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-12 20:51:48,374 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-12 20:51:48,374 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-12 20:51:48,374 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-12 20:51:48,374 | WARNING |   - ... and 3 more
+2026-09-12 20:51:48,374 | WARNING | Missing layers (randomly initialized): 23
+2026-09-12 20:51:48,374 | WARNING | • models         : 23 layers missing
+2026-09-12 20:51:48,374 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-12 20:51:48,374 | INFO | ===================================
+2026-09-12 20:51:48,497 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-12 20:51:48,731 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-12 20:51:48,731 | INFO | Normalization plan:
++---------------+--------------+-------------------+-------------+----------+
+| Feature Group | Feature Name | Rule              | Mean        | Std      |
++===============+==============+===================+=============+==========+
+| x             | pt           | log_normalize     | 3.98544     | 0.678853 |
+|               | energy       | log_normalize     | 4.42597     | 0.737328 |
+|               | eta          | normalize         | -0.00448623 | 1.09788  |
+|               | phi          | normalize_uniform | -0.00397098 | 1.81522  |
+| globals       | m4l          | log_normalize     | 5.72218     | 0.397629 |
+|               | sum_pt       | log_normalize     | 5.49003     | 0.441928 |
+|               | sum_energy   | log_normalize     | 5.97339     | 0.452458 |
++---------------+--------------+-------------------+-------------+----------+
+2026-09-12 20:51:48,731 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-12 20:51:48,732 | INFO | Train loader: size=34771, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-12 20:51:48,732 | INFO | Class distribution for train -> bkg: count=22632 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=12139 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-12 20:51:48,732 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-12 20:51:48,735 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-12 20:59:29,412 | INFO | Epoch 1/50 | train_loss=0.4619 | train_accuracy=0.7981 | val_loss=0.4509 | val_accuracy=0.7809
+2026-09-12 21:07:10,741 | INFO | Epoch 2/50 | train_loss=0.3957 | train_accuracy=0.8312 | val_loss=0.4814 | val_accuracy=0.7768
+2026-09-12 21:14:51,736 | INFO | Epoch 3/50 | train_loss=0.3426 | train_accuracy=0.8557 | val_loss=0.5529 | val_accuracy=0.7602
+2026-09-12 21:22:33,108 | INFO | Epoch 4/50 | train_loss=0.2888 | train_accuracy=0.8813 | val_loss=0.6110 | val_accuracy=0.7643
+2026-09-12 21:31:21,316 | INFO | Epoch 5/50 | train_loss=0.2392 | train_accuracy=0.9035 | val_loss=0.6924 | val_accuracy=0.7638
+2026-09-12 21:41:04,000 | INFO | Epoch 6/50 | train_loss=0.1958 | train_accuracy=0.9222 | val_loss=0.8006 | val_accuracy=0.7425
+2026-09-12 21:41:04,001 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-12 21:41:04,209 | INFO | Restored best model from epoch 1 based on val_loss=0.4509
+2026-09-12 21:41:04,210 | INFO | Training finished
+2026-09-12 21:41:04,210 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sig_over_bkg/f0010/seed1/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-12 21:41:04,861 | INFO | Starting _collect_predictions
+2026-09-12 21:41:04,861 | INFO | Dataset size = 4096
+2026-09-12 21:41:04,861 | INFO | Batch size = 1024
+2026-09-12 21:41:05,338 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f0010/seed1: best_epoch=1 val_auc=0.8657 C_ref=0.6910 chi2/ndf=36.54 (62.0 min)
+2026-09-12 21:53:49,947 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-12 21:53:50,039 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-12 21:53:50,223 | INFO | ======== Soft Load Summary ========
+2026-09-12 21:53:50,223 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-12 21:53:50,223 | INFO | All components loaded: NO
+2026-09-12 21:53:50,224 | INFO | --- Breakdown ---
+2026-09-12 21:53:50,224 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-12 21:53:50,224 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-12 21:53:50,224 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-12 21:53:50,224 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-12 21:53:50,224 | WARNING | Shape mismatches for 8 layers
+2026-09-12 21:53:50,224 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-12 21:53:50,224 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-12 21:53:50,224 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-12 21:53:50,224 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-12 21:53:50,224 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-12 21:53:50,224 | WARNING |   - ... and 3 more
+2026-09-12 21:53:50,224 | WARNING | Missing layers (randomly initialized): 23
+2026-09-12 21:53:50,225 | WARNING | • models         : 23 layers missing
+2026-09-12 21:53:50,225 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-12 21:53:50,225 | INFO | ===================================
+2026-09-12 21:53:50,416 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-12 21:53:50,583 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-12 21:53:50,583 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.81272    | 0.531165 |
+|               | energy       | log_normalize     | 4.2613     | 0.627255 |
+|               | eta          | normalize         | 0.00197152 | 1.11083  |
+|               | phi          | normalize_uniform | 0.00308708 | 1.81598  |
+| globals       | m4l          | log_normalize     | 5.52689    | 0.259024 |
+|               | sum_pt       | log_normalize     | 5.27819    | 0.29566  |
+|               | sum_energy   | log_normalize     | 5.77618    | 0.35524  |
++---------------+--------------+-------------------+------------+----------+
+2026-09-12 21:53:50,583 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-12 21:53:50,583 | INFO | Train loader: size=46102, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-12 21:53:50,584 | INFO | Class distribution for train -> bkg: count=23051 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=23051 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-12 21:53:50,584 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-12 21:53:50,586 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-12 22:01:30,061 | INFO | Epoch 1/50 | train_loss=0.7045 | train_accuracy=0.5010 | val_loss=0.6950 | val_accuracy=0.4993
+2026-09-12 22:09:10,759 | INFO | Epoch 2/50 | train_loss=0.6947 | train_accuracy=0.5014 | val_loss=0.6947 | val_accuracy=0.4985
+2026-09-12 22:16:52,005 | INFO | Epoch 3/50 | train_loss=0.6936 | train_accuracy=0.5030 | val_loss=0.6945 | val_accuracy=0.4997
+2026-09-12 22:24:34,799 | INFO | Epoch 4/50 | train_loss=0.6935 | train_accuracy=0.5026 | val_loss=0.6935 | val_accuracy=0.4991
+2026-09-12 22:32:16,815 | INFO | Epoch 5/50 | train_loss=0.6933 | train_accuracy=0.5024 | val_loss=0.6930 | val_accuracy=0.4989
+2026-09-12 22:41:05,415 | INFO | Epoch 6/50 | train_loss=0.6932 | train_accuracy=0.5036 | val_loss=0.6935 | val_accuracy=0.4998
+2026-09-12 22:50:42,521 | INFO | Epoch 7/50 | train_loss=0.6932 | train_accuracy=0.5022 | val_loss=0.6929 | val_accuracy=0.4994
+2026-09-12 22:58:23,086 | INFO | Epoch 8/50 | train_loss=0.6930 | train_accuracy=0.5024 | val_loss=0.6929 | val_accuracy=0.5002
+2026-09-12 23:06:04,829 | INFO | Epoch 9/50 | train_loss=0.6930 | train_accuracy=0.5031 | val_loss=0.6934 | val_accuracy=0.4984
+2026-09-12 23:13:47,589 | INFO | Epoch 10/50 | train_loss=0.6930 | train_accuracy=0.5029 | val_loss=0.6928 | val_accuracy=0.4989
+2026-09-12 23:21:26,537 | INFO | Epoch 11/50 | train_loss=0.6930 | train_accuracy=0.5024 | val_loss=0.6929 | val_accuracy=0.4990
+2026-09-12 23:29:05,887 | INFO | Epoch 12/50 | train_loss=0.6929 | train_accuracy=0.5033 | val_loss=0.6936 | val_accuracy=0.4994
+2026-09-12 23:37:27,487 | INFO | Epoch 13/50 | train_loss=0.6930 | train_accuracy=0.5025 | val_loss=0.6935 | val_accuracy=0.5005
+2026-09-12 23:47:38,822 | INFO | Epoch 14/50 | train_loss=0.6929 | train_accuracy=0.5029 | val_loss=0.6932 | val_accuracy=0.4987
+2026-09-12 23:55:22,350 | INFO | Epoch 15/50 | train_loss=0.6929 | train_accuracy=0.5037 | val_loss=0.6930 | val_accuracy=0.4996
+2026-09-12 23:55:22,353 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-12 23:55:22,520 | INFO | Restored best model from epoch 10 based on val_loss=0.6928
+2026-09-12 23:55:22,520 | INFO | Training finished
+2026-09-12 23:55:22,521 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sbi_over_bkg/f0010/seed1/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-12 23:55:23,179 | INFO | Starting _collect_predictions
+2026-09-12 23:55:23,179 | INFO | Dataset size = 4096
+2026-09-12 23:55:23,179 | INFO | Batch size = 1024
+2026-09-12 23:55:23,604 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f0010/seed1: best_epoch=10 val_auc=0.5069 C_ref=1.0066 chi2/ndf=0.87 (133.8 min)
+2026-09-13 00:07:36,417 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 00:07:36,508 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 00:07:36,683 | INFO | ======== Soft Load Summary ========
+2026-09-13 00:07:36,683 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 00:07:36,684 | INFO | All components loaded: NO
+2026-09-13 00:07:36,684 | INFO | --- Breakdown ---
+2026-09-13 00:07:36,684 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 00:07:36,684 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 00:07:36,685 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 00:07:36,685 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 00:07:36,685 | WARNING | Shape mismatches for 8 layers
+2026-09-13 00:07:36,685 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 00:07:36,685 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 00:07:36,685 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 00:07:36,685 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 00:07:36,685 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 00:07:36,685 | WARNING |   - ... and 3 more
+2026-09-13 00:07:36,685 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 00:07:36,685 | WARNING | • models         : 23 layers missing
+2026-09-13 00:07:36,685 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 00:07:36,685 | INFO | ===================================
+2026-09-13 00:07:36,803 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 00:07:37,031 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 00:07:37,031 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.98661      | 0.679426 |
+|               | energy       | log_normalize     | 4.4266       | 0.738096 |
+|               | eta          | normalize         | -0.000952979 | 1.09738  |
+|               | phi          | normalize_uniform | 0.00285176   | 1.81333  |
+| globals       | m4l          | log_normalize     | 5.7229       | 0.400696 |
+|               | sum_pt       | log_normalize     | 5.49082      | 0.443461 |
+|               | sum_energy   | log_normalize     | 5.97363      | 0.454828 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-13 00:07:37,031 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 00:07:37,032 | INFO | Train loader: size=34771, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 00:07:37,032 | INFO | Class distribution for train -> bkg: count=22632 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=12139 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-13 00:07:37,032 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 00:07:37,034 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-13 00:15:16,998 | INFO | Epoch 1/50 | train_loss=0.4498 | train_accuracy=0.8009 | val_loss=0.4418 | val_accuracy=0.7834
+2026-09-13 00:22:56,310 | INFO | Epoch 2/50 | train_loss=0.3863 | train_accuracy=0.8359 | val_loss=0.5021 | val_accuracy=0.7646
+2026-09-13 00:30:37,268 | INFO | Epoch 3/50 | train_loss=0.3307 | train_accuracy=0.8617 | val_loss=0.5682 | val_accuracy=0.7492
+2026-09-13 00:38:18,658 | INFO | Epoch 4/50 | train_loss=0.2752 | train_accuracy=0.8880 | val_loss=0.6588 | val_accuracy=0.7347
+2026-09-13 00:46:30,331 | INFO | Epoch 5/50 | train_loss=0.2273 | train_accuracy=0.9093 | val_loss=0.7047 | val_accuracy=0.7659
+2026-09-13 00:56:45,890 | INFO | Epoch 6/50 | train_loss=0.1897 | train_accuracy=0.9256 | val_loss=0.7921 | val_accuracy=0.7622
+2026-09-13 00:56:45,892 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 00:56:46,041 | INFO | Restored best model from epoch 1 based on val_loss=0.4418
+2026-09-13 00:56:46,041 | INFO | Training finished
+2026-09-13 00:56:46,042 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sig_over_bkg/f0010/seed2/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 00:56:46,694 | INFO | Starting _collect_predictions
+2026-09-13 00:56:46,694 | INFO | Dataset size = 4096
+2026-09-13 00:56:46,694 | INFO | Batch size = 1024
+2026-09-13 00:56:47,114 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f0010/seed2: best_epoch=1 val_auc=0.8639 C_ref=0.8503 chi2/ndf=77.15 (61.9 min)
+2026-09-13 01:09:32,365 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 01:09:32,458 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 01:09:32,636 | INFO | ======== Soft Load Summary ========
+2026-09-13 01:09:32,636 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 01:09:32,636 | INFO | All components loaded: NO
+2026-09-13 01:09:32,637 | INFO | --- Breakdown ---
+2026-09-13 01:09:32,637 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 01:09:32,637 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 01:09:32,637 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 01:09:32,637 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 01:09:32,637 | WARNING | Shape mismatches for 8 layers
+2026-09-13 01:09:32,637 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 01:09:32,637 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 01:09:32,637 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 01:09:32,637 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 01:09:32,637 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 01:09:32,637 | WARNING |   - ... and 3 more
+2026-09-13 01:09:32,637 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 01:09:32,637 | WARNING | • models         : 23 layers missing
+2026-09-13 01:09:32,637 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 01:09:32,637 | INFO | ===================================
+2026-09-13 01:09:32,805 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 01:09:33,029 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 01:09:33,029 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.81196      | 0.532761 |
+|               | energy       | log_normalize     | 4.2623       | 0.627225 |
+|               | eta          | normalize         | -5.08122e-05 | 1.1127   |
+|               | phi          | normalize_uniform | 0.000953318  | 1.81388  |
+| globals       | m4l          | log_normalize     | 5.52847      | 0.262585 |
+|               | sum_pt       | log_normalize     | 5.27762      | 0.298445 |
+|               | sum_energy   | log_normalize     | 5.77656      | 0.359552 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-13 01:09:33,029 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 01:09:33,029 | INFO | Train loader: size=46102, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 01:09:33,030 | INFO | Class distribution for train -> bkg: count=23051 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=23051 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-13 01:09:33,030 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 01:09:33,032 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-13 01:17:15,066 | INFO | Epoch 1/50 | train_loss=0.6979 | train_accuracy=0.5017 | val_loss=0.6944 | val_accuracy=0.5004
+2026-09-13 01:24:55,698 | INFO | Epoch 2/50 | train_loss=0.6940 | train_accuracy=0.5024 | val_loss=0.6932 | val_accuracy=0.4998
+2026-09-13 01:32:38,139 | INFO | Epoch 3/50 | train_loss=0.6934 | train_accuracy=0.5026 | val_loss=0.6929 | val_accuracy=0.4998
+2026-09-13 01:40:20,486 | INFO | Epoch 4/50 | train_loss=0.6932 | train_accuracy=0.5031 | val_loss=0.6928 | val_accuracy=0.4992
+2026-09-13 01:48:39,560 | INFO | Epoch 5/50 | train_loss=0.6931 | train_accuracy=0.5037 | val_loss=0.6928 | val_accuracy=0.4990
+2026-09-13 01:58:58,632 | INFO | Epoch 6/50 | train_loss=0.6931 | train_accuracy=0.5024 | val_loss=0.6933 | val_accuracy=0.4997
+2026-09-13 02:06:40,574 | INFO | Epoch 7/50 | train_loss=0.6930 | train_accuracy=0.5031 | val_loss=0.6930 | val_accuracy=0.4999
+2026-09-13 02:14:20,198 | INFO | Epoch 8/50 | train_loss=0.6930 | train_accuracy=0.5027 | val_loss=0.6928 | val_accuracy=0.4995
+2026-09-13 02:21:58,602 | INFO | Epoch 9/50 | train_loss=0.6929 | train_accuracy=0.5032 | val_loss=0.6935 | val_accuracy=0.4999
+2026-09-13 02:29:35,657 | INFO | Epoch 10/50 | train_loss=0.6929 | train_accuracy=0.5037 | val_loss=0.6929 | val_accuracy=0.5000
+2026-09-13 02:37:14,259 | INFO | Epoch 11/50 | train_loss=0.6929 | train_accuracy=0.5035 | val_loss=0.6931 | val_accuracy=0.4996
+2026-09-13 02:44:52,361 | INFO | Epoch 12/50 | train_loss=0.6929 | train_accuracy=0.5037 | val_loss=0.6935 | val_accuracy=0.5001
+2026-09-13 02:52:30,750 | INFO | Epoch 13/50 | train_loss=0.6928 | train_accuracy=0.5040 | val_loss=0.6931 | val_accuracy=0.4996
+2026-09-13 02:52:30,750 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 02:52:30,824 | INFO | Restored best model from epoch 8 based on val_loss=0.6928
+2026-09-13 02:52:30,824 | INFO | Training finished
+2026-09-13 02:52:30,825 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sbi_over_bkg/f0010/seed2/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 02:52:31,462 | INFO | Starting _collect_predictions
+2026-09-13 02:52:31,462 | INFO | Dataset size = 4096
+2026-09-13 02:52:31,462 | INFO | Batch size = 1024
+2026-09-13 02:52:31,881 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f0010/seed2: best_epoch=8 val_auc=0.5064 C_ref=0.9946 chi2/ndf=0.10 (115.1 min)
+2026-09-13 03:04:36,050 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 03:04:36,142 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 03:04:36,330 | INFO | ======== Soft Load Summary ========
+2026-09-13 03:04:36,330 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 03:04:36,330 | INFO | All components loaded: NO
+2026-09-13 03:04:36,331 | INFO | --- Breakdown ---
+2026-09-13 03:04:36,331 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 03:04:36,331 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 03:04:36,331 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 03:04:36,331 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 03:04:36,331 | WARNING | Shape mismatches for 8 layers
+2026-09-13 03:04:36,331 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 03:04:36,331 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 03:04:36,331 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 03:04:36,331 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 03:04:36,331 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 03:04:36,331 | WARNING |   - ... and 3 more
+2026-09-13 03:04:36,331 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 03:04:36,331 | WARNING | • models         : 23 layers missing
+2026-09-13 03:04:36,331 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 03:04:36,331 | INFO | ===================================
+2026-09-13 03:04:36,453 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 03:04:36,499 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 03:04:36,499 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.98783    | 0.679691 |
+|               | energy       | log_normalize     | 4.42913    | 0.738827 |
+|               | eta          | normalize         | 0.00361719 | 1.09929  |
+|               | phi          | normalize_uniform | 0.0028908  | 1.81309  |
+| globals       | m4l          | log_normalize     | 5.7241     | 0.399983 |
+|               | sum_pt       | log_normalize     | 5.492      | 0.444526 |
+|               | sum_energy   | log_normalize     | 5.97656    | 0.455542 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-13 03:04:36,499 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 03:04:36,500 | INFO | Train loader: size=104313, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 03:04:36,501 | INFO | Class distribution for train -> bkg: count=67896 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=36417 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-13 03:04:36,501 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 03:04:36,503 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-13 03:08:02,928 | INFO | Epoch 1/50 | train_loss=0.4554 | train_accuracy=0.8043 | val_loss=0.4413 | val_accuracy=0.7963
+2026-09-13 03:11:21,239 | INFO | Epoch 2/50 | train_loss=0.4422 | train_accuracy=0.8109 | val_loss=0.4447 | val_accuracy=0.7915
+2026-09-13 03:14:46,529 | INFO | Epoch 3/50 | train_loss=0.4349 | train_accuracy=0.8141 | val_loss=0.4501 | val_accuracy=0.7945
+2026-09-13 03:18:04,459 | INFO | Epoch 4/50 | train_loss=0.4308 | train_accuracy=0.8157 | val_loss=0.4485 | val_accuracy=0.7855
+2026-09-13 03:21:29,731 | INFO | Epoch 5/50 | train_loss=0.4269 | train_accuracy=0.8176 | val_loss=0.4541 | val_accuracy=0.7879
+2026-09-13 03:24:48,976 | INFO | Epoch 6/50 | train_loss=0.4228 | train_accuracy=0.8193 | val_loss=0.4574 | val_accuracy=0.7844
+2026-09-13 03:24:48,977 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 03:24:49,200 | INFO | Restored best model from epoch 1 based on val_loss=0.4413
+2026-09-13 03:24:49,200 | INFO | Training finished
+2026-09-13 03:24:49,201 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/frozen/sig_over_bkg/f0030/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 03:24:49,667 | INFO | Starting _collect_predictions
+2026-09-13 03:24:49,667 | INFO | Dataset size = 4096
+2026-09-13 03:24:49,668 | INFO | Batch size = 1024
+2026-09-13 03:24:50,084 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sig_over_bkg/f0030/seed0: best_epoch=1 val_auc=0.8641 C_ref=1.0163 chi2/ndf=12.88 (34.1 min)
+2026-09-13 03:38:44,620 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 03:38:44,711 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 03:38:45,054 | INFO | ======== Soft Load Summary ========
+2026-09-13 03:38:45,054 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 03:38:45,054 | INFO | All components loaded: NO
+2026-09-13 03:38:45,055 | INFO | --- Breakdown ---
+2026-09-13 03:38:45,055 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 03:38:45,055 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 03:38:45,055 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 03:38:45,055 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 03:38:45,055 | WARNING | Shape mismatches for 8 layers
+2026-09-13 03:38:45,055 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 03:38:45,055 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 03:38:45,055 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 03:38:45,055 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 03:38:45,055 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 03:38:45,055 | WARNING |   - ... and 3 more
+2026-09-13 03:38:45,055 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 03:38:45,056 | WARNING | • models         : 23 layers missing
+2026-09-13 03:38:45,056 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 03:38:45,056 | INFO | ===================================
+2026-09-13 03:38:45,272 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 03:38:46,125 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 03:38:46,125 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.80984    | 0.531669 |
+|               | energy       | log_normalize     | 4.26035    | 0.627613 |
+|               | eta          | normalize         | 0.00520081 | 1.11337  |
+|               | phi          | normalize_uniform | 0.00395417 | 1.81339  |
+| globals       | m4l          | log_normalize     | 5.5261     | 0.259915 |
+|               | sum_pt       | log_normalize     | 5.27562    | 0.295925 |
+|               | sum_energy   | log_normalize     | 5.77553    | 0.356403 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-13 03:38:46,125 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 03:38:46,125 | INFO | Train loader: size=138304, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 03:38:46,127 | INFO | Class distribution for train -> bkg: count=69152 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=69152 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-13 03:38:46,127 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 03:38:46,129 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-13 03:43:26,996 | INFO | Epoch 1/50 | train_loss=0.6968 | train_accuracy=0.5016 | val_loss=0.6971 | val_accuracy=0.4995
+2026-09-13 03:46:53,074 | INFO | Epoch 2/50 | train_loss=0.6948 | train_accuracy=0.5025 | val_loss=0.6936 | val_accuracy=0.5004
+2026-09-13 03:50:11,986 | INFO | Epoch 3/50 | train_loss=0.6944 | train_accuracy=0.5027 | val_loss=0.6947 | val_accuracy=0.5003
+2026-09-13 03:53:38,458 | INFO | Epoch 4/50 | train_loss=0.6937 | train_accuracy=0.5026 | val_loss=0.6937 | val_accuracy=0.5004
+2026-09-13 03:56:56,434 | INFO | Epoch 5/50 | train_loss=0.6933 | train_accuracy=0.5028 | val_loss=0.6930 | val_accuracy=0.4990
+2026-09-13 04:00:22,847 | INFO | Epoch 6/50 | train_loss=0.6930 | train_accuracy=0.5027 | val_loss=0.6929 | val_accuracy=0.4992
+2026-09-13 04:03:41,386 | INFO | Epoch 7/50 | train_loss=0.6929 | train_accuracy=0.5042 | val_loss=0.6929 | val_accuracy=0.4997
+2026-09-13 04:07:08,156 | INFO | Epoch 8/50 | train_loss=0.6929 | train_accuracy=0.5042 | val_loss=0.6929 | val_accuracy=0.4999
+2026-09-13 04:10:27,671 | INFO | Epoch 9/50 | train_loss=0.6929 | train_accuracy=0.5035 | val_loss=0.6929 | val_accuracy=0.4991
+2026-09-13 04:13:53,900 | INFO | Epoch 10/50 | train_loss=0.6929 | train_accuracy=0.5044 | val_loss=0.6928 | val_accuracy=0.5001
+2026-09-13 04:17:13,359 | INFO | Epoch 11/50 | train_loss=0.6928 | train_accuracy=0.5043 | val_loss=0.6928 | val_accuracy=0.5010
+2026-09-13 04:20:32,473 | INFO | Epoch 12/50 | train_loss=0.6927 | train_accuracy=0.5036 | val_loss=0.6929 | val_accuracy=0.4998
+2026-09-13 04:25:15,165 | INFO | Epoch 13/50 | train_loss=0.6927 | train_accuracy=0.5045 | val_loss=0.6929 | val_accuracy=0.4996
+2026-09-13 04:29:58,566 | INFO | Epoch 14/50 | train_loss=0.6928 | train_accuracy=0.5038 | val_loss=0.6928 | val_accuracy=0.4986
+2026-09-13 04:33:50,771 | INFO | Epoch 15/50 | train_loss=0.6928 | train_accuracy=0.5042 | val_loss=0.6931 | val_accuracy=0.4988
+2026-09-13 04:33:50,772 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 04:33:50,918 | INFO | Restored best model from epoch 10 based on val_loss=0.6928
+2026-09-13 04:33:50,918 | INFO | Training finished
+2026-09-13 04:33:50,919 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/frozen/sbi_over_bkg/f0030/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 04:33:51,389 | INFO | Starting _collect_predictions
+2026-09-13 04:33:51,389 | INFO | Dataset size = 4096
+2026-09-13 04:33:51,389 | INFO | Batch size = 1024
+2026-09-13 04:33:51,819 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sbi_over_bkg/f0030/seed0: best_epoch=10 val_auc=0.5068 C_ref=1.0058 chi2/ndf=1.08 (66.9 min)
+2026-09-13 04:45:37,080 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 04:45:37,172 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 04:45:37,346 | INFO | ======== Soft Load Summary ========
+2026-09-13 04:45:37,346 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 04:45:37,346 | INFO | All components loaded: NO
+2026-09-13 04:45:37,347 | INFO | --- Breakdown ---
+2026-09-13 04:45:37,347 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 04:45:37,347 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 04:45:37,347 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 04:45:37,347 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 04:45:37,347 | WARNING | Shape mismatches for 8 layers
+2026-09-13 04:45:37,347 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 04:45:37,347 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 04:45:37,347 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 04:45:37,347 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 04:45:37,347 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 04:45:37,347 | WARNING |   - ... and 3 more
+2026-09-13 04:45:37,347 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 04:45:37,348 | WARNING | • models         : 23 layers missing
+2026-09-13 04:45:37,348 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 04:45:37,348 | INFO | ===================================
+2026-09-13 04:45:37,506 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 04:45:37,694 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 04:45:37,695 | INFO | Normalization plan:
++---------------+--------------+-------------------+-------------+----------+
+| Feature Group | Feature Name | Rule              | Mean        | Std      |
++===============+==============+===================+=============+==========+
+| x             | pt           | log_normalize     | 3.98688     | 0.679046 |
+|               | energy       | log_normalize     | 4.42706     | 0.737966 |
+|               | eta          | normalize         | -0.0037315  | 1.09761  |
+|               | phi          | normalize_uniform | -0.00183982 | 1.81454  |
+| globals       | m4l          | log_normalize     | 5.72308     | 0.398585 |
+|               | sum_pt       | log_normalize     | 5.49135     | 0.442795 |
+|               | sum_energy   | log_normalize     | 5.97417     | 0.45442  |
++---------------+--------------+-------------------+-------------+----------+
+2026-09-13 04:45:37,695 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 04:45:37,695 | INFO | Train loader: size=104313, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 04:45:37,696 | INFO | Class distribution for train -> bkg: count=67896 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=36417 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-13 04:45:37,696 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 04:45:37,698 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-13 04:53:13,420 | INFO | Epoch 1/50 | train_loss=0.4711 | train_accuracy=0.7940 | val_loss=0.4385 | val_accuracy=0.7812
+2026-09-13 05:00:46,998 | INFO | Epoch 2/50 | train_loss=0.4297 | train_accuracy=0.8162 | val_loss=0.4312 | val_accuracy=0.7800
+2026-09-13 05:08:22,762 | INFO | Epoch 3/50 | train_loss=0.4141 | train_accuracy=0.8228 | val_loss=0.4472 | val_accuracy=0.7755
+2026-09-13 05:16:05,237 | INFO | Epoch 4/50 | train_loss=0.3979 | train_accuracy=0.8299 | val_loss=0.4525 | val_accuracy=0.7730
+2026-09-13 05:23:44,337 | INFO | Epoch 5/50 | train_loss=0.3794 | train_accuracy=0.8385 | val_loss=0.4630 | val_accuracy=0.7696
+2026-09-13 05:32:39,570 | INFO | Epoch 6/50 | train_loss=0.3603 | train_accuracy=0.8477 | val_loss=0.5037 | val_accuracy=0.7541
+2026-09-13 05:42:13,538 | INFO | Epoch 7/50 | train_loss=0.3400 | train_accuracy=0.8569 | val_loss=0.5180 | val_accuracy=0.7607
+2026-09-13 05:42:13,538 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 05:42:13,765 | INFO | Restored best model from epoch 2 based on val_loss=0.4312
+2026-09-13 05:42:13,765 | INFO | Training finished
+2026-09-13 05:42:13,766 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sig_over_bkg/f0030/seed1/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 05:42:14,619 | INFO | Starting _collect_predictions
+2026-09-13 05:42:14,619 | INFO | Dataset size = 4096
+2026-09-13 05:42:14,619 | INFO | Batch size = 1024
+2026-09-13 05:42:15,043 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f0030/seed1: best_epoch=2 val_auc=0.8725 C_ref=0.7580 chi2/ndf=97.17 (69.5 min)
+2026-09-13 05:55:04,831 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 05:55:04,924 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 05:55:05,103 | INFO | ======== Soft Load Summary ========
+2026-09-13 05:55:05,103 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 05:55:05,104 | INFO | All components loaded: NO
+2026-09-13 05:55:05,104 | INFO | --- Breakdown ---
+2026-09-13 05:55:05,104 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 05:55:05,104 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 05:55:05,105 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 05:55:05,105 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 05:55:05,105 | WARNING | Shape mismatches for 8 layers
+2026-09-13 05:55:05,105 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 05:55:05,105 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 05:55:05,105 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 05:55:05,105 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 05:55:05,105 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 05:55:05,105 | WARNING |   - ... and 3 more
+2026-09-13 05:55:05,105 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 05:55:05,105 | WARNING | • models         : 23 layers missing
+2026-09-13 05:55:05,105 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 05:55:05,105 | INFO | ===================================
+2026-09-13 05:55:05,318 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 05:55:05,509 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 05:55:05,509 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.81118    | 0.530848 |
+|               | energy       | log_normalize     | 4.26151    | 0.626424 |
+|               | eta          | normalize         | -0.001067  | 1.11311  |
+|               | phi          | normalize_uniform | 0.00398411 | 1.81397  |
+| globals       | m4l          | log_normalize     | 5.52626    | 0.258745 |
+|               | sum_pt       | log_normalize     | 5.2765     | 0.295675 |
+|               | sum_energy   | log_normalize     | 5.77604    | 0.355555 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-13 05:55:05,509 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 05:55:05,509 | INFO | Train loader: size=138304, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 05:55:05,511 | INFO | Class distribution for train -> bkg: count=69152 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=69152 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-13 05:55:05,511 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 05:55:05,513 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-13 06:02:45,728 | INFO | Epoch 1/50 | train_loss=0.7053 | train_accuracy=0.5004 | val_loss=0.6939 | val_accuracy=0.5002
+2026-09-13 06:10:27,833 | INFO | Epoch 2/50 | train_loss=0.6943 | train_accuracy=0.5029 | val_loss=0.6936 | val_accuracy=0.5000
+2026-09-13 06:18:07,302 | INFO | Epoch 3/50 | train_loss=0.6935 | train_accuracy=0.5018 | val_loss=0.6940 | val_accuracy=0.4997
+2026-09-13 06:25:46,832 | INFO | Epoch 4/50 | train_loss=0.6933 | train_accuracy=0.5028 | val_loss=0.6934 | val_accuracy=0.4985
+2026-09-13 06:33:28,637 | INFO | Epoch 5/50 | train_loss=0.6934 | train_accuracy=0.5018 | val_loss=0.6936 | val_accuracy=0.4986
+2026-09-13 06:42:27,535 | INFO | Epoch 6/50 | train_loss=0.6935 | train_accuracy=0.5024 | val_loss=0.6933 | val_accuracy=0.5009
+2026-09-13 06:52:05,987 | INFO | Epoch 7/50 | train_loss=0.6932 | train_accuracy=0.5039 | val_loss=0.6938 | val_accuracy=0.4988
+2026-09-13 06:59:49,141 | INFO | Epoch 8/50 | train_loss=0.6931 | train_accuracy=0.5034 | val_loss=0.6928 | val_accuracy=0.5002
+2026-09-13 07:07:30,830 | INFO | Epoch 9/50 | train_loss=0.6932 | train_accuracy=0.5026 | val_loss=0.6929 | val_accuracy=0.5008
+2026-09-13 07:15:11,847 | INFO | Epoch 10/50 | train_loss=0.6931 | train_accuracy=0.5025 | val_loss=0.6929 | val_accuracy=0.4992
+2026-09-13 07:22:55,078 | INFO | Epoch 11/50 | train_loss=0.6931 | train_accuracy=0.5027 | val_loss=0.6930 | val_accuracy=0.4993
+2026-09-13 07:30:37,081 | INFO | Epoch 12/50 | train_loss=0.6929 | train_accuracy=0.5032 | val_loss=0.6931 | val_accuracy=0.5004
+2026-09-13 07:38:20,224 | INFO | Epoch 13/50 | train_loss=0.6930 | train_accuracy=0.5023 | val_loss=0.6932 | val_accuracy=0.4987
+2026-09-13 07:38:20,226 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 07:38:20,393 | INFO | Restored best model from epoch 8 based on val_loss=0.6928
+2026-09-13 07:38:20,393 | INFO | Training finished
+2026-09-13 07:38:20,394 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sbi_over_bkg/f0030/seed1/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 07:38:21,044 | INFO | Starting _collect_predictions
+2026-09-13 07:38:21,044 | INFO | Dataset size = 4096
+2026-09-13 07:38:21,044 | INFO | Batch size = 1024
+2026-09-13 07:38:21,470 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f0030/seed1: best_epoch=8 val_auc=0.5064 C_ref=1.0073 chi2/ndf=0.61 (115.6 min)
+2026-09-13 07:50:41,850 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 07:50:41,942 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 07:50:42,120 | INFO | ======== Soft Load Summary ========
+2026-09-13 07:50:42,120 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 07:50:42,120 | INFO | All components loaded: NO
+2026-09-13 07:50:42,121 | INFO | --- Breakdown ---
+2026-09-13 07:50:42,121 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 07:50:42,121 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 07:50:42,121 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 07:50:42,121 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 07:50:42,121 | WARNING | Shape mismatches for 8 layers
+2026-09-13 07:50:42,121 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 07:50:42,121 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 07:50:42,121 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 07:50:42,121 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 07:50:42,121 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 07:50:42,121 | WARNING |   - ... and 3 more
+2026-09-13 07:50:42,121 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 07:50:42,121 | WARNING | • models         : 23 layers missing
+2026-09-13 07:50:42,121 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 07:50:42,121 | INFO | ===================================
+2026-09-13 07:50:42,245 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 07:50:42,416 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 07:50:42,416 | INFO | Normalization plan:
++---------------+--------------+-------------------+-------------+----------+
+| Feature Group | Feature Name | Rule              | Mean        | Std      |
++===============+==============+===================+=============+==========+
+| x             | pt           | log_normalize     | 3.98659     | 0.679754 |
+|               | energy       | log_normalize     | 4.42701     | 0.73893  |
+|               | eta          | normalize         | 0.000670163 | 1.09827  |
+|               | phi          | normalize_uniform | 0.00315391  | 1.81378  |
+| globals       | m4l          | log_normalize     | 5.72276     | 0.400137 |
+|               | sum_pt       | log_normalize     | 5.49066     | 0.444666 |
+|               | sum_energy   | log_normalize     | 5.97408     | 0.456093 |
++---------------+--------------+-------------------+-------------+----------+
+2026-09-13 07:50:42,416 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 07:50:42,416 | INFO | Train loader: size=104313, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 07:50:42,417 | INFO | Class distribution for train -> bkg: count=67896 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=36417 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-13 07:50:42,417 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 07:50:42,419 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-13 07:58:20,509 | INFO | Epoch 1/50 | train_loss=0.4600 | train_accuracy=0.7961 | val_loss=0.4343 | val_accuracy=0.7966
+2026-09-13 08:06:00,984 | INFO | Epoch 2/50 | train_loss=0.4272 | train_accuracy=0.8179 | val_loss=0.4424 | val_accuracy=0.7846
+2026-09-13 08:14:48,133 | INFO | Epoch 3/50 | train_loss=0.4107 | train_accuracy=0.8248 | val_loss=0.4457 | val_accuracy=0.7740
+2026-09-13 08:23:39,690 | INFO | Epoch 4/50 | train_loss=0.3917 | train_accuracy=0.8334 | val_loss=0.4600 | val_accuracy=0.7793
+2026-09-13 08:27:31,406 | INFO | Epoch 5/50 | train_loss=0.3728 | train_accuracy=0.8428 | val_loss=0.4870 | val_accuracy=0.7631
+2026-09-13 08:31:23,456 | INFO | Epoch 6/50 | train_loss=0.3506 | train_accuracy=0.8535 | val_loss=0.5069 | val_accuracy=0.7551
+2026-09-13 08:31:23,457 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 08:31:23,480 | INFO | Restored best model from epoch 1 based on val_loss=0.4343
+2026-09-13 08:31:23,480 | INFO | Training finished
+2026-09-13 08:31:23,481 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sig_over_bkg/f0030/seed2/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 08:31:23,949 | INFO | Starting _collect_predictions
+2026-09-13 08:31:23,950 | INFO | Dataset size = 4096
+2026-09-13 08:31:23,950 | INFO | Batch size = 1024
+2026-09-13 08:31:24,176 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f0030/seed2: best_epoch=1 val_auc=0.8682 C_ref=1.0248 chi2/ndf=11.73 (48.3 min)
+2026-09-13 08:38:58,969 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 08:38:59,059 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 08:38:59,234 | INFO | ======== Soft Load Summary ========
+2026-09-13 08:38:59,235 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 08:38:59,235 | INFO | All components loaded: NO
+2026-09-13 08:38:59,235 | INFO | --- Breakdown ---
+2026-09-13 08:38:59,235 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 08:38:59,235 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 08:38:59,236 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 08:38:59,236 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 08:38:59,236 | WARNING | Shape mismatches for 8 layers
+2026-09-13 08:38:59,236 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 08:38:59,236 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 08:38:59,236 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 08:38:59,236 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 08:38:59,236 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 08:38:59,236 | WARNING |   - ... and 3 more
+2026-09-13 08:38:59,236 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 08:38:59,236 | WARNING | • models         : 23 layers missing
+2026-09-13 08:38:59,236 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 08:38:59,236 | INFO | ===================================
+2026-09-13 08:38:59,405 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 08:38:59,452 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 08:38:59,452 | INFO | Normalization plan:
++---------------+--------------+-------------------+-------------+----------+
+| Feature Group | Feature Name | Rule              | Mean        | Std      |
++===============+==============+===================+=============+==========+
+| x             | pt           | log_normalize     | 3.81204     | 0.532222 |
+|               | energy       | log_normalize     | 4.26276     | 0.626673 |
+|               | eta          | normalize         | 4.17593e-05 | 1.1134   |
+|               | phi          | normalize_uniform | 0.000649553 | 1.8127   |
+| globals       | m4l          | log_normalize     | 5.52846     | 0.261735 |
+|               | sum_pt       | log_normalize     | 5.27755     | 0.298222 |
+|               | sum_energy   | log_normalize     | 5.77693     | 0.357983 |
++---------------+--------------+-------------------+-------------+----------+
+2026-09-13 08:38:59,453 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 08:38:59,453 | INFO | Train loader: size=138304, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 08:38:59,454 | INFO | Class distribution for train -> bkg: count=69152 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=69152 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-13 08:38:59,454 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 08:38:59,455 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-13 08:42:51,707 | INFO | Epoch 1/50 | train_loss=0.6978 | train_accuracy=0.5018 | val_loss=0.6938 | val_accuracy=0.5007
+2026-09-13 08:46:42,874 | INFO | Epoch 2/50 | train_loss=0.6939 | train_accuracy=0.5031 | val_loss=0.6929 | val_accuracy=0.5010
+2026-09-13 08:50:34,485 | INFO | Epoch 3/50 | train_loss=0.6933 | train_accuracy=0.5027 | val_loss=0.6928 | val_accuracy=0.5008
+2026-09-13 08:54:24,587 | INFO | Epoch 4/50 | train_loss=0.6932 | train_accuracy=0.5027 | val_loss=0.6930 | val_accuracy=0.5013
+2026-09-13 08:58:15,519 | INFO | Epoch 5/50 | train_loss=0.6932 | train_accuracy=0.5031 | val_loss=0.6929 | val_accuracy=0.5003
+2026-09-13 09:02:05,727 | INFO | Epoch 6/50 | train_loss=0.6930 | train_accuracy=0.5025 | val_loss=0.6936 | val_accuracy=0.5008
+2026-09-13 09:05:56,019 | INFO | Epoch 7/50 | train_loss=0.6931 | train_accuracy=0.5032 | val_loss=0.6928 | val_accuracy=0.5001
+2026-09-13 09:09:47,424 | INFO | Epoch 8/50 | train_loss=0.6929 | train_accuracy=0.5037 | val_loss=0.6927 | val_accuracy=0.4998
+2026-09-13 09:13:36,637 | INFO | Epoch 9/50 | train_loss=0.6930 | train_accuracy=0.5037 | val_loss=0.6928 | val_accuracy=0.5006
+2026-09-13 09:17:28,857 | INFO | Epoch 10/50 | train_loss=0.6930 | train_accuracy=0.5020 | val_loss=0.6932 | val_accuracy=0.4992
+2026-09-13 09:21:20,370 | INFO | Epoch 11/50 | train_loss=0.6930 | train_accuracy=0.5031 | val_loss=0.6928 | val_accuracy=0.4987
+2026-09-13 09:25:11,855 | INFO | Epoch 12/50 | train_loss=0.6930 | train_accuracy=0.5026 | val_loss=0.6928 | val_accuracy=0.4997
+2026-09-13 09:29:02,596 | INFO | Epoch 13/50 | train_loss=0.6931 | train_accuracy=0.5029 | val_loss=0.6934 | val_accuracy=0.4994
+2026-09-13 09:29:02,597 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 09:29:02,620 | INFO | Restored best model from epoch 8 based on val_loss=0.6927
+2026-09-13 09:29:02,620 | INFO | Training finished
+2026-09-13 09:29:02,621 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sbi_over_bkg/f0030/seed2/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 09:29:03,100 | INFO | Starting _collect_predictions
+2026-09-13 09:29:03,100 | INFO | Dataset size = 4096
+2026-09-13 09:29:03,100 | INFO | Batch size = 1024
+2026-09-13 09:29:03,325 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f0030/seed2: best_epoch=8 val_auc=0.5060 C_ref=0.9900 chi2/ndf=0.57 (57.4 min)
+2026-09-13 09:36:21,488 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 09:36:21,579 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 09:36:21,774 | INFO | ======== Soft Load Summary ========
+2026-09-13 09:36:21,774 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 09:36:21,775 | INFO | All components loaded: NO
+2026-09-13 09:36:21,775 | INFO | --- Breakdown ---
+2026-09-13 09:36:21,775 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 09:36:21,775 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 09:36:21,775 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 09:36:21,776 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 09:36:21,776 | WARNING | Shape mismatches for 8 layers
+2026-09-13 09:36:21,776 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 09:36:21,776 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 09:36:21,776 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 09:36:21,776 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 09:36:21,776 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 09:36:21,776 | WARNING |   - ... and 3 more
+2026-09-13 09:36:21,776 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 09:36:21,776 | WARNING | • models         : 23 layers missing
+2026-09-13 09:36:21,776 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 09:36:21,776 | INFO | ===================================
+2026-09-13 09:36:21,926 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 09:36:21,983 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 09:36:21,983 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.98686    | 0.679313 |
+|               | energy       | log_normalize     | 4.42744    | 0.738507 |
+|               | eta          | normalize         | 0.0021108  | 1.09821  |
+|               | phi          | normalize_uniform | 0.00100433 | 1.81335  |
+| globals       | m4l          | log_normalize     | 5.7232     | 0.399941 |
+|               | sum_pt       | log_normalize     | 5.49097    | 0.444    |
+|               | sum_energy   | log_normalize     | 5.97462    | 0.455477 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-13 09:36:21,983 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 09:36:21,983 | INFO | Train loader: size=347710, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 09:36:21,985 | INFO | Class distribution for train -> bkg: count=226320 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=121390 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-13 09:36:21,985 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 09:36:21,987 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-13 09:38:00,137 | INFO | Epoch 1/50 | train_loss=0.4565 | train_accuracy=0.8043 | val_loss=0.4441 | val_accuracy=0.7945
+2026-09-13 09:39:38,198 | INFO | Epoch 2/50 | train_loss=0.4456 | train_accuracy=0.8106 | val_loss=0.4450 | val_accuracy=0.7913
+2026-09-13 09:41:16,133 | INFO | Epoch 3/50 | train_loss=0.4439 | train_accuracy=0.8107 | val_loss=0.4385 | val_accuracy=0.7972
+2026-09-13 09:42:54,323 | INFO | Epoch 4/50 | train_loss=0.4411 | train_accuracy=0.8125 | val_loss=0.4479 | val_accuracy=0.7790
+2026-09-13 09:44:32,150 | INFO | Epoch 5/50 | train_loss=0.4394 | train_accuracy=0.8130 | val_loss=0.4438 | val_accuracy=0.7921
+2026-09-13 09:46:09,157 | INFO | Epoch 6/50 | train_loss=0.4376 | train_accuracy=0.8138 | val_loss=0.4372 | val_accuracy=0.7919
+2026-09-13 09:47:46,049 | INFO | Epoch 7/50 | train_loss=0.4372 | train_accuracy=0.8141 | val_loss=0.4409 | val_accuracy=0.7840
+2026-09-13 09:49:22,758 | INFO | Epoch 8/50 | train_loss=0.4352 | train_accuracy=0.8147 | val_loss=0.4358 | val_accuracy=0.7863
+2026-09-13 09:51:00,340 | INFO | Epoch 9/50 | train_loss=0.4339 | train_accuracy=0.8152 | val_loss=0.4404 | val_accuracy=0.7851
+2026-09-13 09:52:38,769 | INFO | Epoch 10/50 | train_loss=0.4338 | train_accuracy=0.8154 | val_loss=0.4322 | val_accuracy=0.7965
+2026-09-13 09:54:16,984 | INFO | Epoch 11/50 | train_loss=0.4328 | train_accuracy=0.8159 | val_loss=0.4410 | val_accuracy=0.7845
+2026-09-13 09:55:54,978 | INFO | Epoch 12/50 | train_loss=0.4325 | train_accuracy=0.8157 | val_loss=0.4349 | val_accuracy=0.7872
+2026-09-13 09:57:33,002 | INFO | Epoch 13/50 | train_loss=0.4307 | train_accuracy=0.8171 | val_loss=0.4468 | val_accuracy=0.7804
+2026-09-13 09:59:10,030 | INFO | Epoch 14/50 | train_loss=0.4300 | train_accuracy=0.8169 | val_loss=0.4438 | val_accuracy=0.7800
+2026-09-13 10:00:47,116 | INFO | Epoch 15/50 | train_loss=0.4292 | train_accuracy=0.8173 | val_loss=0.4394 | val_accuracy=0.7840
+2026-09-13 10:00:47,116 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 10:00:47,140 | INFO | Restored best model from epoch 10 based on val_loss=0.4322
+2026-09-13 10:00:47,140 | INFO | Training finished
+2026-09-13 10:00:47,141 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/frozen/sig_over_bkg/f0100/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 10:00:47,443 | INFO | Starting _collect_predictions
+2026-09-13 10:00:47,443 | INFO | Dataset size = 4096
+2026-09-13 10:00:47,443 | INFO | Batch size = 1024
+2026-09-13 10:00:47,667 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sig_over_bkg/f0100/seed0: best_epoch=10 val_auc=0.8697 C_ref=0.9295 chi2/ndf=58.56 (32.0 min)
+2026-09-13 10:08:21,852 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 10:08:21,943 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 10:08:22,119 | INFO | ======== Soft Load Summary ========
+2026-09-13 10:08:22,119 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 10:08:22,119 | INFO | All components loaded: NO
+2026-09-13 10:08:22,120 | INFO | --- Breakdown ---
+2026-09-13 10:08:22,120 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 10:08:22,120 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 10:08:22,120 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 10:08:22,120 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 10:08:22,120 | WARNING | Shape mismatches for 8 layers
+2026-09-13 10:08:22,120 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 10:08:22,120 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 10:08:22,120 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 10:08:22,120 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 10:08:22,120 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 10:08:22,120 | WARNING |   - ... and 3 more
+2026-09-13 10:08:22,120 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 10:08:22,121 | WARNING | • models         : 23 layers missing
+2026-09-13 10:08:22,121 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 10:08:22,121 | INFO | ===================================
+2026-09-13 10:08:22,302 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 10:08:22,366 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 10:08:22,367 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.81118    | 0.531703 |
+|               | energy       | log_normalize     | 4.26226    | 0.628747 |
+|               | eta          | normalize         | 0.00374292 | 1.1142   |
+|               | phi          | normalize_uniform | 0.00147381 | 1.81312  |
+| globals       | m4l          | log_normalize     | 5.52675    | 0.259837 |
+|               | sum_pt       | log_normalize     | 5.27715    | 0.295785 |
+|               | sum_energy   | log_normalize     | 5.77779    | 0.35728  |
++---------------+--------------+-------------------+------------+----------+
+2026-09-13 10:08:22,367 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 10:08:22,367 | INFO | Train loader: size=461012, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 10:08:22,369 | INFO | Class distribution for train -> bkg: count=230506 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=230506 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-13 10:08:22,369 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 10:08:22,371 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-13 10:09:59,067 | INFO | Epoch 1/50 | train_loss=0.6969 | train_accuracy=0.5022 | val_loss=0.6949 | val_accuracy=0.4998
+2026-09-13 10:11:35,540 | INFO | Epoch 2/50 | train_loss=0.6949 | train_accuracy=0.5020 | val_loss=0.6970 | val_accuracy=0.5000
+2026-09-13 10:13:12,185 | INFO | Epoch 3/50 | train_loss=0.6945 | train_accuracy=0.5025 | val_loss=0.6953 | val_accuracy=0.5002
+2026-09-13 10:14:48,595 | INFO | Epoch 4/50 | train_loss=0.6938 | train_accuracy=0.5024 | val_loss=0.6932 | val_accuracy=0.4992
+2026-09-13 10:16:25,347 | INFO | Epoch 5/50 | train_loss=0.6933 | train_accuracy=0.5023 | val_loss=0.6930 | val_accuracy=0.4989
+2026-09-13 10:18:02,370 | INFO | Epoch 6/50 | train_loss=0.6931 | train_accuracy=0.5035 | val_loss=0.6930 | val_accuracy=0.5003
+2026-09-13 10:19:39,535 | INFO | Epoch 7/50 | train_loss=0.6929 | train_accuracy=0.5029 | val_loss=0.6929 | val_accuracy=0.4994
+2026-09-13 10:21:17,319 | INFO | Epoch 8/50 | train_loss=0.6929 | train_accuracy=0.5039 | val_loss=0.6933 | val_accuracy=0.4994
+2026-09-13 10:22:55,274 | INFO | Epoch 9/50 | train_loss=0.6929 | train_accuracy=0.5052 | val_loss=0.6928 | val_accuracy=0.4987
+2026-09-13 10:24:32,875 | INFO | Epoch 10/50 | train_loss=0.6927 | train_accuracy=0.5047 | val_loss=0.6928 | val_accuracy=0.5006
+2026-09-13 10:26:10,702 | INFO | Epoch 11/50 | train_loss=0.6928 | train_accuracy=0.5045 | val_loss=0.6929 | val_accuracy=0.5001
+2026-09-13 10:27:48,853 | INFO | Epoch 12/50 | train_loss=0.6927 | train_accuracy=0.5035 | val_loss=0.6929 | val_accuracy=0.5000
+2026-09-13 10:29:26,401 | INFO | Epoch 13/50 | train_loss=0.6927 | train_accuracy=0.5043 | val_loss=0.6928 | val_accuracy=0.4991
+2026-09-13 10:31:04,506 | INFO | Epoch 14/50 | train_loss=0.6930 | train_accuracy=0.5033 | val_loss=0.6931 | val_accuracy=0.4994
+2026-09-13 10:31:04,506 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 10:31:04,530 | INFO | Restored best model from epoch 9 based on val_loss=0.6928
+2026-09-13 10:31:04,530 | INFO | Training finished
+2026-09-13 10:31:04,530 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/frozen/sbi_over_bkg/f0100/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 10:31:04,833 | INFO | Starting _collect_predictions
+2026-09-13 10:31:04,833 | INFO | Dataset size = 4096
+2026-09-13 10:31:04,833 | INFO | Batch size = 1024
+2026-09-13 10:31:05,056 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sbi_over_bkg/f0100/seed0: best_epoch=9 val_auc=0.5065 C_ref=1.0043 chi2/ndf=0.77 (30.0 min)
+2026-09-13 10:38:24,229 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 10:38:24,320 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 10:38:24,493 | INFO | ======== Soft Load Summary ========
+2026-09-13 10:38:24,493 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 10:38:24,493 | INFO | All components loaded: NO
+2026-09-13 10:38:24,493 | INFO | --- Breakdown ---
+2026-09-13 10:38:24,493 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 10:38:24,494 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 10:38:24,494 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 10:38:24,494 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 10:38:24,494 | WARNING | Shape mismatches for 8 layers
+2026-09-13 10:38:24,494 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 10:38:24,494 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 10:38:24,494 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 10:38:24,494 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 10:38:24,494 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 10:38:24,494 | WARNING |   - ... and 3 more
+2026-09-13 10:38:24,494 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 10:38:24,494 | WARNING | • models         : 23 layers missing
+2026-09-13 10:38:24,494 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 10:38:24,494 | INFO | ===================================
+2026-09-13 10:38:24,643 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 10:38:24,701 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 10:38:24,701 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.98719      | 0.678665 |
+|               | energy       | log_normalize     | 4.42796      | 0.738525 |
+|               | eta          | normalize         | -0.000223594 | 1.09848  |
+|               | phi          | normalize_uniform | -0.00094655  | 1.81372  |
+| globals       | m4l          | log_normalize     | 5.7232       | 0.399183 |
+|               | sum_pt       | log_normalize     | 5.49122      | 0.443187 |
+|               | sum_energy   | log_normalize     | 5.97494      | 0.455771 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-13 10:38:24,701 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 10:38:24,701 | INFO | Train loader: size=347710, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 10:38:24,703 | INFO | Class distribution for train -> bkg: count=226320 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=121390 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-13 10:38:24,703 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 10:38:24,705 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-13 10:42:15,410 | INFO | Epoch 1/50 | train_loss=0.4707 | train_accuracy=0.7961 | val_loss=0.4297 | val_accuracy=0.7887
+2026-09-13 10:46:05,969 | INFO | Epoch 2/50 | train_loss=0.4352 | train_accuracy=0.8153 | val_loss=0.4283 | val_accuracy=0.7810
+2026-09-13 10:49:56,195 | INFO | Epoch 3/50 | train_loss=0.4274 | train_accuracy=0.8190 | val_loss=0.4270 | val_accuracy=0.7782
+2026-09-13 10:53:47,692 | INFO | Epoch 4/50 | train_loss=0.4221 | train_accuracy=0.8206 | val_loss=0.4293 | val_accuracy=0.7721
+2026-09-13 10:57:38,581 | INFO | Epoch 5/50 | train_loss=0.4162 | train_accuracy=0.8228 | val_loss=0.4289 | val_accuracy=0.7675
+2026-09-13 11:01:29,667 | INFO | Epoch 6/50 | train_loss=0.4133 | train_accuracy=0.8239 | val_loss=0.4310 | val_accuracy=0.7675
+2026-09-13 11:05:21,382 | INFO | Epoch 7/50 | train_loss=0.4079 | train_accuracy=0.8260 | val_loss=0.4317 | val_accuracy=0.7665
+2026-09-13 11:09:13,011 | INFO | Epoch 8/50 | train_loss=0.4035 | train_accuracy=0.8282 | val_loss=0.4323 | val_accuracy=0.7684
+2026-09-13 11:09:13,011 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 11:09:13,034 | INFO | Restored best model from epoch 3 based on val_loss=0.4270
+2026-09-13 11:09:13,035 | INFO | Training finished
+2026-09-13 11:09:13,035 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sig_over_bkg/f0100/seed1/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 11:09:13,514 | INFO | Starting _collect_predictions
+2026-09-13 11:09:13,514 | INFO | Dataset size = 4096
+2026-09-13 11:09:13,514 | INFO | Batch size = 1024
+2026-09-13 11:09:13,741 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f0100/seed1: best_epoch=3 val_auc=0.8789 C_ref=0.8463 chi2/ndf=38.22 (38.7 min)
+2026-09-13 11:17:04,580 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 11:17:04,671 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 11:17:04,848 | INFO | ======== Soft Load Summary ========
+2026-09-13 11:17:04,848 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 11:17:04,848 | INFO | All components loaded: NO
+2026-09-13 11:17:04,849 | INFO | --- Breakdown ---
+2026-09-13 11:17:04,849 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 11:17:04,849 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 11:17:04,849 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 11:17:04,849 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 11:17:04,849 | WARNING | Shape mismatches for 8 layers
+2026-09-13 11:17:04,850 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 11:17:04,850 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 11:17:04,850 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 11:17:04,850 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 11:17:04,850 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 11:17:04,850 | WARNING |   - ... and 3 more
+2026-09-13 11:17:04,850 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 11:17:04,850 | WARNING | • models         : 23 layers missing
+2026-09-13 11:17:04,850 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 11:17:04,850 | INFO | ===================================
+2026-09-13 11:17:05,052 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 11:17:05,130 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 11:17:05,130 | INFO | Normalization plan:
++---------------+--------------+-------------------+-------------+----------+
+| Feature Group | Feature Name | Rule              | Mean        | Std      |
++===============+==============+===================+=============+==========+
+| x             | pt           | log_normalize     | 3.81063     | 0.53229  |
+|               | energy       | log_normalize     | 4.2619      | 0.628308 |
+|               | eta          | normalize         | 0.000663747 | 1.11446  |
+|               | phi          | normalize_uniform | 0.00265137  | 1.81299  |
+| globals       | m4l          | log_normalize     | 5.52656     | 0.260195 |
+|               | sum_pt       | log_normalize     | 5.27648     | 0.297141 |
+|               | sum_energy   | log_normalize     | 5.77709     | 0.35703  |
++---------------+--------------+-------------------+-------------+----------+
+2026-09-13 11:17:05,130 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 11:17:05,130 | INFO | Train loader: size=461012, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 11:17:05,133 | INFO | Class distribution for train -> bkg: count=230506 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=230506 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-13 11:17:05,133 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 11:17:05,134 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-13 11:20:56,581 | INFO | Epoch 1/50 | train_loss=0.7050 | train_accuracy=0.5011 | val_loss=0.6944 | val_accuracy=0.4999
+2026-09-13 11:24:48,461 | INFO | Epoch 2/50 | train_loss=0.6944 | train_accuracy=0.5020 | val_loss=0.6940 | val_accuracy=0.4985
+2026-09-13 11:28:39,258 | INFO | Epoch 3/50 | train_loss=0.6937 | train_accuracy=0.5022 | val_loss=0.6930 | val_accuracy=0.5002
+2026-09-13 11:32:30,079 | INFO | Epoch 4/50 | train_loss=0.6935 | train_accuracy=0.5019 | val_loss=0.6934 | val_accuracy=0.5001
+2026-09-13 11:36:20,646 | INFO | Epoch 5/50 | train_loss=0.6933 | train_accuracy=0.5031 | val_loss=0.6930 | val_accuracy=0.5003
+2026-09-13 11:40:12,742 | INFO | Epoch 6/50 | train_loss=0.6932 | train_accuracy=0.5031 | val_loss=0.6940 | val_accuracy=0.5002
+2026-09-13 11:44:05,067 | INFO | Epoch 7/50 | train_loss=0.6932 | train_accuracy=0.5019 | val_loss=0.6942 | val_accuracy=0.4991
+2026-09-13 11:47:55,388 | INFO | Epoch 8/50 | train_loss=0.6933 | train_accuracy=0.5027 | val_loss=0.6931 | val_accuracy=0.5002
+2026-09-13 11:51:45,636 | INFO | Epoch 9/50 | train_loss=0.6931 | train_accuracy=0.5035 | val_loss=0.6940 | val_accuracy=0.4983
+2026-09-13 11:55:36,671 | INFO | Epoch 10/50 | train_loss=0.6932 | train_accuracy=0.5032 | val_loss=0.6936 | val_accuracy=0.4980
+2026-09-13 11:55:36,671 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 11:55:36,696 | INFO | Restored best model from epoch 5 based on val_loss=0.6930
+2026-09-13 11:55:36,696 | INFO | Training finished
+2026-09-13 11:55:36,697 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sbi_over_bkg/f0100/seed1/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 11:55:37,171 | INFO | Starting _collect_predictions
+2026-09-13 11:55:37,171 | INFO | Dataset size = 4096
+2026-09-13 11:55:37,171 | INFO | Batch size = 1024
+2026-09-13 11:55:37,401 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f0100/seed1: best_epoch=5 val_auc=0.5054 C_ref=0.9972 chi2/ndf=0.98 (46.0 min)
+2026-09-13 12:03:07,431 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 12:03:07,522 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 12:03:07,718 | INFO | ======== Soft Load Summary ========
+2026-09-13 12:03:07,718 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 12:03:07,718 | INFO | All components loaded: NO
+2026-09-13 12:03:07,719 | INFO | --- Breakdown ---
+2026-09-13 12:03:07,719 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 12:03:07,719 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 12:03:07,719 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 12:03:07,719 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 12:03:07,719 | WARNING | Shape mismatches for 8 layers
+2026-09-13 12:03:07,719 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 12:03:07,719 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 12:03:07,719 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 12:03:07,719 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 12:03:07,719 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 12:03:07,719 | WARNING |   - ... and 3 more
+2026-09-13 12:03:07,719 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 12:03:07,719 | WARNING | • models         : 23 layers missing
+2026-09-13 12:03:07,719 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 12:03:07,719 | INFO | ===================================
+2026-09-13 12:03:07,867 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 12:03:07,924 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 12:03:07,924 | INFO | Normalization plan:
++---------------+--------------+-------------------+-------------+----------+
+| Feature Group | Feature Name | Rule              | Mean        | Std      |
++===============+==============+===================+=============+==========+
+| x             | pt           | log_normalize     | 3.98667     | 0.678882 |
+|               | energy       | log_normalize     | 4.42671     | 0.738427 |
+|               | eta          | normalize         | 0.000543537 | 1.09754  |
+|               | phi          | normalize_uniform | 0.00180264  | 1.81397  |
+| globals       | m4l          | log_normalize     | 5.72291     | 0.39922  |
+|               | sum_pt       | log_normalize     | 5.49077     | 0.443442 |
+|               | sum_energy   | log_normalize     | 5.97403     | 0.454819 |
++---------------+--------------+-------------------+-------------+----------+
+2026-09-13 12:03:07,924 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 12:03:07,924 | INFO | Train loader: size=347710, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 12:03:07,927 | INFO | Class distribution for train -> bkg: count=226320 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=121390 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-13 12:03:07,927 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 12:03:07,928 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-13 12:06:58,225 | INFO | Epoch 1/50 | train_loss=0.4641 | train_accuracy=0.7938 | val_loss=0.4443 | val_accuracy=0.7937
+2026-09-13 12:10:48,949 | INFO | Epoch 2/50 | train_loss=0.4374 | train_accuracy=0.8138 | val_loss=0.4348 | val_accuracy=0.7899
+2026-09-13 12:14:39,815 | INFO | Epoch 3/50 | train_loss=0.4308 | train_accuracy=0.8171 | val_loss=0.4379 | val_accuracy=0.7816
+2026-09-13 12:18:30,787 | INFO | Epoch 4/50 | train_loss=0.4268 | train_accuracy=0.8185 | val_loss=0.4328 | val_accuracy=0.7772
+2026-09-13 12:22:21,704 | INFO | Epoch 5/50 | train_loss=0.4229 | train_accuracy=0.8202 | val_loss=0.4379 | val_accuracy=0.7744
+2026-09-13 12:26:11,850 | INFO | Epoch 6/50 | train_loss=0.4202 | train_accuracy=0.8212 | val_loss=0.4365 | val_accuracy=0.7788
+2026-09-13 12:30:01,411 | INFO | Epoch 7/50 | train_loss=0.4159 | train_accuracy=0.8228 | val_loss=0.4302 | val_accuracy=0.7836
+2026-09-13 12:33:52,019 | INFO | Epoch 8/50 | train_loss=0.4122 | train_accuracy=0.8241 | val_loss=0.4365 | val_accuracy=0.7724
+2026-09-13 12:37:42,793 | INFO | Epoch 9/50 | train_loss=0.4088 | train_accuracy=0.8257 | val_loss=0.4371 | val_accuracy=0.7672
+2026-09-13 12:41:32,430 | INFO | Epoch 10/50 | train_loss=0.4045 | train_accuracy=0.8268 | val_loss=0.4424 | val_accuracy=0.7728
+2026-09-13 12:45:23,624 | INFO | Epoch 11/50 | train_loss=0.3986 | train_accuracy=0.8297 | val_loss=0.4410 | val_accuracy=0.7658
+2026-09-13 12:49:13,372 | INFO | Epoch 12/50 | train_loss=0.3940 | train_accuracy=0.8318 | val_loss=0.4515 | val_accuracy=0.7660
+2026-09-13 12:49:13,373 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 12:49:13,396 | INFO | Restored best model from epoch 7 based on val_loss=0.4302
+2026-09-13 12:49:13,396 | INFO | Training finished
+2026-09-13 12:49:13,397 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sig_over_bkg/f0100/seed2/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 12:49:13,873 | INFO | Starting _collect_predictions
+2026-09-13 12:49:13,873 | INFO | Dataset size = 4096
+2026-09-13 12:49:13,874 | INFO | Batch size = 1024
+2026-09-13 12:49:14,099 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sig_over_bkg/f0100/seed2: best_epoch=7 val_auc=0.8740 C_ref=0.8193 chi2/ndf=102.39 (53.9 min)
+2026-09-13 12:57:00,105 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 12:57:00,195 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 12:57:00,385 | INFO | ======== Soft Load Summary ========
+2026-09-13 12:57:00,385 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 12:57:00,385 | INFO | All components loaded: NO
+2026-09-13 12:57:00,386 | INFO | --- Breakdown ---
+2026-09-13 12:57:00,386 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 12:57:00,386 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 12:57:00,386 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 12:57:00,386 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 12:57:00,386 | WARNING | Shape mismatches for 8 layers
+2026-09-13 12:57:00,386 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 12:57:00,386 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 12:57:00,386 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 12:57:00,386 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 12:57:00,386 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 12:57:00,386 | WARNING |   - ... and 3 more
+2026-09-13 12:57:00,386 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 12:57:00,386 | WARNING | • models         : 23 layers missing
+2026-09-13 12:57:00,386 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 12:57:00,386 | INFO | ===================================
+2026-09-13 12:57:00,590 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 12:57:00,657 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 12:57:00,657 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.81051    | 0.532688 |
+|               | energy       | log_normalize     | 4.26161    | 0.627601 |
+|               | eta          | normalize         | 0.00196005 | 1.1141   |
+|               | phi          | normalize_uniform | 0.00394717 | 1.81277  |
+| globals       | m4l          | log_normalize     | 5.52739    | 0.261195 |
+|               | sum_pt       | log_normalize     | 5.2765     | 0.297637 |
+|               | sum_energy   | log_normalize     | 5.77657    | 0.357195 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-13 12:57:00,657 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 12:57:00,657 | INFO | Train loader: size=461012, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 12:57:00,660 | INFO | Class distribution for train -> bkg: count=230506 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=230506 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-13 12:57:00,660 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 12:57:00,661 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-13 13:00:51,918 | INFO | Epoch 1/50 | train_loss=0.6976 | train_accuracy=0.5021 | val_loss=0.6953 | val_accuracy=0.5005
+2026-09-13 13:04:43,895 | INFO | Epoch 2/50 | train_loss=0.6941 | train_accuracy=0.5018 | val_loss=0.6932 | val_accuracy=0.5002
+2026-09-13 13:08:33,551 | INFO | Epoch 3/50 | train_loss=0.6934 | train_accuracy=0.5030 | val_loss=0.6930 | val_accuracy=0.4999
+2026-09-13 13:12:24,984 | INFO | Epoch 4/50 | train_loss=0.6933 | train_accuracy=0.5028 | val_loss=0.6930 | val_accuracy=0.4995
+2026-09-13 13:16:15,073 | INFO | Epoch 5/50 | train_loss=0.6932 | train_accuracy=0.5032 | val_loss=0.6928 | val_accuracy=0.4987
+2026-09-13 13:20:05,714 | INFO | Epoch 6/50 | train_loss=0.6933 | train_accuracy=0.5029 | val_loss=0.6933 | val_accuracy=0.5001
+2026-09-13 13:23:57,266 | INFO | Epoch 7/50 | train_loss=0.6933 | train_accuracy=0.5027 | val_loss=0.6932 | val_accuracy=0.4992
+2026-09-13 13:27:48,779 | INFO | Epoch 8/50 | train_loss=0.6932 | train_accuracy=0.5029 | val_loss=0.6928 | val_accuracy=0.4994
+2026-09-13 13:31:40,141 | INFO | Epoch 9/50 | train_loss=0.6930 | train_accuracy=0.5038 | val_loss=0.6928 | val_accuracy=0.4995
+2026-09-13 13:35:31,690 | INFO | Epoch 10/50 | train_loss=0.6930 | train_accuracy=0.5043 | val_loss=0.6928 | val_accuracy=0.4996
+2026-09-13 13:39:23,079 | INFO | Epoch 11/50 | train_loss=0.6930 | train_accuracy=0.5030 | val_loss=0.6928 | val_accuracy=0.4994
+2026-09-13 13:43:13,827 | INFO | Epoch 12/50 | train_loss=0.6930 | train_accuracy=0.5038 | val_loss=0.6927 | val_accuracy=0.4983
+2026-09-13 13:47:04,660 | INFO | Epoch 13/50 | train_loss=0.6930 | train_accuracy=0.5033 | val_loss=0.6932 | val_accuracy=0.4992
+2026-09-13 13:50:56,489 | INFO | Epoch 14/50 | train_loss=0.6929 | train_accuracy=0.5031 | val_loss=0.6928 | val_accuracy=0.5001
+2026-09-13 13:54:48,750 | INFO | Epoch 15/50 | train_loss=0.6929 | train_accuracy=0.5042 | val_loss=0.6928 | val_accuracy=0.4999
+2026-09-13 13:58:40,539 | INFO | Epoch 16/50 | train_loss=0.6929 | train_accuracy=0.5042 | val_loss=0.6928 | val_accuracy=0.4989
+2026-09-13 14:02:31,575 | INFO | Epoch 17/50 | train_loss=0.6929 | train_accuracy=0.5033 | val_loss=0.6929 | val_accuracy=0.4991
+2026-09-13 14:02:31,575 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 14:02:31,599 | INFO | Restored best model from epoch 12 based on val_loss=0.6927
+2026-09-13 14:02:31,599 | INFO | Training finished
+2026-09-13 14:02:31,599 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/pretrained/sbi_over_bkg/f0100/seed2/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 14:02:32,077 | INFO | Starting _collect_predictions
+2026-09-13 14:02:32,077 | INFO | Dataset size = 4096
+2026-09-13 14:02:32,077 | INFO | Batch size = 1024
+2026-09-13 14:02:32,304 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] pretrained/sbi_over_bkg/f0100/seed2: best_epoch=12 val_auc=0.5070 C_ref=0.9969 chi2/ndf=0.23 (73.1 min)
+2026-09-13 14:10:05,951 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 14:10:06,042 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 14:10:06,268 | INFO | ======== Soft Load Summary ========
+2026-09-13 14:10:06,269 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 14:10:06,269 | INFO | All components loaded: NO
+2026-09-13 14:10:06,269 | INFO | --- Breakdown ---
+2026-09-13 14:10:06,269 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 14:10:06,270 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 14:10:06,270 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 14:10:06,270 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 14:10:06,270 | WARNING | Shape mismatches for 8 layers
+2026-09-13 14:10:06,270 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 14:10:06,270 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 14:10:06,270 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 14:10:06,270 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 14:10:06,270 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 14:10:06,270 | WARNING |   - ... and 3 more
+2026-09-13 14:10:06,270 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 14:10:06,270 | WARNING | • models         : 23 layers missing
+2026-09-13 14:10:06,270 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 14:10:06,270 | INFO | ===================================
+2026-09-13 14:10:06,520 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 14:10:06,682 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 14:10:06,682 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.9867       | 0.678774 |
+|               | energy       | log_normalize     | 4.42699      | 0.738253 |
+|               | eta          | normalize         | 0.00214376   | 1.09782  |
+|               | phi          | normalize_uniform | -9.31048e-05 | 1.81363  |
+| globals       | m4l          | log_normalize     | 5.72289      | 0.399467 |
+|               | sum_pt       | log_normalize     | 5.49073      | 0.443431 |
+|               | sum_energy   | log_normalize     | 5.97422      | 0.454944 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-13 14:10:06,682 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 14:10:06,682 | INFO | Train loader: size=1043131, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 14:10:06,688 | INFO | Class distribution for train -> bkg: count=678959 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=364172 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-13 14:10:06,688 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 14:10:06,689 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-13 14:11:43,296 | INFO | Epoch 1/50 | train_loss=0.4592 | train_accuracy=0.8028 | val_loss=0.4509 | val_accuracy=0.7932
+2026-09-13 14:13:19,674 | INFO | Epoch 2/50 | train_loss=0.4493 | train_accuracy=0.8084 | val_loss=0.4544 | val_accuracy=0.7850
+2026-09-13 14:14:57,345 | INFO | Epoch 3/50 | train_loss=0.4483 | train_accuracy=0.8087 | val_loss=0.4350 | val_accuracy=0.7934
+2026-09-13 14:16:35,855 | INFO | Epoch 4/50 | train_loss=0.4462 | train_accuracy=0.8097 | val_loss=0.4435 | val_accuracy=0.7870
+2026-09-13 14:18:14,305 | INFO | Epoch 5/50 | train_loss=0.4450 | train_accuracy=0.8102 | val_loss=0.4438 | val_accuracy=0.7874
+2026-09-13 14:19:52,490 | INFO | Epoch 6/50 | train_loss=0.4445 | train_accuracy=0.8101 | val_loss=0.4468 | val_accuracy=0.7915
+2026-09-13 14:21:30,627 | INFO | Epoch 7/50 | train_loss=0.4442 | train_accuracy=0.8105 | val_loss=0.4451 | val_accuracy=0.7864
+2026-09-13 14:23:07,151 | INFO | Epoch 8/50 | train_loss=0.4424 | train_accuracy=0.8114 | val_loss=0.4425 | val_accuracy=0.7835
+2026-09-13 14:23:07,152 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 14:23:07,175 | INFO | Restored best model from epoch 3 based on val_loss=0.4350
+2026-09-13 14:23:07,175 | INFO | Training finished
+2026-09-13 14:23:07,175 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/frozen/sig_over_bkg/f0300/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 14:23:07,476 | INFO | Starting _collect_predictions
+2026-09-13 14:23:07,476 | INFO | Dataset size = 4096
+2026-09-13 14:23:07,476 | INFO | Batch size = 1024
+2026-09-13 14:23:07,703 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sig_over_bkg/f0300/seed0: best_epoch=3 val_auc=0.8687 C_ref=0.9549 chi2/ndf=32.97 (21.2 min)
+2026-09-13 14:31:16,037 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 14:31:16,127 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 14:31:16,300 | INFO | ======== Soft Load Summary ========
+2026-09-13 14:31:16,300 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 14:31:16,300 | INFO | All components loaded: NO
+2026-09-13 14:31:16,301 | INFO | --- Breakdown ---
+2026-09-13 14:31:16,301 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 14:31:16,301 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 14:31:16,301 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 14:31:16,301 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 14:31:16,301 | WARNING | Shape mismatches for 8 layers
+2026-09-13 14:31:16,301 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 14:31:16,301 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 14:31:16,301 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 14:31:16,301 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 14:31:16,301 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 14:31:16,301 | WARNING |   - ... and 3 more
+2026-09-13 14:31:16,301 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 14:31:16,301 | WARNING | • models         : 23 layers missing
+2026-09-13 14:31:16,301 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 14:31:16,301 | INFO | ===================================
+2026-09-13 14:31:16,642 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 14:31:16,842 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 14:31:16,843 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.8112     | 0.531766 |
+|               | energy       | log_normalize     | 4.26234    | 0.628546 |
+|               | eta          | normalize         | 0.00263837 | 1.11425  |
+|               | phi          | normalize_uniform | 0.00233675 | 1.81298  |
+| globals       | m4l          | log_normalize     | 5.52714    | 0.260758 |
+|               | sum_pt       | log_normalize     | 5.27706    | 0.296473 |
+|               | sum_energy   | log_normalize     | 5.77768    | 0.357367 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-13 14:31:16,843 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 14:31:16,843 | INFO | Train loader: size=1383034, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 14:31:16,849 | INFO | Class distribution for train -> bkg: count=691517 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=691517 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-13 14:31:16,850 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 14:31:16,851 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-13 14:32:53,113 | INFO | Epoch 1/50 | train_loss=0.6967 | train_accuracy=0.5012 | val_loss=0.6976 | val_accuracy=0.4996
+2026-09-13 14:34:29,329 | INFO | Epoch 2/50 | train_loss=0.6950 | train_accuracy=0.5031 | val_loss=0.6957 | val_accuracy=0.5003
+2026-09-13 14:36:05,530 | INFO | Epoch 3/50 | train_loss=0.6944 | train_accuracy=0.5019 | val_loss=0.6931 | val_accuracy=0.4998
+2026-09-13 14:37:41,809 | INFO | Epoch 4/50 | train_loss=0.6937 | train_accuracy=0.5034 | val_loss=0.6933 | val_accuracy=0.5000
+2026-09-13 14:39:17,971 | INFO | Epoch 5/50 | train_loss=0.6934 | train_accuracy=0.5035 | val_loss=0.6958 | val_accuracy=0.4999
+2026-09-13 14:40:54,167 | INFO | Epoch 6/50 | train_loss=0.6932 | train_accuracy=0.5030 | val_loss=0.6932 | val_accuracy=0.4998
+2026-09-13 14:42:30,478 | INFO | Epoch 7/50 | train_loss=0.6930 | train_accuracy=0.5039 | val_loss=0.6930 | val_accuracy=0.4989
+2026-09-13 14:44:06,544 | INFO | Epoch 8/50 | train_loss=0.6930 | train_accuracy=0.5035 | val_loss=0.6930 | val_accuracy=0.5000
+2026-09-13 14:45:42,874 | INFO | Epoch 9/50 | train_loss=0.6929 | train_accuracy=0.5042 | val_loss=0.6929 | val_accuracy=0.4997
+2026-09-13 14:47:19,270 | INFO | Epoch 10/50 | train_loss=0.6928 | train_accuracy=0.5036 | val_loss=0.6929 | val_accuracy=0.4994
+2026-09-13 14:48:55,561 | INFO | Epoch 11/50 | train_loss=0.6928 | train_accuracy=0.5052 | val_loss=0.6929 | val_accuracy=0.4998
+2026-09-13 14:50:32,073 | INFO | Epoch 12/50 | train_loss=0.6928 | train_accuracy=0.5039 | val_loss=0.6930 | val_accuracy=0.4996
+2026-09-13 14:52:08,963 | INFO | Epoch 13/50 | train_loss=0.6928 | train_accuracy=0.5046 | val_loss=0.6929 | val_accuracy=0.4998
+2026-09-13 14:53:45,894 | INFO | Epoch 14/50 | train_loss=0.6928 | train_accuracy=0.5033 | val_loss=0.6928 | val_accuracy=0.5000
+2026-09-13 14:55:23,070 | INFO | Epoch 15/50 | train_loss=0.6928 | train_accuracy=0.5036 | val_loss=0.6928 | val_accuracy=0.4997
+2026-09-13 14:57:01,022 | INFO | Epoch 16/50 | train_loss=0.6927 | train_accuracy=0.5048 | val_loss=0.6928 | val_accuracy=0.4997
+2026-09-13 14:58:39,009 | INFO | Epoch 17/50 | train_loss=0.6927 | train_accuracy=0.5035 | val_loss=0.6928 | val_accuracy=0.4993
+2026-09-13 15:00:17,188 | INFO | Epoch 18/50 | train_loss=0.6928 | train_accuracy=0.5043 | val_loss=0.6928 | val_accuracy=0.4993
+2026-09-13 15:01:54,924 | INFO | Epoch 19/50 | train_loss=0.6927 | train_accuracy=0.5053 | val_loss=0.6928 | val_accuracy=0.4994
+2026-09-13 15:01:54,925 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 15:01:54,948 | INFO | Restored best model from epoch 14 based on val_loss=0.6928
+2026-09-13 15:01:54,948 | INFO | Training finished
+2026-09-13 15:01:54,949 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/frozen/sbi_over_bkg/f0300/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 15:01:55,251 | INFO | Starting _collect_predictions
+2026-09-13 15:01:55,251 | INFO | Dataset size = 4096
+2026-09-13 15:01:55,251 | INFO | Batch size = 1024
+2026-09-13 15:01:55,475 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sbi_over_bkg/f0300/seed0: best_epoch=14 val_auc=0.5067 C_ref=1.0047 chi2/ndf=0.60 (38.4 min)
+2026-09-13 15:09:37,369 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 15:09:37,460 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 15:09:37,639 | INFO | ======== Soft Load Summary ========
+2026-09-13 15:09:37,639 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 15:09:37,639 | INFO | All components loaded: NO
+2026-09-13 15:09:37,640 | INFO | --- Breakdown ---
+2026-09-13 15:09:37,640 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 15:09:37,640 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 15:09:37,640 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 15:09:37,640 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 15:09:37,640 | WARNING | Shape mismatches for 8 layers
+2026-09-13 15:09:37,640 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 15:09:37,640 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 15:09:37,640 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 15:09:37,640 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 15:09:37,640 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 15:09:37,640 | WARNING |   - ... and 3 more
+2026-09-13 15:09:37,640 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 15:09:37,640 | WARNING | • models         : 23 layers missing
+2026-09-13 15:09:37,640 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 15:09:37,640 | INFO | ===================================
+2026-09-13 15:09:38,158 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 15:09:38,781 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 15:09:38,781 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.98682      | 0.678921 |
+|               | energy       | log_normalize     | 4.42733      | 0.7384   |
+|               | eta          | normalize         | 0.0011922    | 1.09815  |
+|               | phi          | normalize_uniform | -0.000436313 | 1.81355  |
+| globals       | m4l          | log_normalize     | 5.72314      | 0.399443 |
+|               | sum_pt       | log_normalize     | 5.49086      | 0.443598 |
+|               | sum_energy   | log_normalize     | 5.97456      | 0.455184 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-13 15:09:38,781 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 15:09:38,781 | INFO | Train loader: size=3477101, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 15:09:38,798 | INFO | Class distribution for train -> bkg: count=2263196 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=1213905 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-13 15:09:38,798 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 15:09:38,800 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-13 15:11:16,985 | INFO | Epoch 1/50 | train_loss=0.4611 | train_accuracy=0.8018 | val_loss=0.4468 | val_accuracy=0.7910
+2026-09-13 15:12:54,393 | INFO | Epoch 2/50 | train_loss=0.4512 | train_accuracy=0.8072 | val_loss=0.4450 | val_accuracy=0.7921
+2026-09-13 15:14:32,668 | INFO | Epoch 3/50 | train_loss=0.4500 | train_accuracy=0.8076 | val_loss=0.4482 | val_accuracy=0.7840
+2026-09-13 15:16:10,362 | INFO | Epoch 4/50 | train_loss=0.4491 | train_accuracy=0.8078 | val_loss=0.4465 | val_accuracy=0.7799
+2026-09-13 15:17:46,648 | INFO | Epoch 5/50 | train_loss=0.4477 | train_accuracy=0.8086 | val_loss=0.4426 | val_accuracy=0.7879
+2026-09-13 15:19:23,013 | INFO | Epoch 6/50 | train_loss=0.4475 | train_accuracy=0.8084 | val_loss=0.4361 | val_accuracy=0.7947
+2026-09-13 15:20:59,346 | INFO | Epoch 7/50 | train_loss=0.4463 | train_accuracy=0.8092 | val_loss=0.4396 | val_accuracy=0.7879
+2026-09-13 15:22:35,513 | INFO | Epoch 8/50 | train_loss=0.4462 | train_accuracy=0.8092 | val_loss=0.4422 | val_accuracy=0.7835
+2026-09-13 15:24:12,048 | INFO | Epoch 9/50 | train_loss=0.4451 | train_accuracy=0.8097 | val_loss=0.4435 | val_accuracy=0.7870
+2026-09-13 15:25:48,498 | INFO | Epoch 10/50 | train_loss=0.4437 | train_accuracy=0.8104 | val_loss=0.4377 | val_accuracy=0.7892
+2026-09-13 15:27:24,887 | INFO | Epoch 11/50 | train_loss=0.4442 | train_accuracy=0.8105 | val_loss=0.4377 | val_accuracy=0.7887
+2026-09-13 15:27:24,888 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 15:27:24,911 | INFO | Restored best model from epoch 6 based on val_loss=0.4361
+2026-09-13 15:27:24,911 | INFO | Training finished
+2026-09-13 15:27:24,911 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/frozen/sig_over_bkg/f1000/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 15:27:25,211 | INFO | Starting _collect_predictions
+2026-09-13 15:27:25,211 | INFO | Dataset size = 4096
+2026-09-13 15:27:25,211 | INFO | Batch size = 1024
+2026-09-13 15:27:25,434 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sig_over_bkg/f1000/seed0: best_epoch=6 val_auc=0.8709 C_ref=0.8699 chi2/ndf=50.67 (27.3 min)
+2026-09-13 15:36:52,896 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-13 15:36:52,988 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-13 15:36:53,343 | INFO | ======== Soft Load Summary ========
+2026-09-13 15:36:53,343 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-13 15:36:53,343 | INFO | All components loaded: NO
+2026-09-13 15:36:53,344 | INFO | --- Breakdown ---
+2026-09-13 15:36:53,344 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-13 15:36:53,344 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-13 15:36:53,344 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-13 15:36:53,344 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-13 15:36:53,344 | WARNING | Shape mismatches for 8 layers
+2026-09-13 15:36:53,344 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-13 15:36:53,344 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-13 15:36:53,344 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-13 15:36:53,344 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-13 15:36:53,344 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-13 15:36:53,344 | WARNING |   - ... and 3 more
+2026-09-13 15:36:53,344 | WARNING | Missing layers (randomly initialized): 23
+2026-09-13 15:36:53,344 | WARNING | • models         : 23 layers missing
+2026-09-13 15:36:53,344 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-13 15:36:53,344 | INFO | ===================================
+2026-09-13 15:36:54,030 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-13 15:36:54,849 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-13 15:36:54,849 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.81124    | 0.532144 |
+|               | energy       | log_normalize     | 4.26257    | 0.628343 |
+|               | eta          | normalize         | 0.00157893 | 1.11446  |
+|               | phi          | normalize_uniform | 0.00215519 | 1.81293  |
+| globals       | m4l          | log_normalize     | 5.52743    | 0.261194 |
+|               | sum_pt       | log_normalize     | 5.27714    | 0.296965 |
+|               | sum_energy   | log_normalize     | 5.77781    | 0.357287 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-13 15:36:54,849 | INFO | Training setup: epochs=50, batch_size=512, world_size=1, device=cuda
+2026-09-13 15:36:54,849 | INFO | Train loader: size=4610116, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-13 15:36:54,873 | INFO | Class distribution for train -> bkg: count=2305058 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=2305058 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-13 15:36:54,873 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-13 15:36:54,875 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-13 15:38:33,358 | INFO | Epoch 1/50 | train_loss=0.6967 | train_accuracy=0.5016 | val_loss=0.6950 | val_accuracy=0.5002
+2026-09-13 15:40:11,305 | INFO | Epoch 2/50 | train_loss=0.6949 | train_accuracy=0.5007 | val_loss=0.6947 | val_accuracy=0.4995
+2026-09-13 15:41:47,953 | INFO | Epoch 3/50 | train_loss=0.6945 | train_accuracy=0.5023 | val_loss=0.6937 | val_accuracy=0.4997
+2026-09-13 15:43:24,438 | INFO | Epoch 4/50 | train_loss=0.6939 | train_accuracy=0.5025 | val_loss=0.6949 | val_accuracy=0.4999
+2026-09-13 15:45:00,965 | INFO | Epoch 5/50 | train_loss=0.6935 | train_accuracy=0.5022 | val_loss=0.6942 | val_accuracy=0.4998
+2026-09-13 15:46:37,350 | INFO | Epoch 6/50 | train_loss=0.6932 | train_accuracy=0.5022 | val_loss=0.6933 | val_accuracy=0.4986
+2026-09-13 15:48:13,821 | INFO | Epoch 7/50 | train_loss=0.6932 | train_accuracy=0.5027 | val_loss=0.6931 | val_accuracy=0.4992
+2026-09-13 15:49:50,246 | INFO | Epoch 8/50 | train_loss=0.6929 | train_accuracy=0.5032 | val_loss=0.6934 | val_accuracy=0.4994
+2026-09-13 15:51:26,620 | INFO | Epoch 9/50 | train_loss=0.6929 | train_accuracy=0.5053 | val_loss=0.6928 | val_accuracy=0.5004
+2026-09-13 15:53:03,246 | INFO | Epoch 10/50 | train_loss=0.6928 | train_accuracy=0.5045 | val_loss=0.6930 | val_accuracy=0.4988
+2026-09-13 15:54:40,211 | INFO | Epoch 11/50 | train_loss=0.6928 | train_accuracy=0.5041 | val_loss=0.6929 | val_accuracy=0.4986
+2026-09-13 15:56:17,554 | INFO | Epoch 12/50 | train_loss=0.6928 | train_accuracy=0.5032 | val_loss=0.6928 | val_accuracy=0.4984
+2026-09-13 15:57:54,715 | INFO | Epoch 13/50 | train_loss=0.6928 | train_accuracy=0.5047 | val_loss=0.6928 | val_accuracy=0.4992
+2026-09-13 15:59:32,275 | INFO | Epoch 14/50 | train_loss=0.6928 | train_accuracy=0.5045 | val_loss=0.6928 | val_accuracy=0.4992
+2026-09-13 16:01:09,485 | INFO | Epoch 15/50 | train_loss=0.6927 | train_accuracy=0.5051 | val_loss=0.6930 | val_accuracy=0.4994
+2026-09-13 16:02:47,104 | INFO | Epoch 16/50 | train_loss=0.6928 | train_accuracy=0.5050 | val_loss=0.6928 | val_accuracy=0.4999
+2026-09-13 16:04:24,595 | INFO | Epoch 17/50 | train_loss=0.6928 | train_accuracy=0.5029 | val_loss=0.6929 | val_accuracy=0.4996
+2026-09-13 16:06:01,522 | INFO | Epoch 18/50 | train_loss=0.6927 | train_accuracy=0.5057 | val_loss=0.6929 | val_accuracy=0.4987
+2026-09-13 16:06:01,523 | INFO | Early stopping triggered after 5 epochs without improvement on val_loss
+2026-09-13 16:06:01,546 | INFO | Restored best model from epoch 13 based on val_loss=0.6928
+2026-09-13 16:06:01,546 | INFO | Training finished
+2026-09-13 16:06:01,546 | INFO | Saving checkpoint to /home/ubuntu/datascan/runs/frozen/sbi_over_bkg/f1000/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-13 16:06:01,846 | INFO | Starting _collect_predictions
+2026-09-13 16:06:01,847 | INFO | Dataset size = 4096
+2026-09-13 16:06:01,847 | INFO | Batch size = 1024
+2026-09-13 16:06:02,253 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sbi_over_bkg/f1000/seed0: best_epoch=13 val_auc=0.5064 C_ref=1.0006 chi2/ndf=1.07 (38.5 min)
+   variant         task  frac  seed status
+    frozen sig_over_bkg  0.01     0   done
+    frozen sbi_over_bkg  0.01     0   done
+pretrained sig_over_bkg  0.01     1   done
+pretrained sbi_over_bkg  0.01     1   done
+pretrained sig_over_bkg  0.01     2   done
+pretrained sbi_over_bkg  0.01     2   done
+    frozen sig_over_bkg  0.03     0   done
+    frozen sbi_over_bkg  0.03     0   done
+pretrained sig_over_bkg  0.03     1   done
+pretrained sbi_over_bkg  0.03     1   done
+pretrained sig_over_bkg  0.03     2   done
+pretrained sbi_over_bkg  0.03     2   done
+    frozen sig_over_bkg  0.10     0   done
+    frozen sbi_over_bkg  0.10     0   done
+pretrained sig_over_bkg  0.10     1   done
+pretrained sbi_over_bkg  0.10     1   done
+pretrained sig_over_bkg  0.10     2   done
+pretrained sbi_over_bkg  0.10     2   done
+    frozen sig_over_bkg  0.30     0   done
+    frozen sbi_over_bkg  0.30     0   done
+    frozen sig_over_bkg  1.00     0   done
+    frozen sbi_over_bkg  1.00     0   done
+summary: done=22

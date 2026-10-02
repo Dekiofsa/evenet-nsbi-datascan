@@ -1,0 +1,109 @@
+{
+ "variant": "pretrained_e05",
+ "task": "sig_over_bkg",
+ "frac": 0.3,
+ "frac_tag": "f0300",
+ "seed": 0,
+ "checkpoint_kind": "e05",
+ "checkpoint": "/home/ubuntu/datascan/fullsched/runs/pretrained/sig_over_bkg/f0300/seed0/epoch05.pt",
+ "subsample_seed": 1000,
+ "n_num_train": 364172,
+ "n_den_train": 678959,
+ "ess_num_train": 184707.97453620957,
+ "ess_den_train": 541695.6968654111,
+ "n_num_val": 303477,
+ "n_den_val": 565800,
+ "n_train_rows": 1043131,
+ "n_val_monitor_rows": 262144,
+ "n_trainable_params": 19860656,
+ "n_nonfinite_batches": 0,
+ "steps_per_epoch": 2038,
+ "tf32_training": false,
+ "autocast_bf16_training": false,
+ "fit_seconds": 4767.747659921646,
+ "device": "cuda",
+ "config": {
+  "root": "/home/ubuntu/datascan/fullsched",
+  "raw_data_dir": "/content/drive/MyDrive/Research/NSBI/spliced_21_columns",
+  "toys_root": "/content/drive/MyDrive/Research/NSBI",
+  "train_frac": 0.8,
+  "split_seed": 42,
+  "fractions": [
+   0.01,
+   0.03,
+   0.1,
+   0.3,
+   1.0
+  ],
+  "variants": [
+   "scratch",
+   "pretrained",
+   "frozen"
+  ],
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "tasks": [
+   "sig_over_bkg",
+   "sbi_over_bkg"
+  ],
+  "batch_size": 512,
+  "epoch_size": 1043131,
+  "max_epochs": 20,
+  "early_stop_patience": 0,
+  "val_monitor_rows": 262144,
+  "num_workers": 0,
+  "scratch_lr": 0.0003,
+  "scratch_weight_decay": 0.01,
+  "tf32": false,
+  "autocast_bf16": false,
+  "lumi": 300.0,
+  "mu_true_values": [
+   0.4,
+   2.5
+  ],
+  "mu_min": 0.0,
+  "mu_max": 4.0,
+  "mu_steps": 401,
+  "calib_ref_events": 1000000,
+  "keep_checkpoint": true,
+  "wandb_project": null,
+  "wandb_entity": null
+ },
+ "epochs_run": 20,
+ "checkpoint_epoch": 5,
+ "checkpoint_step": 10190,
+ "best_epoch": 13,
+ "best_step": 26494,
+ "best_val_loss_monitor": 0.4185384511947632,
+ "total_steps": 40760,
+ "checkpoint_val_loss_monitor": 0.42473313212394714,
+ "lr_at_checkpoint": [
+  8.945702546981969e-05,
+  4.4728512734909844e-05,
+  8.94570254698197e-06
+ ],
+ "resumed_from_checkpoint": false,
+ "val_bce_full": 0.43019665179171235,
+ "val_auc_full": 0.8797928401257328,
+ "C_ref": 0.9436887508781294,
+ "C_sub": 0.95299205762093,
+ "C_val": 0.9371068254277907,
+ "fast_predict_max_rel_dev": 7.649862587119482e-06,
+ "closure_chi2_ndf": 3.3516786213645617,
+ "closure_chi2": 134.06714485458247,
+ "closure_ndf": 40,
+ "toys": {
+  "mu0p4": {
+   "rows": 2885273,
+   "mean_r": 1.1212399005889893
+  },
+  "mu2p5": {
+   "rows": 2885273,
+   "mean_r": 1.1212399005889893
+  }
+ },
+ "total_seconds": 500.36365485191345
+}

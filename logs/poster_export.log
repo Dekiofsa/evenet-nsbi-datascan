@@ -1,0 +1,40 @@
+/opt/pytorch/lib/python3.13/site-packages/torch/cuda/__init__.py:64: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+2026-09-12 19:55:59,314 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-12 19:56:01,389 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-12 19:56:01,389 | INFO | Restoring checkpoint from /home/ubuntu/datascan/poster_ckpt/EveNetPretrain_sig_over_bkg-val_loss-epoch0007-0.4119.pt
+2026-09-12 19:56:03,737 | INFO | Restored normalizer state from checkpoint
+2026-09-12 19:56:05,360 | INFO | Starting _collect_predictions
+2026-09-12 19:56:05,360 | INFO | Dataset size = 4096
+2026-09-12 19:56:05,360 | INFO | Batch size = 1024
+2026-09-12 19:56:05,862 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[poster] sig_over_bkg: C_ref=1.0308 C_fullbkgtrain=1.0281 C_val=0.9976 val_auc=0.8842 fast_dev=1.5e-05 (20.8 min)
+2026-09-12 20:16:46,270 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-12 20:16:46,385 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-12 20:16:46,385 | INFO | Restoring checkpoint from /home/ubuntu/datascan/poster_ckpt/EveNetPretrain_nsbi_over_bkg-val_loss-epoch0020-0.6926.pt
+2026-09-12 20:16:48,079 | INFO | Restored normalizer state from checkpoint
+2026-09-12 20:16:48,972 | INFO | Starting _collect_predictions
+2026-09-12 20:16:48,972 | INFO | Dataset size = 4096
+2026-09-12 20:16:48,972 | INFO | Batch size = 1024
+2026-09-12 20:16:49,438 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[poster] sbi_over_bkg: C_ref=0.9991 C_fullbkgtrain=0.9991 C_val=0.9992 val_auc=0.5080 fast_dev=7.1e-07 (23.6 min)
+
+=== poster checkpoints, calibration C_sub (full bkg_train, as the poster) ===
+ mu_true  bias_mean  bias_se_toys_mean  width_mean  n_open_max
+     0.4      0.491              0.022       0.408           0
+     2.5     -0.176              0.011       0.573           0
+toy 0 (the poster's toy):
+ mu_true  mu_hat    lo    hi  width
+     0.4   0.962 0.848 1.195  0.347
+     2.5   2.278 1.996 2.567  0.572
+
+=== poster checkpoints, calibration C_ref (scan reference) ===
+ mu_true  bias_mean  bias_se_toys_mean  width_mean  n_open_max
+     0.4      0.508              0.017       0.405           0
+     2.5     -0.166              0.011       0.573           0
+toy 0 (the poster's toy):
+ mu_true  mu_hat    lo    hi  width
+     0.4   0.967 0.849 1.203  0.354
+     2.5   2.288 2.006 2.578  0.572
+POSTER EXPORT DONE
+EXIT=0

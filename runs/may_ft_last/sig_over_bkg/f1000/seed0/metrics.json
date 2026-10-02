@@ -1,0 +1,21 @@
+{
+ "task": "sig_over_bkg",
+ "frac": 1.0,
+ "frac_tag": "f1000",
+ "seed": 0,
+ "checkpoint": "/home/ubuntu/datascan/may_ckpt/pretrain_sig/final.pt",
+ "checkpoint_epoch": null,
+ "checkpoint_step": 135840,
+ "C_ref": 0.9885080683399798,
+ "C_sub": 0.9851608781201568,
+ "C_val": 0.9736766306819041,
+ "fast_predict_max_rel_dev": 1.869717491622627e-05,
+ "val_bce_full": 0.42304139410565844,
+ "val_auc_full": 0.8852451645806831,
+ "best_epoch": 20,
+ "epochs_run": 20,
+ "best_step": 135840,
+ "closure_chi2_ndf": NaN,
+ "total_seconds": 649.7983675003052,
+ "variant": "may_ft_last"
+}

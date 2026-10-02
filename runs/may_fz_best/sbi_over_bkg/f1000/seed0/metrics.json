@@ -1,0 +1,21 @@
+{
+ "task": "sbi_over_bkg",
+ "frac": 1.0,
+ "frac_tag": "f1000",
+ "seed": 0,
+ "checkpoint": "/home/ubuntu/datascan/may_ckpt/ssl_sbi/sbi_over_bkg-val_loss-epoch0020-0.6926.pt",
+ "checkpoint_epoch": 19,
+ "checkpoint_step": 180100,
+ "C_ref": 0.9994818983360831,
+ "C_sub": 0.9994746362079535,
+ "C_val": 0.9995370422804091,
+ "fast_predict_max_rel_dev": 1.7641849289209892e-06,
+ "val_bce_full": 0.6926111210294325,
+ "val_auc_full": 0.507650015736326,
+ "best_epoch": 19,
+ "epochs_run": 20,
+ "best_step": 180100,
+ "closure_chi2_ndf": NaN,
+ "total_seconds": 1214.0217430591583,
+ "variant": "may_fz_best"
+}

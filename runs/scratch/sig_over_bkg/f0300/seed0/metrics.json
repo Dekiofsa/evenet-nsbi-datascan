@@ -1,0 +1,155 @@
+{
+ "variant": "scratch",
+ "task": "sig_over_bkg",
+ "frac": 0.3,
+ "frac_tag": "f0300",
+ "seed": 0,
+ "subsample_seed": 1000,
+ "n_num_train": 364172,
+ "n_den_train": 678959,
+ "ess_num_train": 184707.97453620957,
+ "ess_den_train": 541695.6968654111,
+ "n_num_val": 303477,
+ "n_den_val": 565800,
+ "n_train_rows": 1043131,
+ "n_val_monitor_rows": 262144,
+ "n_trainable_params": 19860656,
+ "n_nonfinite_batches": 0,
+ "resumed_from_checkpoint": false,
+ "tf32_training": false,
+ "autocast_bf16_training": false,
+ "epochs_run": 12,
+ "best_epoch": 7,
+ "best_step": 14000,
+ "total_steps": 24000,
+ "steps_per_epoch": 2000,
+ "best_val_loss_monitor": 0.406590074300766,
+ "val_bce_full": 0.42376964319764543,
+ "val_auc_full": 0.8849808039758275,
+ "C_ref": 1.1281757606951461,
+ "C_sub": 1.1339394753247465,
+ "C_val": 1.1251094300537756,
+ "fast_predict_max_rel_dev": 6.4152570208572835e-06,
+ "closure_chi2_ndf": 2.072293173146486,
+ "closure_chi2": 82.89172692585944,
+ "closure_ndf": 40,
+ "toys": {
+  "mu0p4": {
+   "rows": 2885273,
+   "mean_r": 0.9567668437957764
+  },
+  "mu2p5": {
+   "rows": 2885273,
+   "mean_r": 0.9567668437957764
+  }
+ },
+ "fit_seconds": 5694.714065074921,
+ "total_seconds": 6524.789907693863,
+ "device": "cuda",
+ "config": {
+  "root": "/home/ubuntu/datascan",
+  "raw_data_dir": "/content/drive/MyDrive/Research/NSBI/spliced_21_columns",
+  "toys_root": "/content/drive/MyDrive/Research/NSBI",
+  "train_frac": 0.8,
+  "split_seed": 42,
+  "fractions": [
+   0.01,
+   0.03,
+   0.1,
+   0.3,
+   1.0
+  ],
+  "variants": [
+   "scratch",
+   "pretrained",
+   "frozen"
+  ],
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "tasks": [
+   "sig_over_bkg",
+   "sbi_over_bkg"
+  ],
+  "batch_size": 512,
+  "epoch_size": 1024000,
+  "max_epochs": 50,
+  "early_stop_patience": 5,
+  "val_monitor_rows": 262144,
+  "num_workers": 0,
+  "scratch_lr": 0.0003,
+  "scratch_weight_decay": 0.01,
+  "tf32": false,
+  "autocast_bf16": false,
+  "lumi": 300.0,
+  "mu_true_values": [
+   0.4,
+   2.5
+  ],
+  "mu_min": 0.0,
+  "mu_max": 4.0,
+  "mu_steps": 401,
+  "calib_ref_events": 1000000,
+  "keep_checkpoint": false,
+  "wandb_project": null,
+  "wandb_entity": null
+ },
+ "normalizer": {
+  "stats": {
+   "x": {
+    "mean": [
+     3.9867005348205566,
+     4.426988124847412,
+     0.0021437588147819042,
+     -9.310476889368147e-05
+    ],
+    "std": [
+     0.6787735223770142,
+     0.7382534146308899,
+     1.097822666168213,
+     1.813631296157837
+    ]
+   },
+   "globals": {
+    "mean": [
+     5.722894668579102,
+     5.490725517272949,
+     5.97421932220459
+    ],
+    "std": [
+     0.3994668126106262,
+     0.44343140721321106,
+     0.45494362711906433
+    ]
+   }
+  },
+  "rules": {
+   "x": [
+    "log_normalize",
+    "log_normalize",
+    "normalize",
+    "normalize_uniform"
+   ],
+   "globals": [
+    "log_normalize",
+    "log_normalize",
+    "log_normalize"
+   ]
+  },
+  "feature_names": {
+   "x": [
+    "pt",
+    "energy",
+    "eta",
+    "phi"
+   ],
+   "globals": [
+    "m4l",
+    "sum_pt",
+    "sum_energy"
+   ]
+  }
+ }
+}

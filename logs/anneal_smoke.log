@@ -1,0 +1,76 @@
+[smoke] root /home/ubuntu/datascan/anneal_smoke: frozen S/B at 1 %, 2 epochs, early stopping off
+/opt/pytorch/lib/python3.13/site-packages/torch/cuda/__init__.py:64: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+2026-09-16 02:01:18,798 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 02:01:18,917 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-16 02:01:20,079 | INFO | ======== Soft Load Summary ========
+2026-09-16 02:01:20,079 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-16 02:01:20,079 | INFO | All components loaded: NO
+2026-09-16 02:01:20,080 | INFO | --- Breakdown ---
+2026-09-16 02:01:20,080 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-16 02:01:20,080 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-16 02:01:20,080 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-16 02:01:20,080 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-16 02:01:20,080 | WARNING | Shape mismatches for 8 layers
+2026-09-16 02:01:20,080 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-16 02:01:20,081 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-16 02:01:20,081 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-16 02:01:20,081 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-16 02:01:20,081 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-16 02:01:20,081 | WARNING |   - ... and 3 more
+2026-09-16 02:01:20,081 | WARNING | Missing layers (randomly initialized): 23
+2026-09-16 02:01:20,081 | WARNING | • models         : 23 layers missing
+2026-09-16 02:01:20,081 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-16 02:01:20,081 | INFO | ===================================
+2026-09-16 02:01:22,092 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 02:01:22,943 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-16 02:01:22,944 | INFO | Normalization plan:
++---------------+--------------+-------------------+-------------+----------+
+| Feature Group | Feature Name | Rule              | Mean        | Std      |
++===============+==============+===================+=============+==========+
+| x             | pt           | log_normalize     | 3.9907      | 0.682227 |
+|               | energy       | log_normalize     | 4.42875     | 0.738802 |
+|               | eta          | normalize         | 0.00825904  | 1.09472  |
+|               | phi          | normalize_uniform | 0.000825798 | 1.813    |
+| globals       | m4l          | log_normalize     | 5.72653     | 0.401061 |
+|               | sum_pt       | log_normalize     | 5.49585     | 0.446093 |
+|               | sum_energy   | log_normalize     | 5.97629     | 0.455497 |
++---------------+--------------+-------------------+-------------+----------+
+2026-09-16 02:01:22,944 | INFO | Training setup: epochs=2, batch_size=512, world_size=1, device=cuda
+2026-09-16 02:01:22,944 | INFO | Train loader: size=34771, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-16 02:01:22,954 | INFO | Class distribution for train -> bkg: count=22632 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=12139 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-16 02:01:22,955 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-16 02:01:22,957 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-16 02:06:09,266 | INFO | Epoch 1/2 | train_loss=0.4415 | train_accuracy=0.8113 | val_loss=0.4431 | val_accuracy=0.7973
+[anneal] epoch 1/2 lr=['0.001'] val_loss=0.4431
+2026-09-16 02:10:57,252 | INFO | Epoch 2/2 | train_loss=0.4131 | train_accuracy=0.8242 | val_loss=0.4603 | val_accuracy=0.7865
+[anneal] epoch 2/2 lr=['0'] val_loss=0.4603
+2026-09-16 02:10:57,254 | INFO | Saving checkpoint to /home/ubuntu/datascan/anneal_smoke/runs/frozen/sig_over_bkg/f0010/seed0/last.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[anneal] last-epoch weights saved to /home/ubuntu/datascan/anneal_smoke/runs/frozen/sig_over_bkg/f0010/seed0/last.pt
+2026-09-16 02:10:58,196 | INFO | Restored best model from epoch 1 based on val_loss=0.4431
+2026-09-16 02:10:58,196 | INFO | Training finished
+2026-09-16 02:10:58,200 | INFO | Saving checkpoint to /home/ubuntu/datascan/anneal_smoke/runs/frozen/sig_over_bkg/f0010/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-16 02:10:58,779 | INFO | Starting _collect_predictions
+2026-09-16 02:10:58,779 | INFO | Dataset size = 4096
+2026-09-16 02:10:58,779 | INFO | Batch size = 1024
+2026-09-16 02:10:59,311 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sig_over_bkg/f0010/seed0: best_epoch=1 val_auc=0.8611 C_ref=0.8396 chi2/ndf=70.71 (25.6 min)
+[anneal] frozen/sig_over_bkg/f0010: 2 epochs, best epoch 1, lr first->last 0.001 -> 0, schedule finished: True
+2026-09-16 02:26:54,638 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 02:26:54,803 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 02:26:54,804 | INFO | Restoring checkpoint from /home/ubuntu/datascan/anneal_smoke/runs/frozen/sig_over_bkg/f0010/seed0/last.pt
+2026-09-16 02:26:56,225 | INFO | Restored normalizer state from checkpoint
+2026-09-16 02:26:58,089 | INFO | Starting _collect_predictions
+2026-09-16 02:26:58,089 | INFO | Dataset size = 4096
+2026-09-16 02:26:58,089 | INFO | Batch size = 1024
+2026-09-16 02:26:58,746 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen_last/sig_over_bkg/f0010/seed0: epoch 2 val_auc=0.8580 C_ref=0.5624 chi2/ndf=218.75 (23.9 min)
+[smoke] collect_runs variants: ['frozen', 'frozen_last'] | r_toys best vs last differ: True (max rel dev 342) | schedule finished: True
+   best/best.pt: True   last/best.pt: False
+   best/last.pt: True   last/last.pt: False
+   best/history.json: True   last/history.json: True
+   best/r_val.npz: True   last/r_val.npz: True
+   best/r_toys_mu2p5.npy: True   last/r_toys_mu2p5.npy: True
+   best/metrics.json: True   last/metrics.json: True
+   best/done.json: True   last/done.json: True
+[smoke] PASS

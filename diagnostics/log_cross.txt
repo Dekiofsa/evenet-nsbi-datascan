@@ -1,0 +1,126 @@
+runs collected: 56 | xs {'sig': 0.31658278834407944, 'int': -0.624197121958183, 'bkg': 5.9641121728136115, 'sbi': 5.656497839039445}
+[cross] S/B scratch    + SBI/B pretrained f=0.01  seed 0 mu=2.5: bias=-1.333 width=0.540 open=19 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.01  seed 0 mu=0.4: bias=+0.291 width=0.774 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.01  seed 1 mu=2.5: bias=-2.140 width=0.483 open=39 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.01  seed 1 mu=0.4: bias=+0.518 width=0.262 open=0 spike=45
+[cross] S/B scratch    + SBI/B pretrained f=0.01  seed 2 mu=2.5: bias=-1.368 width=0.560 open=20 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.01  seed 2 mu=0.4: bias=+0.108 width=0.446 open=0 spike=2
+[cross] S/B scratch    + SBI/B pretrained f=0.03  seed 0 mu=2.5: bias=+0.018 width=0.608 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.03  seed 0 mu=0.4: bias=-0.024 width=0.842 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.03  seed 1 mu=2.5: bias=-0.632 width=0.363 open=3 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.03  seed 1 mu=0.4: bias=-0.163 width=0.429 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.03  seed 2 mu=2.5: bias=-0.500 width=0.523 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.03  seed 2 mu=0.4: bias=-0.022 width=0.217 open=0 spike=8
+[cross] S/B scratch    + SBI/B pretrained f=0.1   seed 0 mu=2.5: bias=-2.500 width=nan open=48 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.1   seed 0 mu=0.4: bias=-0.339 width=0.131 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.1   seed 1 mu=2.5: bias=-0.686 width=0.552 open=9 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.1   seed 1 mu=0.4: bias=-0.195 width=0.415 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.1   seed 2 mu=2.5: bias=-0.253 width=0.580 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.1   seed 2 mu=0.4: bias=-0.023 width=0.704 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.3   seed 0 mu=2.5: bias=-0.059 width=0.519 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=0.3   seed 0 mu=0.4: bias=-0.025 width=0.858 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=1.0   seed 0 mu=2.5: bias=-0.231 width=0.558 open=0 spike=0
+[cross] S/B scratch    + SBI/B pretrained f=1.0   seed 0 mu=0.4: bias=-0.083 width=0.775 open=0 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=0.01  seed 0 mu=2.5: bias=-2.389 width=0.526 open=45 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=0.01  seed 0 mu=0.4: bias=+0.499 width=0.149 open=0 spike=35
+[cross] S/B pretrained + SBI/B scratch    f=0.01  seed 1 mu=2.5: bias=-2.500 width=nan open=48 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=0.01  seed 1 mu=0.4: bias=+0.555 width=0.180 open=0 spike=48
+[cross] S/B pretrained + SBI/B scratch    f=0.01  seed 2 mu=2.5: bias=-0.879 width=0.498 open=0 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=0.01  seed 2 mu=0.4: bias=+0.440 width=0.215 open=0 spike=20
+[cross] S/B pretrained + SBI/B scratch    f=0.03  seed 0 mu=2.5: bias=-1.735 width=0.341 open=17 spike=9
+[cross] S/B pretrained + SBI/B scratch    f=0.03  seed 0 mu=0.4: bias=+0.550 width=0.083 open=0 spike=46
+[cross] S/B pretrained + SBI/B scratch    f=0.03  seed 1 mu=2.5: bias=-1.207 width=0.492 open=10 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=0.03  seed 1 mu=0.4: bias=+0.538 width=0.173 open=0 spike=47
+[cross] S/B pretrained + SBI/B scratch    f=0.03  seed 2 mu=2.5: bias=-0.367 width=0.628 open=1 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=0.03  seed 2 mu=0.4: bias=+0.277 width=0.383 open=0 spike=20
+[cross] S/B pretrained + SBI/B scratch    f=0.1   seed 0 mu=2.5: bias=-1.452 width=0.533 open=23 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=0.1   seed 0 mu=0.4: bias=+0.570 width=0.184 open=0 spike=46
+[cross] S/B pretrained + SBI/B scratch    f=0.1   seed 1 mu=2.5: bias=-0.218 width=0.563 open=0 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=0.1   seed 1 mu=0.4: bias=+0.525 width=0.446 open=0 spike=40
+[cross] S/B pretrained + SBI/B scratch    f=0.1   seed 2 mu=2.5: bias=-0.699 width=0.556 open=1 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=0.1   seed 2 mu=0.4: bias=+0.560 width=0.176 open=0 spike=46
+[cross] S/B pretrained + SBI/B scratch    f=0.3   seed 0 mu=2.5: bias=-0.406 width=0.568 open=0 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=0.3   seed 0 mu=0.4: bias=+0.501 width=0.236 open=0 spike=39
+[cross] S/B pretrained + SBI/B scratch    f=1.0   seed 0 mu=2.5: bias=-0.131 width=0.590 open=0 spike=0
+[cross] S/B pretrained + SBI/B scratch    f=1.0   seed 0 mu=0.4: bias=-0.033 width=0.791 open=0 spike=1
+[cross] S/B frozen     + SBI/B scratch    f=0.01  seed 0 mu=2.5: bias=-1.780 width=0.535 open=29 spike=0
+[cross] S/B frozen     + SBI/B scratch    f=0.01  seed 0 mu=0.4: bias=+0.383 width=0.272 open=0 spike=12
+[cross] S/B frozen     + SBI/B scratch    f=0.03  seed 0 mu=2.5: bias=-0.613 width=0.625 open=0 spike=0
+[cross] S/B frozen     + SBI/B scratch    f=0.03  seed 0 mu=0.4: bias=+0.131 width=0.466 open=0 spike=0
+[cross] S/B frozen     + SBI/B scratch    f=0.1   seed 0 mu=2.5: bias=-0.264 width=0.562 open=0 spike=0
+[cross] S/B frozen     + SBI/B scratch    f=0.1   seed 0 mu=0.4: bias=+0.450 width=0.365 open=0 spike=35
+[cross] S/B frozen     + SBI/B scratch    f=0.3   seed 0 mu=2.5: bias=-0.465 width=0.555 open=0 spike=0
+[cross] S/B frozen     + SBI/B scratch    f=0.3   seed 0 mu=0.4: bias=+0.319 width=0.323 open=0 spike=3
+[cross] S/B frozen     + SBI/B scratch    f=1.0   seed 0 mu=2.5: bias=-0.252 width=0.580 open=0 spike=0
+[cross] S/B frozen     + SBI/B scratch    f=1.0   seed 0 mu=0.4: bias=+0.351 width=0.475 open=0 spike=8
+[cross] S/B scratch    + SBI/B frozen     f=0.01  seed 0 mu=2.5: bias=-1.163 width=0.539 open=15 spike=0
+[cross] S/B scratch    + SBI/B frozen     f=0.01  seed 0 mu=0.4: bias=+0.323 width=0.755 open=0 spike=2
+[cross] S/B scratch    + SBI/B frozen     f=0.03  seed 0 mu=2.5: bias=-0.158 width=0.609 open=0 spike=0
+[cross] S/B scratch    + SBI/B frozen     f=0.03  seed 0 mu=0.4: bias=+0.026 width=0.760 open=0 spike=0
+[cross] S/B scratch    + SBI/B frozen     f=0.1   seed 0 mu=2.5: bias=-0.220 width=0.561 open=0 spike=0
+[cross] S/B scratch    + SBI/B frozen     f=0.1   seed 0 mu=0.4: bias=-0.061 width=0.772 open=0 spike=0
+[cross] S/B scratch    + SBI/B frozen     f=0.3   seed 0 mu=2.5: bias=-0.136 width=0.594 open=0 spike=0
+[cross] S/B scratch    + SBI/B frozen     f=0.3   seed 0 mu=0.4: bias=-0.013 width=0.752 open=0 spike=0
+[cross] S/B scratch    + SBI/B frozen     f=1.0   seed 0 mu=2.5: bias=-0.338 width=0.553 open=0 spike=0
+[cross] S/B scratch    + SBI/B frozen     f=1.0   seed 0 mu=0.4: bias=-0.065 width=0.676 open=0 spike=0
+[cross] S/B frozen     + SBI/B pretrained f=0.01  seed 0 mu=2.5: bias=-1.637 width=0.543 open=26 spike=0
+[cross] S/B frozen     + SBI/B pretrained f=0.01  seed 0 mu=0.4: bias=+0.406 width=0.311 open=0 spike=14
+[cross] S/B frozen     + SBI/B pretrained f=0.03  seed 0 mu=2.5: bias=-0.116 width=0.624 open=2 spike=0
+[cross] S/B frozen     + SBI/B pretrained f=0.03  seed 0 mu=0.4: bias=+0.322 width=0.699 open=0 spike=13
+[cross] S/B frozen     + SBI/B pretrained f=0.1   seed 0 mu=2.5: bias=-2.500 width=nan open=48 spike=0
+[cross] S/B frozen     + SBI/B pretrained f=0.1   seed 0 mu=0.4: bias=-0.363 width=0.070 open=2 spike=0
+[cross] S/B frozen     + SBI/B pretrained f=0.3   seed 0 mu=2.5: bias=-0.282 width=0.502 open=0 spike=0
+[cross] S/B frozen     + SBI/B pretrained f=0.3   seed 0 mu=0.4: bias=+0.458 width=0.509 open=0 spike=34
+[cross] S/B frozen     + SBI/B pretrained f=1.0   seed 0 mu=2.5: bias=-0.324 width=0.570 open=0 spike=0
+[cross] S/B frozen     + SBI/B pretrained f=1.0   seed 0 mu=0.4: bias=+0.405 width=0.432 open=0 spike=10
+[cross] S/B pretrained + SBI/B frozen     f=0.01  seed 0 mu=2.5: bias=-2.152 width=0.530 open=39 spike=0
+[cross] S/B pretrained + SBI/B frozen     f=0.01  seed 0 mu=0.4: bias=+0.528 width=0.170 open=0 spike=41
+[cross] S/B pretrained + SBI/B frozen     f=0.03  seed 0 mu=2.5: bias=-2.500 width=nan open=48 spike=0
+[cross] S/B pretrained + SBI/B frozen     f=0.03  seed 0 mu=0.4: bias=+0.579 width=0.103 open=0 spike=48
+[cross] S/B pretrained + SBI/B frozen     f=0.1   seed 0 mu=2.5: bias=-1.614 width=0.572 open=27 spike=0
+[cross] S/B pretrained + SBI/B frozen     f=0.1   seed 0 mu=0.4: bias=+0.543 width=0.180 open=0 spike=40
+[cross] S/B pretrained + SBI/B frozen     f=0.3   seed 0 mu=2.5: bias=-0.262 width=0.590 open=0 spike=0
+[cross] S/B pretrained + SBI/B frozen     f=0.3   seed 0 mu=0.4: bias=+0.515 width=0.285 open=0 spike=41
+[cross] S/B pretrained + SBI/B frozen     f=1.0   seed 0 mu=2.5: bias=-0.287 width=0.578 open=0 spike=0
+[cross] S/B pretrained + SBI/B frozen     f=1.0   seed 0 mu=0.4: bias=+0.044 width=0.686 open=0 spike=1
+
+[cross] 84 measurements in 2409 s
+
+=== cross-variant pairs, mu_true=2.5, bias mean over available seeds ===
+frac                     0.01  0.03  0.10  0.30  1.00
+sig_variant sbi_variant                              
+frozen      pretrained  -1.64 -0.12 -2.50 -0.28 -0.32
+            scratch     -1.78 -0.61 -0.26 -0.47 -0.25
+pretrained  frozen      -2.15 -2.50 -1.61 -0.26 -0.29
+            scratch     -1.92 -1.10 -0.79 -0.41 -0.13
+scratch     frozen      -1.16 -0.16 -0.22 -0.14 -0.34
+            pretrained  -1.61 -0.37 -1.15 -0.06 -0.23
+   n_open max:
+frac                     0.01  0.03  0.10  0.30  1.00
+sig_variant sbi_variant                              
+frozen      pretrained     26     2    48     0     0
+            scratch        29     0     0     0     0
+pretrained  frozen         39    48    27     0     0
+            scratch        48    17    23     0     0
+scratch     frozen         15     0     0     0     0
+            pretrained     39     3    48     0     0
+
+=== cross-variant pairs, mu_true=0.4, bias mean over available seeds ===
+frac                     0.01  0.03  0.10  0.30  1.00
+sig_variant sbi_variant                              
+frozen      pretrained   0.41  0.32 -0.36  0.46  0.40
+            scratch      0.38  0.13  0.45  0.32  0.35
+pretrained  frozen       0.53  0.58  0.54  0.52  0.04
+            scratch      0.50  0.45  0.55  0.50 -0.03
+scratch     frozen       0.32  0.03 -0.06 -0.01 -0.07
+            pretrained   0.31 -0.07 -0.19 -0.02 -0.08
+   n_open max:
+frac                     0.01  0.03  0.10  0.30  1.00
+sig_variant sbi_variant                              
+frozen      pretrained      0     0     2     0     0
+            scratch         0     0     0     0     0
+pretrained  frozen          0     0     0     0     0
+            scratch         0     0     0     0     0
+scratch     frozen          0     0     0     0     0
+            pretrained      0     0     0     0     0
+[cross] DONE

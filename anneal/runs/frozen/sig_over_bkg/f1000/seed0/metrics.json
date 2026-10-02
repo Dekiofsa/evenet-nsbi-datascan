@@ -1,0 +1,156 @@
+{
+ "variant": "frozen",
+ "task": "sig_over_bkg",
+ "frac": 1.0,
+ "frac_tag": "f1000",
+ "seed": 0,
+ "subsample_seed": 1000,
+ "n_num_train": 1213905,
+ "n_den_train": 2263196,
+ "ess_num_train": 536973.4667310083,
+ "ess_den_train": 1732342.0633137233,
+ "n_num_val": 303477,
+ "n_den_val": 565800,
+ "n_train_rows": 3477101,
+ "n_val_monitor_rows": 262144,
+ "n_trainable_params": 1186306,
+ "n_nonfinite_batches": 0,
+ "resumed_from_checkpoint": false,
+ "tf32_training": false,
+ "autocast_bf16_training": false,
+ "epochs_run": 30,
+ "best_epoch": 29,
+ "best_step": 58000,
+ "total_steps": 60000,
+ "steps_per_epoch": 2000,
+ "best_val_loss_monitor": 0.42932331562042236,
+ "val_bce_full": 0.4378223806660699,
+ "val_auc_full": 0.8744236493044647,
+ "C_ref": 1.031134847665686,
+ "C_sub": 1.0284907016523899,
+ "C_val": 1.0239125356713892,
+ "fast_predict_max_rel_dev": 3.793651736172964e-05,
+ "closure_chi2_ndf": 1.4737523909547754,
+ "closure_chi2": 58.950095638191016,
+ "closure_ndf": 40,
+ "toys": {
+  "mu0p4": {
+   "rows": 2885273,
+   "mean_r": 1.0122904777526855
+  },
+  "mu2p5": {
+   "rows": 2885273,
+   "mean_r": 1.0122904777526855
+  }
+ },
+ "fit_seconds": 8162.359659194946,
+ "total_seconds": 9124.469552993774,
+ "device": "cuda",
+ "config": {
+  "root": "/home/ubuntu/datascan/anneal",
+  "raw_data_dir": "/content/drive/MyDrive/Research/NSBI/spliced_21_columns",
+  "toys_root": "/content/drive/MyDrive/Research/NSBI",
+  "train_frac": 0.8,
+  "split_seed": 42,
+  "fractions": [
+   0.01,
+   0.03,
+   0.1,
+   0.3,
+   1.0
+  ],
+  "variants": [
+   "scratch",
+   "pretrained",
+   "frozen"
+  ],
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "tasks": [
+   "sig_over_bkg",
+   "sbi_over_bkg"
+  ],
+  "batch_size": 512,
+  "epoch_size": 1024000,
+  "max_epochs": 30,
+  "early_stop_patience": 0,
+  "val_monitor_rows": 262144,
+  "num_workers": 0,
+  "scratch_lr": 0.0003,
+  "scratch_weight_decay": 0.01,
+  "tf32": false,
+  "autocast_bf16": false,
+  "lumi": 300.0,
+  "mu_true_values": [
+   0.4,
+   2.5
+  ],
+  "mu_min": 0.0,
+  "mu_max": 4.0,
+  "mu_steps": 401,
+  "calib_ref_events": 1000000,
+  "keep_checkpoint": true,
+  "wandb_project": null,
+  "wandb_entity": null
+ },
+ "normalizer": {
+  "stats": {
+   "x": {
+    "mean": [
+     3.986820936203003,
+     4.427334308624268,
+     0.0011922016274183989,
+     -0.0004363131010904908
+    ],
+    "std": [
+     0.6789208054542542,
+     0.7384003400802612,
+     1.0981528759002686,
+     1.8135545253753662
+    ]
+   },
+   "globals": {
+    "mean": [
+     5.723140716552734,
+     5.490861415863037,
+     5.9745564460754395
+    ],
+    "std": [
+     0.39944303035736084,
+     0.4435977339744568,
+     0.45518410205841064
+    ]
+   }
+  },
+  "rules": {
+   "x": [
+    "log_normalize",
+    "log_normalize",
+    "normalize",
+    "normalize_uniform"
+   ],
+   "globals": [
+    "log_normalize",
+    "log_normalize",
+    "log_normalize"
+   ]
+  },
+  "feature_names": {
+   "x": [
+    "pt",
+    "energy",
+    "eta",
+    "phi"
+   ],
+   "globals": [
+    "m4l",
+    "sum_pt",
+    "sum_energy"
+   ]
+  }
+ },
+ "checkpoint_kind": "best"
+}

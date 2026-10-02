@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.ipynb_checkpoints/
+
+# caches and exports that are rebuilt, not versioned (tens of GB in total)
+data/*.npz
+**/r_val.npz
+**/r_toys_*.npy
+*.pt

@@ -1,0 +1,528 @@
+root /home/ubuntu/datascan/anneal | 8 runs for variants ['frozen', 'pretrained'] | 30 epochs x 2000 steps, early stopping off, both checkpoints exported
+/opt/pytorch/lib/python3.13/site-packages/torch/cuda/__init__.py:64: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+2026-09-16 02:26:41,704 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 02:26:41,823 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-16 02:26:42,105 | INFO | ======== Soft Load Summary ========
+2026-09-16 02:26:42,105 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-16 02:26:42,105 | INFO | All components loaded: NO
+2026-09-16 02:26:42,106 | INFO | --- Breakdown ---
+2026-09-16 02:26:42,106 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-16 02:26:42,106 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-16 02:26:42,106 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-16 02:26:42,106 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-16 02:26:42,106 | WARNING | Shape mismatches for 8 layers
+2026-09-16 02:26:42,106 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-16 02:26:42,106 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-16 02:26:42,106 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-16 02:26:42,106 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-16 02:26:42,106 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-16 02:26:42,106 | WARNING |   - ... and 3 more
+2026-09-16 02:26:42,106 | WARNING | Missing layers (randomly initialized): 23
+2026-09-16 02:26:42,107 | WARNING | • models         : 23 layers missing
+2026-09-16 02:26:42,107 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-16 02:26:42,107 | INFO | ===================================
+2026-09-16 02:26:44,630 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 02:26:47,066 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-16 02:26:47,067 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.98682      | 0.678921 |
+|               | energy       | log_normalize     | 4.42733      | 0.7384   |
+|               | eta          | normalize         | 0.0011922    | 1.09815  |
+|               | phi          | normalize_uniform | -0.000436313 | 1.81355  |
+| globals       | m4l          | log_normalize     | 5.72314      | 0.399443 |
+|               | sum_pt       | log_normalize     | 5.49086      | 0.443598 |
+|               | sum_energy   | log_normalize     | 5.97456      | 0.455184 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-16 02:26:47,067 | INFO | Training setup: epochs=30, batch_size=512, world_size=1, device=cuda
+2026-09-16 02:26:47,067 | INFO | Train loader: size=3477101, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-16 02:26:47,099 | INFO | Class distribution for train -> bkg: count=2263196 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=1213905 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-16 02:26:47,099 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-16 02:26:47,102 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+--- relaunch Wed Sep 16 02:30:03 UTC 2026: a=frozen, b=pretrained,scratch
+root /home/ubuntu/datascan/anneal | 4 runs for variants ['frozen'] | 30 epochs x 2000 steps, early stopping off, both checkpoints exported
+/opt/pytorch/lib/python3.13/site-packages/torch/cuda/__init__.py:64: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+2026-09-16 02:30:05,675 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 02:30:05,794 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-16 02:30:06,077 | INFO | ======== Soft Load Summary ========
+2026-09-16 02:30:06,077 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-16 02:30:06,077 | INFO | All components loaded: NO
+2026-09-16 02:30:06,078 | INFO | --- Breakdown ---
+2026-09-16 02:30:06,078 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-16 02:30:06,078 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-16 02:30:06,078 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-16 02:30:06,078 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-16 02:30:06,078 | WARNING | Shape mismatches for 8 layers
+2026-09-16 02:30:06,078 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-16 02:30:06,078 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-16 02:30:06,078 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-16 02:30:06,078 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-16 02:30:06,078 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-16 02:30:06,078 | WARNING |   - ... and 3 more
+2026-09-16 02:30:06,078 | WARNING | Missing layers (randomly initialized): 23
+2026-09-16 02:30:06,078 | WARNING | • models         : 23 layers missing
+2026-09-16 02:30:06,078 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-16 02:30:06,078 | INFO | ===================================
+2026-09-16 02:30:08,599 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 02:30:10,955 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-16 02:30:10,955 | INFO | Normalization plan:
++---------------+--------------+-------------------+--------------+----------+
+| Feature Group | Feature Name | Rule              | Mean         | Std      |
++===============+==============+===================+==============+==========+
+| x             | pt           | log_normalize     | 3.98682      | 0.678921 |
+|               | energy       | log_normalize     | 4.42733      | 0.7384   |
+|               | eta          | normalize         | 0.0011922    | 1.09815  |
+|               | phi          | normalize_uniform | -0.000436313 | 1.81355  |
+| globals       | m4l          | log_normalize     | 5.72314      | 0.399443 |
+|               | sum_pt       | log_normalize     | 5.49086      | 0.443598 |
+|               | sum_energy   | log_normalize     | 5.97456      | 0.455184 |
++---------------+--------------+-------------------+--------------+----------+
+2026-09-16 02:30:10,956 | INFO | Training setup: epochs=30, batch_size=512, world_size=1, device=cuda
+2026-09-16 02:30:10,956 | INFO | Train loader: size=3477101, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-16 02:30:10,987 | INFO | Class distribution for train -> bkg: count=2263196 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=1213905 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-16 02:30:10,987 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-16 02:30:10,990 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-16 02:40:06,001 | INFO | Epoch 1/30 | train_loss=0.4611 | train_accuracy=0.8018 | val_loss=0.4468 | val_accuracy=0.7910
+[anneal] epoch 1/30 lr=['0.001'] val_loss=0.4468
+2026-09-16 02:49:55,152 | INFO | Epoch 2/30 | train_loss=0.4512 | train_accuracy=0.8072 | val_loss=0.4455 | val_accuracy=0.7912
+[anneal] epoch 2/30 lr=['0.000997'] val_loss=0.4455
+2026-09-16 02:56:56,978 | INFO | Epoch 3/30 | train_loss=0.4499 | train_accuracy=0.8075 | val_loss=0.4481 | val_accuracy=0.7841
+[anneal] epoch 3/30 lr=['0.000988'] val_loss=0.4481
+2026-09-16 03:03:34,724 | INFO | Epoch 4/30 | train_loss=0.4491 | train_accuracy=0.8078 | val_loss=0.4434 | val_accuracy=0.7819
+[anneal] epoch 4/30 lr=['0.000974'] val_loss=0.4434
+2026-09-16 03:10:21,565 | INFO | Epoch 5/30 | train_loss=0.4477 | train_accuracy=0.8085 | val_loss=0.4431 | val_accuracy=0.7879
+[anneal] epoch 5/30 lr=['0.000954'] val_loss=0.4431
+2026-09-16 03:16:57,777 | INFO | Epoch 6/30 | train_loss=0.4473 | train_accuracy=0.8084 | val_loss=0.4376 | val_accuracy=0.7938
+[anneal] epoch 6/30 lr=['0.000928'] val_loss=0.4376
+2026-09-16 03:23:44,769 | INFO | Epoch 7/30 | train_loss=0.4460 | train_accuracy=0.8093 | val_loss=0.4407 | val_accuracy=0.7893
+[anneal] epoch 7/30 lr=['0.000898'] val_loss=0.4407
+2026-09-16 03:30:22,516 | INFO | Epoch 8/30 | train_loss=0.4458 | train_accuracy=0.8093 | val_loss=0.4411 | val_accuracy=0.7830
+[anneal] epoch 8/30 lr=['0.000863'] val_loss=0.4411
+2026-09-16 03:34:50,178 | INFO | Epoch 9/30 | train_loss=0.4449 | train_accuracy=0.8099 | val_loss=0.4454 | val_accuracy=0.7845
+[anneal] epoch 9/30 lr=['0.000824'] val_loss=0.4454
+2026-09-16 03:38:12,539 | INFO | Epoch 10/30 | train_loss=0.4432 | train_accuracy=0.8108 | val_loss=0.4370 | val_accuracy=0.7894
+[anneal] epoch 10/30 lr=['0.000781'] val_loss=0.4370
+2026-09-16 03:41:40,894 | INFO | Epoch 11/30 | train_loss=0.4437 | train_accuracy=0.8106 | val_loss=0.4388 | val_accuracy=0.7867
+[anneal] epoch 11/30 lr=['0.000734'] val_loss=0.4388
+2026-09-16 03:45:01,066 | INFO | Epoch 12/30 | train_loss=0.4438 | train_accuracy=0.8100 | val_loss=0.4352 | val_accuracy=0.7859
+[anneal] epoch 12/30 lr=['0.000685'] val_loss=0.4352
+2026-09-16 03:48:30,010 | INFO | Epoch 13/30 | train_loss=0.4425 | train_accuracy=0.8107 | val_loss=0.4347 | val_accuracy=0.7920
+[anneal] epoch 13/30 lr=['0.000634'] val_loss=0.4347
+2026-09-16 03:51:49,746 | INFO | Epoch 14/30 | train_loss=0.4415 | train_accuracy=0.8115 | val_loss=0.4331 | val_accuracy=0.7876
+[anneal] epoch 14/30 lr=['0.000581'] val_loss=0.4331
+2026-09-16 03:55:12,533 | INFO | Epoch 15/30 | train_loss=0.4423 | train_accuracy=0.8113 | val_loss=0.4381 | val_accuracy=0.7834
+[anneal] epoch 15/30 lr=['0.000527'] val_loss=0.4381
+2026-09-16 03:58:39,768 | INFO | Epoch 16/30 | train_loss=0.4411 | train_accuracy=0.8118 | val_loss=0.4332 | val_accuracy=0.7883
+[anneal] epoch 16/30 lr=['0.000473'] val_loss=0.4332
+2026-09-16 04:01:59,669 | INFO | Epoch 17/30 | train_loss=0.4411 | train_accuracy=0.8119 | val_loss=0.4318 | val_accuracy=0.7888
+[anneal] epoch 17/30 lr=['0.000419'] val_loss=0.4318
+2026-09-16 04:05:27,169 | INFO | Epoch 18/30 | train_loss=0.4415 | train_accuracy=0.8112 | val_loss=0.4347 | val_accuracy=0.7901
+[anneal] epoch 18/30 lr=['0.000366'] val_loss=0.4347
+2026-09-16 04:08:47,209 | INFO | Epoch 19/30 | train_loss=0.4403 | train_accuracy=0.8122 | val_loss=0.4359 | val_accuracy=0.7890
+[anneal] epoch 19/30 lr=['0.000315'] val_loss=0.4359
+2026-09-16 04:12:15,756 | INFO | Epoch 20/30 | train_loss=0.4402 | train_accuracy=0.8122 | val_loss=0.4351 | val_accuracy=0.7890
+[anneal] epoch 20/30 lr=['0.000266'] val_loss=0.4351
+2026-09-16 04:15:36,008 | INFO | Epoch 21/30 | train_loss=0.4393 | train_accuracy=0.8131 | val_loss=0.4352 | val_accuracy=0.7884
+[anneal] epoch 21/30 lr=['0.000219'] val_loss=0.4352
+2026-09-16 04:19:04,464 | INFO | Epoch 22/30 | train_loss=0.4393 | train_accuracy=0.8125 | val_loss=0.4330 | val_accuracy=0.7850
+[anneal] epoch 22/30 lr=['0.000176'] val_loss=0.4330
+2026-09-16 04:22:24,780 | INFO | Epoch 23/30 | train_loss=0.4395 | train_accuracy=0.8125 | val_loss=0.4329 | val_accuracy=0.7859
+[anneal] epoch 23/30 lr=['0.000137'] val_loss=0.4329
+2026-09-16 04:25:53,618 | INFO | Epoch 24/30 | train_loss=0.4402 | train_accuracy=0.8123 | val_loss=0.4342 | val_accuracy=0.7850
+[anneal] epoch 24/30 lr=['0.000102'] val_loss=0.4342
+2026-09-16 04:29:12,950 | INFO | Epoch 25/30 | train_loss=0.4385 | train_accuracy=0.8128 | val_loss=0.4350 | val_accuracy=0.7863
+[anneal] epoch 25/30 lr=['7.16e-05'] val_loss=0.4350
+2026-09-16 04:32:34,790 | INFO | Epoch 26/30 | train_loss=0.4392 | train_accuracy=0.8126 | val_loss=0.4331 | val_accuracy=0.7858
+[anneal] epoch 26/30 lr=['4.62e-05'] val_loss=0.4331
+2026-09-16 04:36:00,597 | INFO | Epoch 27/30 | train_loss=0.4391 | train_accuracy=0.8123 | val_loss=0.4354 | val_accuracy=0.7858
+[anneal] epoch 27/30 lr=['2.62e-05'] val_loss=0.4354
+2026-09-16 04:39:21,186 | INFO | Epoch 28/30 | train_loss=0.4381 | train_accuracy=0.8137 | val_loss=0.4312 | val_accuracy=0.7873
+[anneal] epoch 28/30 lr=['1.17e-05'] val_loss=0.4312
+2026-09-16 04:42:48,905 | INFO | Epoch 29/30 | train_loss=0.4384 | train_accuracy=0.8132 | val_loss=0.4293 | val_accuracy=0.7874
+[anneal] epoch 29/30 lr=['2.93e-06'] val_loss=0.4293
+2026-09-16 04:46:08,653 | INFO | Epoch 30/30 | train_loss=0.4386 | train_accuracy=0.8127 | val_loss=0.4317 | val_accuracy=0.7868
+[anneal] epoch 30/30 lr=['0'] val_loss=0.4317
+2026-09-16 04:46:08,655 | INFO | Saving checkpoint to /home/ubuntu/datascan/anneal/runs/frozen/sig_over_bkg/f1000/seed0/last.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[anneal] last-epoch weights saved to /home/ubuntu/datascan/anneal/runs/frozen/sig_over_bkg/f1000/seed0/last.pt
+2026-09-16 04:46:08,956 | INFO | Restored best model from epoch 29 based on val_loss=0.4293
+2026-09-16 04:46:08,956 | INFO | Training finished
+2026-09-16 04:46:08,957 | INFO | Saving checkpoint to /home/ubuntu/datascan/anneal/runs/frozen/sig_over_bkg/f1000/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-16 04:46:09,416 | INFO | Starting _collect_predictions
+2026-09-16 04:46:09,416 | INFO | Dataset size = 4096
+2026-09-16 04:46:09,416 | INFO | Batch size = 1024
+2026-09-16 04:46:09,829 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sig_over_bkg/f1000/seed0: best_epoch=29 val_auc=0.8744 C_ref=1.0311 chi2/ndf=1.47 (152.1 min)
+[anneal] frozen/sig_over_bkg/f1000: 30 epochs, best epoch 29, lr first->last 0.001 -> 0, schedule finished: True
+2026-09-16 05:02:09,931 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 05:02:10,033 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 05:02:10,033 | INFO | Restoring checkpoint from /home/ubuntu/datascan/anneal/runs/frozen/sig_over_bkg/f1000/seed0/last.pt
+2026-09-16 05:02:10,492 | INFO | Restored normalizer state from checkpoint
+2026-09-16 05:02:11,079 | INFO | Starting _collect_predictions
+2026-09-16 05:02:11,079 | INFO | Dataset size = 4096
+2026-09-16 05:02:11,079 | INFO | Batch size = 1024
+2026-09-16 05:02:11,520 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen_last/sig_over_bkg/f1000/seed0: epoch 30 val_auc=0.8744 C_ref=1.0014 chi2/ndf=1.40 (16.3 min)
+2026-09-16 05:18:28,672 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 05:18:28,763 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-16 05:18:28,997 | INFO | ======== Soft Load Summary ========
+2026-09-16 05:18:28,997 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-16 05:18:28,997 | INFO | All components loaded: NO
+2026-09-16 05:18:28,998 | INFO | --- Breakdown ---
+2026-09-16 05:18:28,998 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-16 05:18:28,998 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-16 05:18:28,998 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-16 05:18:28,999 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-16 05:18:28,999 | WARNING | Shape mismatches for 8 layers
+2026-09-16 05:18:28,999 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-16 05:18:28,999 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-16 05:18:28,999 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-16 05:18:28,999 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-16 05:18:28,999 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-16 05:18:28,999 | WARNING |   - ... and 3 more
+2026-09-16 05:18:28,999 | WARNING | Missing layers (randomly initialized): 23
+2026-09-16 05:18:28,999 | WARNING | • models         : 23 layers missing
+2026-09-16 05:18:28,999 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-16 05:18:28,999 | INFO | ===================================
+2026-09-16 05:18:29,762 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 05:18:30,898 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-16 05:18:30,899 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.81124    | 0.532144 |
+|               | energy       | log_normalize     | 4.26257    | 0.628343 |
+|               | eta          | normalize         | 0.00157893 | 1.11446  |
+|               | phi          | normalize_uniform | 0.00215519 | 1.81293  |
+| globals       | m4l          | log_normalize     | 5.52743    | 0.261194 |
+|               | sum_pt       | log_normalize     | 5.27714    | 0.296965 |
+|               | sum_energy   | log_normalize     | 5.77781    | 0.357287 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-16 05:18:30,899 | INFO | Training setup: epochs=30, batch_size=512, world_size=1, device=cuda
+2026-09-16 05:18:30,899 | INFO | Train loader: size=4610116, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-16 05:18:30,931 | INFO | Class distribution for train -> bkg: count=2305058 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=2305058 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-16 05:18:30,931 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-16 05:18:30,933 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-16 05:21:59,133 | INFO | Epoch 1/30 | train_loss=0.6967 | train_accuracy=0.5016 | val_loss=0.6950 | val_accuracy=0.5002
+[anneal] epoch 1/30 lr=['0.001'] val_loss=0.6950
+2026-09-16 05:25:19,938 | INFO | Epoch 2/30 | train_loss=0.6949 | train_accuracy=0.5011 | val_loss=0.6972 | val_accuracy=0.4996
+[anneal] epoch 2/30 lr=['0.000997'] val_loss=0.6972
+2026-09-16 05:28:45,537 | INFO | Epoch 3/30 | train_loss=0.6944 | train_accuracy=0.5017 | val_loss=0.6936 | val_accuracy=0.4990
+[anneal] epoch 3/30 lr=['0.000988'] val_loss=0.6936
+2026-09-16 05:32:06,855 | INFO | Epoch 4/30 | train_loss=0.6938 | train_accuracy=0.5027 | val_loss=0.6936 | val_accuracy=0.4994
+[anneal] epoch 4/30 lr=['0.000974'] val_loss=0.6936
+2026-09-16 05:35:28,292 | INFO | Epoch 5/30 | train_loss=0.6935 | train_accuracy=0.5026 | val_loss=0.6931 | val_accuracy=0.4996
+[anneal] epoch 5/30 lr=['0.000954'] val_loss=0.6931
+2026-09-16 05:38:56,152 | INFO | Epoch 6/30 | train_loss=0.6932 | train_accuracy=0.5031 | val_loss=0.6931 | val_accuracy=0.5006
+[anneal] epoch 6/30 lr=['0.000928'] val_loss=0.6931
+2026-09-16 05:42:16,950 | INFO | Epoch 7/30 | train_loss=0.6931 | train_accuracy=0.5025 | val_loss=0.6929 | val_accuracy=0.4993
+[anneal] epoch 7/30 lr=['0.000898'] val_loss=0.6929
+2026-09-16 05:45:44,308 | INFO | Epoch 8/30 | train_loss=0.6929 | train_accuracy=0.5029 | val_loss=0.6935 | val_accuracy=0.4988
+[anneal] epoch 8/30 lr=['0.000863'] val_loss=0.6935
+2026-09-16 05:49:04,293 | INFO | Epoch 9/30 | train_loss=0.6928 | train_accuracy=0.5050 | val_loss=0.6929 | val_accuracy=0.4998
+[anneal] epoch 9/30 lr=['0.000824'] val_loss=0.6929
+2026-09-16 05:52:32,283 | INFO | Epoch 10/30 | train_loss=0.6928 | train_accuracy=0.5040 | val_loss=0.6929 | val_accuracy=0.4999
+[anneal] epoch 10/30 lr=['0.000781'] val_loss=0.6929
+2026-09-16 05:55:52,440 | INFO | Epoch 11/30 | train_loss=0.6928 | train_accuracy=0.5045 | val_loss=0.6929 | val_accuracy=0.4987
+[anneal] epoch 11/30 lr=['0.000734'] val_loss=0.6929
+2026-09-16 05:59:20,289 | INFO | Epoch 12/30 | train_loss=0.6928 | train_accuracy=0.5034 | val_loss=0.6929 | val_accuracy=0.4999
+[anneal] epoch 12/30 lr=['0.000685'] val_loss=0.6929
+2026-09-16 06:02:40,410 | INFO | Epoch 13/30 | train_loss=0.6928 | train_accuracy=0.5045 | val_loss=0.6928 | val_accuracy=0.4993
+[anneal] epoch 13/30 lr=['0.000634'] val_loss=0.6928
+2026-09-16 06:06:05,900 | INFO | Epoch 14/30 | train_loss=0.6928 | train_accuracy=0.5052 | val_loss=0.6929 | val_accuracy=0.4989
+[anneal] epoch 14/30 lr=['0.000581'] val_loss=0.6929
+2026-09-16 06:09:28,428 | INFO | Epoch 15/30 | train_loss=0.6927 | train_accuracy=0.5055 | val_loss=0.6930 | val_accuracy=0.4995
+[anneal] epoch 15/30 lr=['0.000527'] val_loss=0.6930
+2026-09-16 06:12:48,770 | INFO | Epoch 16/30 | train_loss=0.6928 | train_accuracy=0.5050 | val_loss=0.6928 | val_accuracy=0.4996
+[anneal] epoch 16/30 lr=['0.000473'] val_loss=0.6928
+2026-09-16 06:16:16,391 | INFO | Epoch 17/30 | train_loss=0.6928 | train_accuracy=0.5029 | val_loss=0.6929 | val_accuracy=0.4993
+[anneal] epoch 17/30 lr=['0.000419'] val_loss=0.6929
+2026-09-16 06:19:37,348 | INFO | Epoch 18/30 | train_loss=0.6927 | train_accuracy=0.5053 | val_loss=0.6928 | val_accuracy=0.4987
+[anneal] epoch 18/30 lr=['0.000366'] val_loss=0.6928
+2026-09-16 06:23:05,704 | INFO | Epoch 19/30 | train_loss=0.6927 | train_accuracy=0.5057 | val_loss=0.6928 | val_accuracy=0.4992
+[anneal] epoch 19/30 lr=['0.000315'] val_loss=0.6928
+2026-09-16 06:26:59,319 | INFO | Epoch 20/30 | train_loss=0.6927 | train_accuracy=0.5050 | val_loss=0.6928 | val_accuracy=0.4995
+[anneal] epoch 20/30 lr=['0.000266'] val_loss=0.6928
+2026-09-16 06:31:48,258 | INFO | Epoch 21/30 | train_loss=0.6927 | train_accuracy=0.5048 | val_loss=0.6928 | val_accuracy=0.4995
+[anneal] epoch 21/30 lr=['0.000219'] val_loss=0.6928
+2026-09-16 06:36:37,686 | INFO | Epoch 22/30 | train_loss=0.6927 | train_accuracy=0.5052 | val_loss=0.6928 | val_accuracy=0.4997
+[anneal] epoch 22/30 lr=['0.000176'] val_loss=0.6928
+2026-09-16 06:41:25,109 | INFO | Epoch 23/30 | train_loss=0.6927 | train_accuracy=0.5038 | val_loss=0.6928 | val_accuracy=0.4995
+[anneal] epoch 23/30 lr=['0.000137'] val_loss=0.6928
+2026-09-16 06:46:13,950 | INFO | Epoch 24/30 | train_loss=0.6927 | train_accuracy=0.5056 | val_loss=0.6928 | val_accuracy=0.4998
+[anneal] epoch 24/30 lr=['0.000102'] val_loss=0.6928
+2026-09-16 06:51:03,435 | INFO | Epoch 25/30 | train_loss=0.6927 | train_accuracy=0.5050 | val_loss=0.6928 | val_accuracy=0.4996
+[anneal] epoch 25/30 lr=['7.16e-05'] val_loss=0.6928
+2026-09-16 06:55:09,966 | INFO | Epoch 26/30 | train_loss=0.6927 | train_accuracy=0.5048 | val_loss=0.6928 | val_accuracy=0.4994
+[anneal] epoch 26/30 lr=['4.62e-05'] val_loss=0.6928
+2026-09-16 06:58:38,588 | INFO | Epoch 27/30 | train_loss=0.6927 | train_accuracy=0.5054 | val_loss=0.6928 | val_accuracy=0.4996
+[anneal] epoch 27/30 lr=['2.62e-05'] val_loss=0.6928
+2026-09-16 07:01:59,101 | INFO | Epoch 28/30 | train_loss=0.6927 | train_accuracy=0.5049 | val_loss=0.6928 | val_accuracy=0.4993
+[anneal] epoch 28/30 lr=['1.17e-05'] val_loss=0.6928
+2026-09-16 07:05:27,650 | INFO | Epoch 29/30 | train_loss=0.6927 | train_accuracy=0.5053 | val_loss=0.6928 | val_accuracy=0.4993
+[anneal] epoch 29/30 lr=['2.93e-06'] val_loss=0.6928
+2026-09-16 07:08:47,951 | INFO | Epoch 30/30 | train_loss=0.6926 | train_accuracy=0.5059 | val_loss=0.6928 | val_accuracy=0.4991
+[anneal] epoch 30/30 lr=['0'] val_loss=0.6928
+2026-09-16 07:08:47,954 | INFO | Saving checkpoint to /home/ubuntu/datascan/anneal/runs/frozen/sbi_over_bkg/f1000/seed0/last.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[anneal] last-epoch weights saved to /home/ubuntu/datascan/anneal/runs/frozen/sbi_over_bkg/f1000/seed0/last.pt
+2026-09-16 07:08:48,267 | INFO | Restored best model from epoch 26 based on val_loss=0.6928
+2026-09-16 07:08:48,267 | INFO | Training finished
+2026-09-16 07:08:48,267 | INFO | Saving checkpoint to /home/ubuntu/datascan/anneal/runs/frozen/sbi_over_bkg/f1000/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-16 07:08:48,722 | INFO | Starting _collect_predictions
+2026-09-16 07:08:48,722 | INFO | Dataset size = 4096
+2026-09-16 07:08:48,722 | INFO | Batch size = 1024
+2026-09-16 07:08:49,145 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sbi_over_bkg/f1000/seed0: best_epoch=26 val_auc=0.5068 C_ref=1.0025 chi2/ndf=0.24 (125.9 min)
+[anneal] frozen/sbi_over_bkg/f1000: 30 epochs, best epoch 26, lr first->last 0.001 -> 0, schedule finished: True
+2026-09-16 07:24:21,406 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 07:24:21,502 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 07:24:21,502 | INFO | Restoring checkpoint from /home/ubuntu/datascan/anneal/runs/frozen/sbi_over_bkg/f1000/seed0/last.pt
+2026-09-16 07:24:21,836 | INFO | Restored normalizer state from checkpoint
+2026-09-16 07:24:22,293 | INFO | Starting _collect_predictions
+2026-09-16 07:24:22,293 | INFO | Dataset size = 4096
+2026-09-16 07:24:22,293 | INFO | Batch size = 1024
+2026-09-16 07:24:22,814 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen_last/sbi_over_bkg/f1000/seed0: epoch 30 val_auc=0.5070 C_ref=1.0032 chi2/ndf=0.27 (15.9 min)
+2026-09-16 07:40:16,630 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 07:40:16,721 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-16 07:40:16,922 | INFO | ======== Soft Load Summary ========
+2026-09-16 07:40:16,922 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-16 07:40:16,923 | INFO | All components loaded: NO
+2026-09-16 07:40:16,923 | INFO | --- Breakdown ---
+2026-09-16 07:40:16,923 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-16 07:40:16,923 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-16 07:40:16,923 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-16 07:40:16,923 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-16 07:40:16,923 | WARNING | Shape mismatches for 8 layers
+2026-09-16 07:40:16,923 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-16 07:40:16,923 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-16 07:40:16,924 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-16 07:40:16,924 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-16 07:40:16,924 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-16 07:40:16,924 | WARNING |   - ... and 3 more
+2026-09-16 07:40:16,924 | WARNING | Missing layers (randomly initialized): 23
+2026-09-16 07:40:16,924 | WARNING | • models         : 23 layers missing
+2026-09-16 07:40:16,924 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-16 07:40:16,924 | INFO | ===================================
+2026-09-16 07:40:17,058 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 07:40:17,234 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-16 07:40:17,235 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.98783    | 0.679691 |
+|               | energy       | log_normalize     | 4.42913    | 0.738827 |
+|               | eta          | normalize         | 0.00361719 | 1.09929  |
+|               | phi          | normalize_uniform | 0.0028908  | 1.81309  |
+| globals       | m4l          | log_normalize     | 5.7241     | 0.399983 |
+|               | sum_pt       | log_normalize     | 5.492      | 0.444526 |
+|               | sum_energy   | log_normalize     | 5.97656    | 0.455542 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-16 07:40:17,235 | INFO | Training setup: epochs=30, batch_size=512, world_size=1, device=cuda
+2026-09-16 07:40:17,235 | INFO | Train loader: size=104313, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-16 07:40:17,236 | INFO | Class distribution for train -> bkg: count=67896 (frac=0.651), weight_sum=1.000 (frac=0.500) | sig: count=36417 (frac=0.349), weight_sum=1.000 (frac=0.500)
+2026-09-16 07:40:17,236 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-16 07:40:17,238 | INFO | Class distribution for val -> bkg: count=170468 (frac=0.650), weight_sum=0.302 (frac=0.501) | sig: count=91676 (frac=0.350), weight_sum=0.301 (frac=0.499)
+2026-09-16 07:43:37,729 | INFO | Epoch 1/30 | train_loss=0.4554 | train_accuracy=0.8043 | val_loss=0.4413 | val_accuracy=0.7963
+[anneal] epoch 1/30 lr=['0.001'] val_loss=0.4413
+2026-09-16 07:47:04,043 | INFO | Epoch 2/30 | train_loss=0.4422 | train_accuracy=0.8109 | val_loss=0.4456 | val_accuracy=0.7906
+[anneal] epoch 2/30 lr=['0.000997'] val_loss=0.4456
+2026-09-16 07:50:23,193 | INFO | Epoch 3/30 | train_loss=0.4349 | train_accuracy=0.8144 | val_loss=0.4536 | val_accuracy=0.7905
+[anneal] epoch 3/30 lr=['0.000988'] val_loss=0.4536
+2026-09-16 07:53:51,155 | INFO | Epoch 4/30 | train_loss=0.4308 | train_accuracy=0.8158 | val_loss=0.4482 | val_accuracy=0.7847
+[anneal] epoch 4/30 lr=['0.000974'] val_loss=0.4482
+2026-09-16 07:57:11,521 | INFO | Epoch 5/30 | train_loss=0.4267 | train_accuracy=0.8175 | val_loss=0.4513 | val_accuracy=0.7879
+[anneal] epoch 5/30 lr=['0.000954'] val_loss=0.4513
+2026-09-16 08:00:39,134 | INFO | Epoch 6/30 | train_loss=0.4226 | train_accuracy=0.8191 | val_loss=0.4541 | val_accuracy=0.7858
+[anneal] epoch 6/30 lr=['0.000928'] val_loss=0.4541
+2026-09-16 08:03:57,856 | INFO | Epoch 7/30 | train_loss=0.4191 | train_accuracy=0.8213 | val_loss=0.4531 | val_accuracy=0.7881
+[anneal] epoch 7/30 lr=['0.000898'] val_loss=0.4531
+2026-09-16 08:07:25,287 | INFO | Epoch 8/30 | train_loss=0.4163 | train_accuracy=0.8218 | val_loss=0.4568 | val_accuracy=0.7795
+[anneal] epoch 8/30 lr=['0.000863'] val_loss=0.4568
+2026-09-16 08:10:43,654 | INFO | Epoch 9/30 | train_loss=0.4122 | train_accuracy=0.8234 | val_loss=0.4599 | val_accuracy=0.7820
+[anneal] epoch 9/30 lr=['0.000824'] val_loss=0.4599
+2026-09-16 08:14:10,490 | INFO | Epoch 10/30 | train_loss=0.4077 | train_accuracy=0.8259 | val_loss=0.4605 | val_accuracy=0.7731
+[anneal] epoch 10/30 lr=['0.000781'] val_loss=0.4605
+2026-09-16 08:17:29,827 | INFO | Epoch 11/30 | train_loss=0.4049 | train_accuracy=0.8268 | val_loss=0.4615 | val_accuracy=0.7812
+[anneal] epoch 11/30 lr=['0.000734'] val_loss=0.4615
+2026-09-16 08:20:50,424 | INFO | Epoch 12/30 | train_loss=0.4005 | train_accuracy=0.8289 | val_loss=0.4641 | val_accuracy=0.7820
+[anneal] epoch 12/30 lr=['0.000685'] val_loss=0.4641
+2026-09-16 08:24:17,683 | INFO | Epoch 13/30 | train_loss=0.3971 | train_accuracy=0.8304 | val_loss=0.4699 | val_accuracy=0.7826
+[anneal] epoch 13/30 lr=['0.000634'] val_loss=0.4699
+2026-09-16 08:27:36,740 | INFO | Epoch 14/30 | train_loss=0.3949 | train_accuracy=0.8314 | val_loss=0.4738 | val_accuracy=0.7674
+[anneal] epoch 14/30 lr=['0.000581'] val_loss=0.4738
+2026-09-16 08:31:04,424 | INFO | Epoch 15/30 | train_loss=0.3908 | train_accuracy=0.8331 | val_loss=0.4721 | val_accuracy=0.7756
+[anneal] epoch 15/30 lr=['0.000527'] val_loss=0.4721
+2026-09-16 08:34:24,089 | INFO | Epoch 16/30 | train_loss=0.3874 | train_accuracy=0.8348 | val_loss=0.4829 | val_accuracy=0.7666
+[anneal] epoch 16/30 lr=['0.000473'] val_loss=0.4829
+2026-09-16 08:37:51,090 | INFO | Epoch 17/30 | train_loss=0.3843 | train_accuracy=0.8362 | val_loss=0.4781 | val_accuracy=0.7785
+[anneal] epoch 17/30 lr=['0.000419'] val_loss=0.4781
+2026-09-16 08:41:09,817 | INFO | Epoch 18/30 | train_loss=0.3805 | train_accuracy=0.8378 | val_loss=0.4825 | val_accuracy=0.7725
+[anneal] epoch 18/30 lr=['0.000366'] val_loss=0.4825
+2026-09-16 08:44:38,400 | INFO | Epoch 19/30 | train_loss=0.3767 | train_accuracy=0.8401 | val_loss=0.4876 | val_accuracy=0.7705
+[anneal] epoch 19/30 lr=['0.000315'] val_loss=0.4876
+2026-09-16 08:47:56,926 | INFO | Epoch 20/30 | train_loss=0.3744 | train_accuracy=0.8408 | val_loss=0.4876 | val_accuracy=0.7751
+[anneal] epoch 20/30 lr=['0.000266'] val_loss=0.4876
+2026-09-16 08:51:23,612 | INFO | Epoch 21/30 | train_loss=0.3730 | train_accuracy=0.8413 | val_loss=0.4963 | val_accuracy=0.7711
+[anneal] epoch 21/30 lr=['0.000219'] val_loss=0.4963
+2026-09-16 08:54:41,888 | INFO | Epoch 22/30 | train_loss=0.3693 | train_accuracy=0.8433 | val_loss=0.4967 | val_accuracy=0.7689
+[anneal] epoch 22/30 lr=['0.000176'] val_loss=0.4967
+2026-09-16 08:58:01,936 | INFO | Epoch 23/30 | train_loss=0.3667 | train_accuracy=0.8445 | val_loss=0.4993 | val_accuracy=0.7723
+[anneal] epoch 23/30 lr=['0.000137'] val_loss=0.4993
+2026-09-16 09:01:28,538 | INFO | Epoch 24/30 | train_loss=0.3650 | train_accuracy=0.8451 | val_loss=0.5011 | val_accuracy=0.7705
+[anneal] epoch 24/30 lr=['0.000102'] val_loss=0.5011
+2026-09-16 09:04:47,375 | INFO | Epoch 25/30 | train_loss=0.3630 | train_accuracy=0.8465 | val_loss=0.5012 | val_accuracy=0.7717
+[anneal] epoch 25/30 lr=['7.16e-05'] val_loss=0.5012
+2026-09-16 09:08:15,341 | INFO | Epoch 26/30 | train_loss=0.3633 | train_accuracy=0.8461 | val_loss=0.5009 | val_accuracy=0.7722
+[anneal] epoch 26/30 lr=['4.62e-05'] val_loss=0.5009
+2026-09-16 09:11:34,024 | INFO | Epoch 27/30 | train_loss=0.3612 | train_accuracy=0.8469 | val_loss=0.5038 | val_accuracy=0.7702
+[anneal] epoch 27/30 lr=['2.62e-05'] val_loss=0.5038
+2026-09-16 09:15:01,747 | INFO | Epoch 28/30 | train_loss=0.3606 | train_accuracy=0.8471 | val_loss=0.5011 | val_accuracy=0.7720
+[anneal] epoch 28/30 lr=['1.17e-05'] val_loss=0.5011
+2026-09-16 09:18:20,644 | INFO | Epoch 29/30 | train_loss=0.3617 | train_accuracy=0.8467 | val_loss=0.4999 | val_accuracy=0.7729
+[anneal] epoch 29/30 lr=['2.93e-06'] val_loss=0.4999
+2026-09-16 09:21:47,756 | INFO | Epoch 30/30 | train_loss=0.3604 | train_accuracy=0.8475 | val_loss=0.5039 | val_accuracy=0.7711
+[anneal] epoch 30/30 lr=['0'] val_loss=0.5039
+2026-09-16 09:21:47,758 | INFO | Saving checkpoint to /home/ubuntu/datascan/anneal/runs/frozen/sig_over_bkg/f0030/seed0/last.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[anneal] last-epoch weights saved to /home/ubuntu/datascan/anneal/runs/frozen/sig_over_bkg/f0030/seed0/last.pt
+2026-09-16 09:21:48,062 | INFO | Restored best model from epoch 1 based on val_loss=0.4413
+2026-09-16 09:21:48,062 | INFO | Training finished
+2026-09-16 09:21:48,063 | INFO | Saving checkpoint to /home/ubuntu/datascan/anneal/runs/frozen/sig_over_bkg/f0030/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-16 09:21:48,500 | INFO | Starting _collect_predictions
+2026-09-16 09:21:48,500 | INFO | Dataset size = 4096
+2026-09-16 09:21:48,501 | INFO | Batch size = 1024
+2026-09-16 09:21:48,918 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sig_over_bkg/f0030/seed0: best_epoch=1 val_auc=0.8641 C_ref=1.0163 chi2/ndf=12.88 (113.7 min)
+[anneal] frozen/sig_over_bkg/f0030: 30 epochs, best epoch 1, lr first->last 0.001 -> 0, schedule finished: True
+2026-09-16 09:34:00,828 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 09:34:00,923 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 09:34:00,923 | INFO | Restoring checkpoint from /home/ubuntu/datascan/anneal/runs/frozen/sig_over_bkg/f0030/seed0/last.pt
+2026-09-16 09:34:01,238 | INFO | Restored normalizer state from checkpoint
+2026-09-16 09:34:01,738 | INFO | Starting _collect_predictions
+2026-09-16 09:34:01,738 | INFO | Dataset size = 4096
+2026-09-16 09:34:01,738 | INFO | Batch size = 1024
+2026-09-16 09:34:02,074 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen_last/sig_over_bkg/f0030/seed0: epoch 30 val_auc=0.8476 C_ref=0.1037 chi2/ndf=151.82 (12.7 min)
+2026-09-16 09:46:43,416 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 09:46:43,508 | INFO | Loading pretrained weights using source=hf (repo_id=Avencast/EveNet, filename=checkpoints.20M.a4.last.ckpt, local_path=None)
+2026-09-16 09:46:43,716 | INFO | ======== Soft Load Summary ========
+2026-09-16 09:46:43,716 | INFO | Loaded 504 / 535 layers (94.2%)
+2026-09-16 09:46:43,716 | INFO | All components loaded: NO
+2026-09-16 09:46:43,716 | INFO | --- Breakdown ---
+2026-09-16 09:46:43,716 | INFO | • GlobalEmbedding [copies=1]: 100/106 loaded (6 not loaded: 0 missing, 6 mismatched)
+2026-09-16 09:46:43,717 | INFO | • PET             [copies=1]: 269/271 loaded (2 not loaded: 0 missing, 2 mismatched)
+2026-09-16 09:46:43,717 | INFO | • ObjectEncoder   [copies=1]: 121/121 loaded (0 not loaded: 0 missing, 0 mismatched)
+2026-09-16 09:46:43,717 | INFO | • Classification  [copies=1]: 14/37 loaded (23 not loaded: 23 missing, 0 mismatched)
+2026-09-16 09:46:43,717 | WARNING | Shape mismatches for 8 layers
+2026-09-16 09:46:43,717 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.weight (ckpt: [10] vs model: [3])
+2026-09-16 09:46:43,717 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.normalization.normalization.bias (ckpt: [10] vs model: [3])
+2026-09-16 09:46:43,717 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.weight (ckpt: [20, 10] vs model: [6, 3])
+2026-09-16 09:46:43,717 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_1.0.bias (ckpt: [20] vs model: [6])
+2026-09-16 09:46:43,717 | WARNING |   - models.0.backbone.GlobalEmbedding.embedding_stack.embedding_layers.0.linear_2.0.weight (ckpt: [16, 20] vs model: [16, 6])
+2026-09-16 09:46:43,717 | WARNING |   - ... and 3 more
+2026-09-16 09:46:43,717 | WARNING | Missing layers (randomly initialized): 23
+2026-09-16 09:46:43,717 | WARNING | • models         : 23 layers missing
+2026-09-16 09:46:43,717 | WARNING | Unexpected layers in checkpoint (ignored): 91
+2026-09-16 09:46:43,717 | INFO | ===================================
+2026-09-16 09:46:43,934 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 09:46:44,107 | INFO | Fitted normalizer with features: {'x': ['pt', 'energy', 'eta', 'phi'], 'globals': ['m4l', 'sum_pt', 'sum_energy']}
+2026-09-16 09:46:44,107 | INFO | Normalization plan:
++---------------+--------------+-------------------+------------+----------+
+| Feature Group | Feature Name | Rule              | Mean       | Std      |
++===============+==============+===================+============+==========+
+| x             | pt           | log_normalize     | 3.80984    | 0.531669 |
+|               | energy       | log_normalize     | 4.26035    | 0.627613 |
+|               | eta          | normalize         | 0.00520081 | 1.11337  |
+|               | phi          | normalize_uniform | 0.00395417 | 1.81339  |
+| globals       | m4l          | log_normalize     | 5.5261     | 0.259915 |
+|               | sum_pt       | log_normalize     | 5.27562    | 0.295925 |
+|               | sum_energy   | log_normalize     | 5.77553    | 0.356403 |
++---------------+--------------+-------------------+------------+----------+
+2026-09-16 09:46:44,107 | INFO | Training setup: epochs=30, batch_size=512, world_size=1, device=cuda
+2026-09-16 09:46:44,107 | INFO | Train loader: size=138304, steps_per_epoch=2000, sampler=DistributedWeightedSampler, epoch_size=1024000, replacement=True
+2026-09-16 09:46:44,109 | INFO | Class distribution for train -> bkg: count=69152 (frac=0.500), weight_sum=1.000 (frac=0.500) | sig: count=69152 (frac=0.500), weight_sum=1.000 (frac=0.500)
+2026-09-16 09:46:44,109 | INFO | Val loader: size=262144, steps_per_epoch=512, sampler=None (shuffled)
+2026-09-16 09:46:44,111 | INFO | Class distribution for val -> bkg: count=130957 (frac=0.500), weight_sum=0.227 (frac=0.500) | sig: count=131187 (frac=0.500), weight_sum=0.227 (frac=0.500)
+2026-09-16 09:50:12,580 | INFO | Epoch 1/30 | train_loss=0.6968 | train_accuracy=0.5016 | val_loss=0.6971 | val_accuracy=0.4995
+[anneal] epoch 1/30 lr=['0.001'] val_loss=0.6971
+2026-09-16 09:53:32,360 | INFO | Epoch 2/30 | train_loss=0.6947 | train_accuracy=0.5021 | val_loss=0.6934 | val_accuracy=0.4998
+[anneal] epoch 2/30 lr=['0.000997'] val_loss=0.6934
+2026-09-16 09:57:00,596 | INFO | Epoch 3/30 | train_loss=0.6944 | train_accuracy=0.5034 | val_loss=0.6951 | val_accuracy=0.5002
+[anneal] epoch 3/30 lr=['0.000988'] val_loss=0.6951
+2026-09-16 10:00:20,435 | INFO | Epoch 4/30 | train_loss=0.6938 | train_accuracy=0.5021 | val_loss=0.6930 | val_accuracy=0.5000
+[anneal] epoch 4/30 lr=['0.000974'] val_loss=0.6930
+2026-09-16 10:03:45,425 | INFO | Epoch 5/30 | train_loss=0.6933 | train_accuracy=0.5021 | val_loss=0.6930 | val_accuracy=0.5001
+[anneal] epoch 5/30 lr=['0.000954'] val_loss=0.6930
+2026-09-16 10:07:07,859 | INFO | Epoch 6/30 | train_loss=0.6930 | train_accuracy=0.5032 | val_loss=0.6928 | val_accuracy=0.4991
+[anneal] epoch 6/30 lr=['0.000928'] val_loss=0.6928
+2026-09-16 10:10:26,969 | INFO | Epoch 7/30 | train_loss=0.6929 | train_accuracy=0.5040 | val_loss=0.6929 | val_accuracy=0.4994
+[anneal] epoch 7/30 lr=['0.000898'] val_loss=0.6929
+2026-09-16 10:13:54,709 | INFO | Epoch 8/30 | train_loss=0.6928 | train_accuracy=0.5040 | val_loss=0.6929 | val_accuracy=0.4997
+[anneal] epoch 8/30 lr=['0.000863'] val_loss=0.6929
+2026-09-16 10:17:14,312 | INFO | Epoch 9/30 | train_loss=0.6929 | train_accuracy=0.5036 | val_loss=0.6930 | val_accuracy=0.4998
+[anneal] epoch 9/30 lr=['0.000824'] val_loss=0.6930
+2026-09-16 10:20:42,065 | INFO | Epoch 10/30 | train_loss=0.6928 | train_accuracy=0.5045 | val_loss=0.6928 | val_accuracy=0.4987
+[anneal] epoch 10/30 lr=['0.000781'] val_loss=0.6928
+2026-09-16 10:24:34,431 | INFO | Epoch 11/30 | train_loss=0.6928 | train_accuracy=0.5039 | val_loss=0.6928 | val_accuracy=0.4998
+[anneal] epoch 11/30 lr=['0.000734'] val_loss=0.6928
+2026-09-16 10:29:20,057 | INFO | Epoch 12/30 | train_loss=0.6927 | train_accuracy=0.5039 | val_loss=0.6928 | val_accuracy=0.4999
+[anneal] epoch 12/30 lr=['0.000685'] val_loss=0.6928
+2026-09-16 10:34:08,001 | INFO | Epoch 13/30 | train_loss=0.6927 | train_accuracy=0.5046 | val_loss=0.6929 | val_accuracy=0.4997
+[anneal] epoch 13/30 lr=['0.000634'] val_loss=0.6929
+2026-09-16 10:38:52,158 | INFO | Epoch 14/30 | train_loss=0.6928 | train_accuracy=0.5043 | val_loss=0.6928 | val_accuracy=0.4986
+[anneal] epoch 14/30 lr=['0.000581'] val_loss=0.6928
+2026-09-16 10:43:41,124 | INFO | Epoch 15/30 | train_loss=0.6927 | train_accuracy=0.5035 | val_loss=0.6930 | val_accuracy=0.4995
+[anneal] epoch 15/30 lr=['0.000527'] val_loss=0.6930
+2026-09-16 10:48:28,358 | INFO | Epoch 16/30 | train_loss=0.6927 | train_accuracy=0.5051 | val_loss=0.6928 | val_accuracy=0.4996
+[anneal] epoch 16/30 lr=['0.000473'] val_loss=0.6928
+2026-09-16 10:52:26,060 | INFO | Epoch 17/30 | train_loss=0.6928 | train_accuracy=0.5029 | val_loss=0.6928 | val_accuracy=0.5001
+[anneal] epoch 17/30 lr=['0.000419'] val_loss=0.6928
+2026-09-16 10:55:53,061 | INFO | Epoch 18/30 | train_loss=0.6927 | train_accuracy=0.5043 | val_loss=0.6928 | val_accuracy=0.4998
+[anneal] epoch 18/30 lr=['0.000366'] val_loss=0.6928
+2026-09-16 10:59:12,671 | INFO | Epoch 19/30 | train_loss=0.6927 | train_accuracy=0.5046 | val_loss=0.6928 | val_accuracy=0.4998
+[anneal] epoch 19/30 lr=['0.000315'] val_loss=0.6928
+2026-09-16 11:02:36,556 | INFO | Epoch 20/30 | train_loss=0.6927 | train_accuracy=0.5058 | val_loss=0.6928 | val_accuracy=0.4993
+[anneal] epoch 20/30 lr=['0.000266'] val_loss=0.6928
+2026-09-16 11:05:59,868 | INFO | Epoch 21/30 | train_loss=0.6927 | train_accuracy=0.5043 | val_loss=0.6928 | val_accuracy=0.4992
+[anneal] epoch 21/30 lr=['0.000219'] val_loss=0.6928
+2026-09-16 11:09:19,833 | INFO | Epoch 22/30 | train_loss=0.6927 | train_accuracy=0.5049 | val_loss=0.6928 | val_accuracy=0.4991
+[anneal] epoch 22/30 lr=['0.000176'] val_loss=0.6928
+2026-09-16 11:12:46,867 | INFO | Epoch 23/30 | train_loss=0.6927 | train_accuracy=0.5043 | val_loss=0.6928 | val_accuracy=0.4991
+[anneal] epoch 23/30 lr=['0.000137'] val_loss=0.6928
+2026-09-16 11:16:05,793 | INFO | Epoch 24/30 | train_loss=0.6927 | train_accuracy=0.5047 | val_loss=0.6928 | val_accuracy=0.4991
+[anneal] epoch 24/30 lr=['0.000102'] val_loss=0.6928
+2026-09-16 11:19:33,443 | INFO | Epoch 25/30 | train_loss=0.6927 | train_accuracy=0.5047 | val_loss=0.6928 | val_accuracy=0.4991
+[anneal] epoch 25/30 lr=['7.16e-05'] val_loss=0.6928
+2026-09-16 11:22:53,137 | INFO | Epoch 26/30 | train_loss=0.6927 | train_accuracy=0.5040 | val_loss=0.6928 | val_accuracy=0.4996
+[anneal] epoch 26/30 lr=['4.62e-05'] val_loss=0.6928
+2026-09-16 11:26:19,515 | INFO | Epoch 27/30 | train_loss=0.6926 | train_accuracy=0.5060 | val_loss=0.6928 | val_accuracy=0.4993
+[anneal] epoch 27/30 lr=['2.62e-05'] val_loss=0.6928
+2026-09-16 11:29:38,187 | INFO | Epoch 28/30 | train_loss=0.6926 | train_accuracy=0.5046 | val_loss=0.6928 | val_accuracy=0.4991
+[anneal] epoch 28/30 lr=['1.17e-05'] val_loss=0.6928
+2026-09-16 11:33:04,931 | INFO | Epoch 29/30 | train_loss=0.6927 | train_accuracy=0.5049 | val_loss=0.6928 | val_accuracy=0.4990
+[anneal] epoch 29/30 lr=['2.93e-06'] val_loss=0.6928
+2026-09-16 11:36:23,875 | INFO | Epoch 30/30 | train_loss=0.6927 | train_accuracy=0.5053 | val_loss=0.6928 | val_accuracy=0.4991
+[anneal] epoch 30/30 lr=['0'] val_loss=0.6928
+2026-09-16 11:36:23,877 | INFO | Saving checkpoint to /home/ubuntu/datascan/anneal/runs/frozen/sbi_over_bkg/f0030/seed0/last.pt (includes normalizer=True, extra keys=['epoch', 'kind', 'schedulers'])
+[anneal] last-epoch weights saved to /home/ubuntu/datascan/anneal/runs/frozen/sbi_over_bkg/f0030/seed0/last.pt
+2026-09-16 11:36:24,180 | INFO | Restored best model from epoch 21 based on val_loss=0.6928
+2026-09-16 11:36:24,180 | INFO | Training finished
+2026-09-16 11:36:24,181 | INFO | Saving checkpoint to /home/ubuntu/datascan/anneal/runs/frozen/sbi_over_bkg/f0030/seed0/final.pt (includes normalizer=True, extra keys=['schedulers'])
+2026-09-16 11:36:24,625 | INFO | Starting _collect_predictions
+2026-09-16 11:36:24,625 | INFO | Dataset size = 4096
+2026-09-16 11:36:24,625 | INFO | Batch size = 1024
+2026-09-16 11:36:25,211 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen/sbi_over_bkg/f0030/seed0: best_epoch=21 val_auc=0.5069 C_ref=0.9996 chi2/ndf=0.13 (121.6 min)
+[anneal] frozen/sbi_over_bkg/f0030: 30 epochs, best epoch 21, lr first->last 0.001 -> 0, schedule finished: True
+2026-09-16 11:48:18,089 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 11:48:18,193 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 11:48:18,193 | INFO | Restoring checkpoint from /home/ubuntu/datascan/anneal/runs/frozen/sbi_over_bkg/f0030/seed0/last.pt
+2026-09-16 11:48:18,592 | INFO | Restored normalizer state from checkpoint
+2026-09-16 11:48:19,175 | INFO | Starting _collect_predictions
+2026-09-16 11:48:19,175 | INFO | Dataset size = 4096
+2026-09-16 11:48:19,175 | INFO | Batch size = 1024
+2026-09-16 11:48:19,600 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[done] frozen_last/sbi_over_bkg/f0030/seed0: epoch 30 val_auc=0.5071 C_ref=1.0037 chi2/ndf=0.27 (12.3 min)
+summary: started=4 failed=0

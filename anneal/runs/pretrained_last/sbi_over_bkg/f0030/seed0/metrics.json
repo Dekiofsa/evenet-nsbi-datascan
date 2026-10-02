@@ -1,0 +1,108 @@
+{
+ "variant": "pretrained_last",
+ "task": "sbi_over_bkg",
+ "frac": 0.03,
+ "frac_tag": "f0030",
+ "seed": 0,
+ "checkpoint_kind": "last",
+ "checkpoint": "/home/ubuntu/datascan/anneal/runs/pretrained/sbi_over_bkg/f0030/seed0/last.pt",
+ "subsample_seed": 1000,
+ "n_num_train": 69152,
+ "n_den_train": 69152,
+ "ess_num_train": 45314.52418435861,
+ "ess_den_train": 45645.089300053056,
+ "n_num_val": 576265,
+ "n_den_val": 576265,
+ "n_train_rows": 138304,
+ "n_val_monitor_rows": 262144,
+ "n_trainable_params": 19860656,
+ "n_nonfinite_batches": 0,
+ "steps_per_epoch": 2000,
+ "tf32_training": false,
+ "autocast_bf16_training": false,
+ "fit_seconds": 6937.53860449791,
+ "device": "cuda",
+ "config": {
+  "root": "/home/ubuntu/datascan/anneal",
+  "raw_data_dir": "/content/drive/MyDrive/Research/NSBI/spliced_21_columns",
+  "toys_root": "/content/drive/MyDrive/Research/NSBI",
+  "train_frac": 0.8,
+  "split_seed": 42,
+  "fractions": [
+   0.01,
+   0.03,
+   0.1,
+   0.3,
+   1.0
+  ],
+  "variants": [
+   "scratch",
+   "pretrained",
+   "frozen"
+  ],
+  "seeds": [
+   0,
+   1,
+   2
+  ],
+  "tasks": [
+   "sig_over_bkg",
+   "sbi_over_bkg"
+  ],
+  "batch_size": 512,
+  "epoch_size": 1024000,
+  "max_epochs": 30,
+  "early_stop_patience": 0,
+  "val_monitor_rows": 262144,
+  "num_workers": 0,
+  "scratch_lr": 0.0003,
+  "scratch_weight_decay": 0.01,
+  "tf32": false,
+  "autocast_bf16": false,
+  "lumi": 300.0,
+  "mu_true_values": [
+   0.4,
+   2.5
+  ],
+  "mu_min": 0.0,
+  "mu_max": 4.0,
+  "mu_steps": 401,
+  "calib_ref_events": 1000000,
+  "keep_checkpoint": true,
+  "wandb_project": null,
+  "wandb_entity": null
+ },
+ "epochs_run": 30,
+ "checkpoint_epoch": 30,
+ "best_epoch": 29,
+ "best_step": 58000,
+ "best_val_loss_monitor": 0.6926701664924622,
+ "total_steps": 60000,
+ "last_val_loss_monitor": 0.692674994468689,
+ "lr_last_epoch": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "resumed_from_checkpoint": false,
+ "val_bce_full": 0.6925928998938022,
+ "val_auc_full": 0.5075093455253226,
+ "C_ref": 1.0024670025641444,
+ "C_sub": 1.002480543498482,
+ "C_val": 1.00256345671407,
+ "fast_predict_max_rel_dev": 4.976978004419325e-06,
+ "closure_chi2_ndf": 0.0747627139494464,
+ "closure_chi2": 2.990508557977856,
+ "closure_ndf": 40,
+ "toys": {
+  "mu0p4": {
+   "rows": 2885273,
+   "mean_r": 0.9987523555755615
+  },
+  "mu2p5": {
+   "rows": 2885273,
+   "mean_r": 0.9987523555755615
+  }
+ },
+ "total_seconds": 444.5428879261017
+}

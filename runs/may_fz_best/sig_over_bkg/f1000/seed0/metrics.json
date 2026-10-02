@@ -1,0 +1,21 @@
+{
+ "task": "sig_over_bkg",
+ "frac": 1.0,
+ "frac_tag": "f1000",
+ "seed": 0,
+ "checkpoint": "/home/ubuntu/datascan/may_ckpt/ssl_sig/sig_over_bkg-val_loss-epoch0008-0.4272.pt",
+ "checkpoint_epoch": 7,
+ "checkpoint_step": 54336,
+ "C_ref": 1.0247899002099514,
+ "C_sub": 1.0194635448699405,
+ "C_val": 1.010229982418431,
+ "fast_predict_max_rel_dev": 1.446321902871896e-05,
+ "val_bce_full": 0.440764503524754,
+ "val_auc_full": 0.8737370485267976,
+ "best_epoch": 7,
+ "epochs_run": 20,
+ "best_step": 54336,
+ "closure_chi2_ndf": NaN,
+ "total_seconds": 1722.857949256897,
+ "variant": "may_fz_best"
+}

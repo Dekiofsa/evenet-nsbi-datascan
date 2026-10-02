@@ -1,0 +1,7 @@
+# measurement, aggregation and figures (CPU only)
+numpy
+pandas
+matplotlib
+jupyter
+
+# training additionally needs torch, EveNet-Lite and evenet-core; see remote_setup.sh

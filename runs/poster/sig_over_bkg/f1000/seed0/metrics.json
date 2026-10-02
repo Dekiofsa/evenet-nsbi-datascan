@@ -1,0 +1,19 @@
+{
+ "variant": "poster",
+ "task": "sig_over_bkg",
+ "frac": 1.0,
+ "frac_tag": "f1000",
+ "seed": 0,
+ "checkpoint": "/home/ubuntu/datascan/poster_ckpt/EveNetPretrain_sig_over_bkg-val_loss-epoch0007-0.4119.pt",
+ "C_ref": 1.0308351843312082,
+ "C_sub": 1.0280618592582929,
+ "C_val": 0.9976023248767675,
+ "fast_predict_max_rel_dev": 1.5221527105817722e-05,
+ "val_bce_full": 0.4246820429159879,
+ "val_auc_full": 0.8842386985280507,
+ "best_epoch": 7,
+ "epochs_run": 20,
+ "best_step": 0,
+ "closure_chi2_ndf": NaN,
+ "total_seconds": 1246.9141833782196
+}

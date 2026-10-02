@@ -1,0 +1,142 @@
+/opt/pytorch/lib/python3.13/site-packages/torch/cuda/__init__.py:64: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+=== step 0: final.pt vs epoch checkpoints (tensor comparison) ===
+pt_sig_final  vs EveNetPretrain_sig_over_bkg-val_loss-epoch0007-0.411: 535 tensors, 521 differ, max|diff| 1.04e+02, epochs (None, 135840) / (6, 47544)
+pt_sbi_final  vs EveNetPretrain_nsbi_over_bkg-val_loss-epoch0020-0.69: 535 tensors, 0 differ, max|diff| 0.00e+00, epochs (None, 180100) / (19, 180100)
+fz_sig_final  vs sig_over_bkg-val_loss-epoch0020-0.4283.pt           : 535 tensors, 0 differ, max|diff| 0.00e+00, epochs (None, 135840) / (19, 135840)
+fz_sig_final  vs sig_over_bkg-val_loss-epoch0008-0.4272.pt           : 535 tensors, 43 differ, max|diff| 8.15e+04, epochs (None, 135840) / (7, 54336)
+fz_sbi_final  vs sbi_over_bkg-val_loss-epoch0020-0.6926.pt           : 535 tensors, 0 differ, max|diff| 0.00e+00, epochs (None, 180100) / (19, 180100)
+identical files: {'pt_sbi_final': 'EveNetPretrain_nsbi_over_bkg-val_loss-epoch0020-0.6926.pt', 'fz_sig_final': 'sig_over_bkg-val_loss-epoch0020-0.4283.pt', 'fz_sbi_final': 'sbi_over_bkg-val_loss-epoch0020-0.6926.pt'}
+2026-09-16 01:54:07,089 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 01:54:10,928 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 01:54:10,928 | INFO | Restoring checkpoint from /home/ubuntu/datascan/may_ckpt/pretrain_sig/final.pt
+2026-09-16 01:54:11,280 | INFO | Restored normalizer state from checkpoint
+2026-09-16 01:54:13,223 | INFO | Starting _collect_predictions
+2026-09-16 01:54:13,223 | INFO | Dataset size = 4096
+2026-09-16 01:54:13,223 | INFO | Batch size = 1024
+2026-09-16 01:54:13,436 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[export] pt_sig_final (sig_over_bkg): C_ref=0.9885 C_sub=0.9852 C_val=0.9737 auc=0.8852 bce=0.4230 fast_dev=1.9e-05 (10.8 min)
+2026-09-16 02:04:56,939 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 02:04:57,052 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 02:04:57,053 | INFO | Restoring checkpoint from /home/ubuntu/datascan/may_ckpt/pretrain_sbi/final.pt
+2026-09-16 02:04:57,712 | INFO | Restored normalizer state from checkpoint
+2026-09-16 02:04:59,432 | INFO | Starting _collect_predictions
+2026-09-16 02:04:59,432 | INFO | Dataset size = 4096
+2026-09-16 02:04:59,432 | INFO | Batch size = 1024
+2026-09-16 02:04:59,777 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[export] pt_sbi_final (sbi_over_bkg): C_ref=0.9991 C_sub=0.9991 C_val=0.9992 auc=0.5080 bce=0.6926 fast_dev=7.1e-07 (17.7 min)
+2026-09-16 02:22:36,997 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 02:22:37,132 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 02:22:37,132 | INFO | Restoring checkpoint from /home/ubuntu/datascan/may_ckpt/ssl_sig/sig_over_bkg-val_loss-epoch0008-0.4272.pt
+2026-09-16 02:22:38,122 | INFO | Restored normalizer state from checkpoint
+2026-09-16 02:22:39,484 | INFO | Starting _collect_predictions
+2026-09-16 02:22:39,484 | INFO | Dataset size = 4096
+2026-09-16 02:22:39,484 | INFO | Batch size = 1024
+2026-09-16 02:22:40,019 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[export] fz_sig_ep8 (sig_over_bkg): C_ref=1.0248 C_sub=1.0195 C_val=1.0102 auc=0.8737 bce=0.4408 fast_dev=1.4e-05 (28.7 min)
+2026-09-16 02:51:19,899 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 02:51:20,033 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 02:51:20,033 | INFO | Restoring checkpoint from /home/ubuntu/datascan/may_ckpt/ssl_sbi/sbi_over_bkg-val_loss-epoch0020-0.6926.pt
+2026-09-16 02:51:20,731 | INFO | Restored normalizer state from checkpoint
+2026-09-16 02:51:21,704 | INFO | Starting _collect_predictions
+2026-09-16 02:51:21,704 | INFO | Dataset size = 4096
+2026-09-16 02:51:21,704 | INFO | Batch size = 1024
+2026-09-16 02:51:22,399 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[export] fz_sbi_ep20 (sbi_over_bkg): C_ref=0.9995 C_sub=0.9995 C_val=0.9995 auc=0.5077 bce=0.6926 fast_dev=1.8e-06 (20.2 min)
+2026-09-16 03:11:33,966 | INFO | Initializing default EveNet-Lite model from /home/ubuntu/EveNet-Lite/evenet_lite/config/default_network_config.yaml with global_input_dim=3, sequential_input_dim=4
+2026-09-16 03:11:34,092 | INFO | Initialized torchmetrics Accuracy with num_classes=2
+2026-09-16 03:11:34,092 | INFO | Restoring checkpoint from /home/ubuntu/datascan/may_ckpt/ssl_sig/sig_over_bkg-val_loss-epoch0020-0.4283.pt
+2026-09-16 03:11:34,961 | INFO | Restored normalizer state from checkpoint
+2026-09-16 03:11:36,035 | INFO | Starting _collect_predictions
+2026-09-16 03:11:36,036 | INFO | Dataset size = 4096
+2026-09-16 03:11:36,036 | INFO | Batch size = 1024
+2026-09-16 03:11:36,584 | INFO | Finished prediction collection: preds=(4096, 2), indices=(4096,)
+[export] fz_sig_ep20 (sig_over_bkg): C_ref=1.0239 C_sub=1.0210 C_val=1.0125 auc=0.8759 bce=0.4364 fast_dev=1.6e-05 (20.7 min)
+[export] fz_sbi_ep20: cached at /home/ubuntu/datascan/may_exports/sbi_over_bkg-val_loss-epoch0020-0.6926__sbi_over_bkg
+[export] fz_sig_final: cached at /home/ubuntu/datascan/may_exports/sig_over_bkg-val_loss-epoch0020-0.4283__sig_over_bkg
+[export] fz_sbi_final: cached at /home/ubuntu/datascan/may_exports/sbi_over_bkg-val_loss-epoch0020-0.6926__sbi_over_bkg
+
+=== tail statistics of every S/B export at 100 % (validation background, calibrated with C_ref) ===
+frozen       epoch  nan: bce 0.4443 auc 0.8709 C_ref 0.8699 C_sub 0.8674 | r>30 share of <r>_B  7.45 % (n=702) | max r toys    120.6, toy events r>30: 3487
+may_ft_last  epoch  nan: bce 0.4230 auc 0.8852 C_ref 0.9885 C_sub 0.9852 | r>30 share of <r>_B  0.94 % (n=30) | max r toys   4456.0, toy events r>30: 199
+may_fz_best  epoch  7.0: bce 0.4408 auc 0.8737 C_ref 1.0248 C_sub 1.0195 | r>30 share of <r>_B  0.04 % (n=6) | max r toys     54.7, toy events r>30: 39
+may_fz_ep20  epoch 19.0: bce 0.4364 auc 0.8759 C_ref 1.0239 C_sub 1.0210 | r>30 share of <r>_B  0.02 % (n=3) | max r toys     53.4, toy events r>30: 21
+may_fz_last  epoch 19.0: bce 0.4364 auc 0.8759 C_ref 1.0239 C_sub 1.0210 | r>30 share of <r>_B  0.02 % (n=3) | max r toys     53.4, toy events r>30: 21
+poster       epoch  nan: bce 0.4247 auc 0.8842 C_ref 1.0308 C_sub 1.0281 | r>30 share of <r>_B  7.02 % (n=310) | max r toys    319.9, toy events r>30: 1710
+pretrained   epoch  nan: bce 0.4305 auc 0.8799 C_ref 1.0619 C_sub 1.0579 | r>30 share of <r>_B  0.58 % (n=22) | max r toys    325.0, toy events r>30: 124
+scratch      epoch  nan: bce 0.4268 auc 0.8843 C_ref 1.0557 C_sub 1.0552 | r>30 share of <r>_B  0.00 % (n=0) | max r toys     23.8, toy events r>30: 0
+
+=== 48 toys, calibration C_sub (full bkg_train, the poster calibration) ===
+    variant  mu_true   bias  bias_se_toys  mean_width  n_open  n_spike  frac_covering
+     frozen      0.4  0.353         0.007       0.361       0        1          0.000
+may_ft_last      0.4  0.267         0.038       0.724       0       15          0.583
+may_fz_best      0.4 -0.001         0.029       0.989       0        3          1.000
+may_fz_ep20      0.4  0.006         0.019       0.952       0        0          1.000
+may_fz_last      0.4  0.006         0.019       0.952       0        0          1.000
+     poster      0.4  0.491         0.022       0.408       0       42          0.021
+ pretrained      0.4  0.033         0.026       0.775       0        1          0.833
+    scratch      0.4 -0.121         0.006       0.710       0        0          1.000
+     frozen      2.5 -0.431         0.011       0.564       0        0          0.021
+may_ft_last      2.5 -0.146         0.011       0.564       0        0          0.938
+may_fz_best      2.5 -0.100         0.011       0.581       0        0          0.979
+may_fz_ep20      2.5 -0.018         0.012       0.605       0        0          0.958
+may_fz_last      2.5 -0.018         0.012       0.605       0        0          0.958
+     poster      2.5 -0.176         0.011       0.573       0        0          0.938
+ pretrained      2.5 -0.189         0.011       0.582       0        0          0.917
+    scratch      2.5 -0.180         0.011       0.561       0        0          0.938
+toy 0 (the poster's toy; poster plot: fine-tuned 0.36 [0.14, 1.00], frozen 0.42 [0.15, 1.07] at mu 0.4):
+    variant  mu_true  mu_hat   lo   hi
+     frozen      0.4    0.74 0.71 0.97
+may_ft_last      0.4    0.36 0.13 1.01
+may_fz_best      0.4    0.35 0.13 1.00
+may_fz_ep20      0.4    0.42 0.15 1.08
+may_fz_last      0.4    0.42 0.15 1.08
+     poster      0.4    0.96 0.85 1.20
+ pretrained      0.4    0.57 0.17 0.95
+    scratch      0.4    0.33 0.13 0.86
+     frozen      2.5    1.99 1.71 2.27
+may_ft_last      2.5    2.30 2.02 2.59
+may_fz_best      2.5    2.32 2.03 2.61
+may_fz_ep20      2.5    2.44 2.13 2.75
+may_fz_last      2.5    2.44 2.13 2.75
+     poster      2.5    2.28 2.00 2.57
+ pretrained      2.5    2.24 1.95 2.53
+    scratch      2.5    2.26 1.98 2.54
+
+=== 48 toys, calibration C_ref (scan reference) ===
+    variant  mu_true   bias  bias_se_toys  mean_width  n_open  n_spike  frac_covering
+     frozen      0.4  0.359         0.007       0.366       0        1          0.000
+may_ft_last      0.4  0.315         0.035       0.733       0       17          0.542
+may_fz_best      0.4  0.122         0.038       1.047       0        8          1.000
+may_fz_ep20      0.4  0.059         0.025       0.988       0        2          1.000
+may_fz_last      0.4  0.059         0.025       0.988       0        2          1.000
+     poster      0.4  0.508         0.017       0.405       0       42          0.000
+ pretrained      0.4  0.056         0.028       0.808       0        1          0.833
+    scratch      0.4 -0.119         0.006       0.723       0        0          1.000
+     frozen      2.5 -0.421         0.011       0.564       0        0          0.021
+may_ft_last      2.5 -0.134         0.012       0.564       0        0          0.958
+may_fz_best      2.5 -0.079         0.011       0.581       0        0          0.979
+may_fz_ep20      2.5 -0.006         0.012       0.605       0        0          0.958
+may_fz_last      2.5 -0.006         0.012       0.605       0        0          0.958
+     poster      2.5 -0.166         0.011       0.573       0        0          0.938
+ pretrained      2.5 -0.173         0.011       0.582       0        0          0.917
+    scratch      2.5 -0.178         0.011       0.561       0        0          0.938
+toy 0 (the poster's toy; poster plot: fine-tuned 0.36 [0.14, 1.00], frozen 0.42 [0.15, 1.07] at mu 0.4):
+    variant  mu_true  mu_hat   lo   hi
+     frozen      0.4    0.75 0.71 0.98
+may_ft_last      0.4    0.37 0.13 1.04
+may_fz_best      0.4    0.37 0.13 1.06
+may_fz_ep20      0.4    0.45 0.15 1.11
+may_fz_last      0.4    0.45 0.15 1.11
+     poster      0.4    0.97 0.85 1.20
+ pretrained      0.4    0.58 0.17 0.97
+    scratch      0.4    0.34 0.13 0.87
+     frozen      2.5    2.00 1.72 2.28
+may_ft_last      2.5    2.31 2.03 2.60
+may_fz_best      2.5    2.34 2.05 2.64
+may_fz_ep20      2.5    2.45 2.15 2.77
+may_fz_last      2.5    2.45 2.15 2.77
+     poster      2.5    2.29 2.01 2.58
+ pretrained      2.5    2.25 1.96 2.55
+    scratch      2.5    2.26 1.98 2.55
+MAY CHECKPOINTS DONE
