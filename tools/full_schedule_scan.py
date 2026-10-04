@@ -326,7 +326,7 @@ def report(cfg: ns.ScanConfig):
     if ref.exists():
         r = pd.read_csv(ref)
         r = r[(r.seed == 0) & np.isclose(r.frac_sig, r.frac_sbi) & (r.variant == "pretrained")]
-        print("\n=== the scan's early-stopped seed-0 pretrained result (HANDOFF section 3) for comparison ===")
+        print("\n=== the scan's early-stopped seed-0 pretrained result for comparison ===")
         print(r[["variant", "frac_sig", "mu_true", "bias", "mean_width", "n_open"]]
               .sort_values(["mu_true", "frac_sig"]).round(3).to_string(index=False))
 
